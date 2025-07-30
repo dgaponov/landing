@@ -1,7 +1,4 @@
-﻿{
-    "pageNotFound": "页面未找到",
-    "pageNotFoundDescription": "您正在寻找的页面不存在或已被移动。",
-    "backToHome": "返回首页",
+{
     "actions_open": "打开",
     "actions_copyToClipboard": "复制到剪贴板",
     "actions_share": "分享",
@@ -19,5 +16,8 @@
     "navigation_next": "下一步",
     "emptySearchPlaceholder": "什么都没找到",
     "show_more": "显示更多",
-    "show_less": "少显示"
+    "show_less": "少显示",
+    "pageNotFound": "页面未找到",
+    "pageNotFoundDescription": "您正在寻找的页面不存在或已被移动。",
+    "backToHome": "返回首页"
 }

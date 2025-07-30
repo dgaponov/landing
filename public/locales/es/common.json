@@ -1,7 +1,4 @@
-﻿{
-    "pageNotFound": "Página No Encontrada",
-    "pageNotFoundDescription": "La página que estás buscando no existe o ha sido movida.",
-    "backToHome": "Volver al Inicio",
+{
     "actions_open": "Abrir",
     "actions_copyToClipboard": "Copiar al portapapeles",
     "actions_share": "Compartir",
@@ -19,5 +16,8 @@
     "navigation_next": "Próxima",
     "emptySearchPlaceholder": "No se encontró nada",
     "show_more": "Mostrar más",
-    "show_less": "Mostrar menos"
+    "show_less": "Mostrar menos",
+    "pageNotFound": "Página No Encontrada",
+    "pageNotFoundDescription": "La página que estás buscando no existe o ha sido movida.",
+    "backToHome": "Volver al Inicio"
 }
