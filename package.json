@@ -109,7 +109,7 @@
     "pretest": "npm run prepare-metadata",
     "lint:js": "eslint --ext .js,.jsx,.ts,.tsx .",
     "lint:styles": "stylelint '{styles,src}/**/*.scss'",
-    "lint:prettier": "prettier --check '**/*.md'",
+    "lint:prettier": "prettier --check '**/*.{md,json}'",
     "lint": "npm run lint:js && npm run lint:styles && npm run lint:prettier",
     "deploy": "echo 'gravity-ui.com' > ./out/CNAME && gh-pages -d build",
     "typecheck": "tsc --noEmit"
@@ -134,7 +134,7 @@
       "eslint --fix --quiet",
       "prettier --write"
     ],
-    "*.md": [
+    "*.{md,json}": [
       "prettier --write"
     ]
   }
