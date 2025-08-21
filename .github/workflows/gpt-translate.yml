@@ -20,8 +20,9 @@ jobs:
       - name: Run GPT Translate
         uses: 3ru/gpt-translate@master
         with:
-          apikey: ${{ secrets.OPENAI_API_KEY }}
-          model: gpt-4o
+          apikey: ${{ secrets.ANTHROPIC_API_KEY }}
+          provider: 'anthropic'
+          model: 'claude-3-5-sonnet-20240620'
           prompt: |
             Please translate the README source file to {targetLanguage}. \
               Make the translation sound as natural as possible. \
