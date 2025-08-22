@@ -20,9 +20,9 @@ jobs:
       - name: Run GPT Translate
         uses: dgaponov/gpt-translate@master
         with:
-          provider: deepseek
-          apikey: ${{ secrets.DEEPSEEK_API_KEY }}
-          model: deepseek-chat
+          provider: 'openrouter'
+          apikey: ${{ secrets.OPENROUTER_API_KEY }}
+          model: 'deepseek/deepseek-r1-0528:free'
           prompt: |
             Please translate the README source file to {targetLanguage}. \
               Make the translation sound as natural as possible. \
