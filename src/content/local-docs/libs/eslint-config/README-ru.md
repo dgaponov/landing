@@ -1,14 +1,14 @@
 # @gravity-ui/eslint-config
 
-## Instalación
+## Установка
 
 ```
 npm install --save-dev eslint @gravity-ui/eslint-config
 ```
 
-## Uso
+## Использование
 
-Agrega un archivo `eslint.config.js` en tu proyecto con el siguiente contenido:
+Добавьте файл `eslint.config.js` в ваш проект со следующим содержимым:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -21,11 +21,11 @@ export default [
 ];
 ```
 
-La configuración base también incluye reglas de TypeScript.
+Базовая конфигурация также включает правила для TypeScript.
 
 ### Prettier
 
-Si estás usando Prettier, agrega la configuración correspondiente:
+Если вы используете Prettier, добавьте соответствующую конфигурацию:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -42,7 +42,7 @@ export default [
 
 ### a11y
 
-Si quieres detectar problemas de accesibilidad, agrega la configuración correspondiente:
+Если вы хотите выявлять проблемы доступности, добавьте соответствующую конфигурацию:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -59,7 +59,7 @@ export default [
 
 ### Order
 
-Si quieres imponer una convención en el orden de importación de módulos, agrega la configuración correspondiente:
+Если вы хотите навязывать конвенцию в порядке импорта модулей, добавьте соответствующую конфигурацию:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';

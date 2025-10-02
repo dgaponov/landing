@@ -1,14 +1,14 @@
 # @gravity-ui/eslint-config
 
-## Instalación
+## 설치
 
 ```
 npm install --save-dev eslint @gravity-ui/eslint-config
 ```
 
-## Uso
+## 사용
 
-Agrega un archivo `eslint.config.js` en tu proyecto con el siguiente contenido:
+프로젝트에 다음 내용을 포함한 `eslint.config.js` 파일을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -21,11 +21,11 @@ export default [
 ];
 ```
 
-La configuración base también incluye reglas de TypeScript.
+기본 설정에는 TypeScript 규칙도 포함되어 있습니다.
 
 ### Prettier
 
-Si estás usando Prettier, agrega la configuración correspondiente:
+Prettier를 사용 중이라면, 해당 설정을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -42,7 +42,7 @@ export default [
 
 ### a11y
 
-Si quieres detectar problemas de accesibilidad, agrega la configuración correspondiente:
+접근성 문제를 감지하고 싶다면, 해당 설정을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -59,7 +59,7 @@ export default [
 
 ### Order
 
-Si quieres imponer una convención en el orden de importación de módulos, agrega la configuración correspondiente:
+모듈 import 순서에 대한 규칙을 적용하고 싶다면, 해당 설정을 추가하세요:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
