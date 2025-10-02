@@ -10,7 +10,7 @@ npm install --save-dev @gravity-ui/axios-wrapper
 
 ## HTTP API
 
-### 构造函数参数
+### 构造函数参数qwrqwr
 
 ##### config [可选]
 
