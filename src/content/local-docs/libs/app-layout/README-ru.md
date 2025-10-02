@@ -1,14 +1,14 @@
 # @gravity-ui/app-layout · [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## 安装
+## Установка
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
 ```
 
-## 使用方法
+## Использование
 
-使用 `express`：
+С `express`:
 
 ```js
 import express from 'express';
@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
   res.send(
     renderLayout({
       // RenderParams
-      title: '首页',
+      title: 'Home page',
       bodyContent: {
         root: 'Hello world!',
       },
@@ -33,61 +33,61 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
-其中
+где
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何兼容 JSON 的数据，将在页面上设置到 window.__DATA__
+  // Любые данные, совместимые с JSON, будут установлены в window.__DATA__ на странице
   data?: Data;
   // favicon
   icon?: Icon;
-  // 设置到相应标签上的 nonce
+  // nonce для установки в соответствующие теги
   nonce?: string;
 
-  // 通用选项
-  // 页面标题
+  // общие опции
+  // Заголовок страницы
   title: string;
-  // 页面语言，将设置到 html 标签
+  // язык страницы, будет установлен в тег html
   lang?: string;
   isMobile?: boolean;
 
-  // html 属性
+  // атрибуты html
   htmlAttributes?: string;
-  // header 标签内容
-  // meta 标签
+  // содержимое тега header
+  // мета-теги
   meta?: Meta[];
-  // link 标签
+  // теги link
   links?: Link[];
-  // script 标签
+  // теги script
   scripts?: Script[];
-  // 样式表标签
+  // теги style
   styleSheets?: Stylesheet[];
-  // 内联代码的 script 标签
+  // теги script с встроенным кодом
   inlineScripts?: string[];
-  // 内联样式的样式标签
+  // теги style с встроенными стилями
   inlineStyleSheets?: string[];
 
-  // body 标签内容
+  // содержимое тега body
   bodyContent?: {
-    // body 标签的类名
+    // класс для тега body
     className?: string;
-    // body 属性
+    // атрибуты body
     attributes?: string;
-    // id 为 root 的 div 标签前的内容
+    // содержимое body перед div с id root
     beforeRoot?: string;
-    // id 为 root 的 div 标签的 innerHtml 内容
+    // innerHtml содержимое div с id root
     root?: string;
-    // id 为 root 的 div 标签后的内容
+    // содержимое body после div с id root
     afterRoot?: string;
   };
-  // 插件选项
+  // опции плагинов
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
 ### Meta
 
-描述 `meta` 标签：
+Описывает тег `meta`:
 
 ```typescript
 interface Meta {
@@ -96,27 +96,27 @@ interface Meta {
 }
 ```
 
-示例：
+Пример:
 
 ```js
 const meta = [
-  {name: 'description', content: '一些文本'},
+  {name: 'description', content: 'some text'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: '某个标题'},
+  {name: 'og:title', content: 'Some title'},
 ];
 ```
 
-将渲染为：
+Будет отрендерено как:
 
 ```html
-<meta name="description" content="一些文本" />
+<meta name="description" content="some text" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="某个标题" />
+<meta property="og:title" content="Some title" />
 ```
 
 ### Icon
 
-描述页面 favicon：
+Описывает favicon страницы:
 
 ```typescript
 interface Icon {
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-默认值为：
+Значение по умолчанию:
 
 ```js
 const icon = {
@@ -138,7 +138,7 @@ const icon = {
 
 ### Links
 
-描述 `link` 标签：
+Описывает тег `link`:
 
 ```typescript
 interface Link {
@@ -152,7 +152,7 @@ interface Link {
 }
 ```
 
-示例：
+Пример:
 
 ```js
 const link = {
@@ -164,7 +164,7 @@ const link = {
 };
 ```
 
-将渲染为：
+будет отрендерено как:
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -172,7 +172,7 @@ const link = {
 
 ### Scripts
 
-描述带有预加载的脚本链接：
+Описывает ссылку на скрипт с preload:
 
 ```typescript
 interface Script {
@@ -184,7 +184,7 @@ interface Script {
 }
 ```
 
-示例：
+Пример:
 
 ```js
 const script = {
@@ -195,7 +195,7 @@ const script = {
 };
 ```
 
-将渲染为：
+будет отрендерено как:
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -203,9 +203,9 @@ const script = {
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### 样式表
+#### Style sheets
 
-描述样式链接：
+Описывает ссылку на стили:
 
 ```typescript
 interface Stylesheet {
@@ -213,7 +213,7 @@ interface Stylesheet {
 }
 ```
 
-示例：
+Пример:
 
 ```js
 const styleSheet = {
@@ -221,25 +221,25 @@ const styleSheet = {
 };
 ```
 
-将渲染为：
+будет отрендерено как:
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
 ```
 
-## 插件
+## Плагины
 
-渲染函数可以通过插件扩展。插件可以重写用户定义的渲染内容。
-插件是一个带有 `name` 和 `apply` 属性的对象：
+Функция рендеринга может быть расширена плагинами. Плагин может перезаписывать пользовательское содержимое рендеринга.
+Плагин — это объект с свойствами `name` и `apply`:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // 通过 `renderLayout` 函数中的 `pluginsOptions` 参数传递。
+    options: Options | undefined; // передается через функцию `renderLayout` в параметре `pluginsOptions`.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated 使用 `renderContent.helpers` 代替 */
+    /** @deprecated используйте `renderContent.helpers` вместо этого */
     utils: RenderHelpers;
   }) => void;
 }
@@ -285,18 +285,19 @@ export interface RenderHelpers {
 }
 ```
 
-此包中包含一些插件：
+В этом пакете есть несколько плагинов:
 
-### Google Analytics
+### Google analytics
 
-在页面上添加 Google Analytics 计数器。
+Добавляет счетчик Google Analytics на страницу.
 
-使用方法：
+Использование:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
+
 ```
 
 ```js
@@ -317,7 +318,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Параметры плагина:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -330,11 +331,11 @@ interface GoogleAnalyticsOptions {
 }
 ```
 
-### Yandex Metrika
+### Яндекс Метрика
 
-在页面上添加 Yandex 指标计数器。
+Добавляет счётчики метрики Яндекса на страницу.
 
-用法：
+Пример использования:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -361,7 +362,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Параметры плагина:
 
 ```typescript
 export type UserParams = {
@@ -392,9 +393,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-从 webpack 资产生成清单文件中添加脚本和样式。
+Добавляет скрипты и стили из манифеста webpack-ассетов.
 
-用法：
+Пример использования:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -417,7 +418,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Параметры плагина:
 
 ```typescript
 export interface LayoutOptions {
@@ -428,9 +429,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-添加 body 属性。
+Добавляет атрибуты для body.
 
-用法：
+Пример использования:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -452,7 +453,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Параметры плагина:
 
 ```typescript
 interface UikitPluginOptions {
@@ -463,13 +464,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-在页面上添加微前端版本信息。
+Добавляет информацию о версиях микрофронтендов на страницу.
 
-此插件会创建一个全局的 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本信息，可用于模块联邦或其他类似的微前端架构，以确定加载远程模块的版本。
+Этот плагин создаёт глобальный объект `window.__REMOTE_VERSIONS__`, содержащий предоставленные версии микрофронтендов. Он может использоваться в архитектурах с модульной федерацией или аналогичными подходами для микрофронтендов, чтобы определить, какие версии удалённых модулей нужно загружать.
 
-它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 结合使用，并启用 `moduleFederation.remotesRuntimeVersioning` 选项，以自动加载对应版本的远程模块。
+Его можно комбинировать с [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) и опцией `moduleFederation.remotesRuntimeVersioning`, чтобы автоматически загружать удалённые модули с соответствующими версиями.
 
-用法：
+Пример использования:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -492,7 +493,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Параметры плагина:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -500,7 +501,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-有一个辅助函数可以创建所有插件：
+Есть вспомогательная функция для создания всех плагинов:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -527,9 +528,9 @@ app.get((req, res) => {
 })
 ```
 
-## 替代用法
+## Альтернативное использование
 
-使用部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 通过 HTML 流式传输：
+С рендерерами частей `generateRenderContent`, `renderHeadContent`, `renderBodyContent` через потоковую передачу HTML:
 
 ```js
 import express from 'express';
@@ -584,4 +585,3 @@ res.write(`
 
 app.listen(3000);
 ```
-*(注意：提供的源文件内容似乎是纯代码片段，没有可翻译的自然语言文本。根据您的指示，我保留了所有代码、HTML 片段和库名称不变。如果这是 README 文件的一部分，请提供包含中文翻译目标的文本内容以便进一步处理。)*

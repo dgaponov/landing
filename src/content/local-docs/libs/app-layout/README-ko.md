@@ -1,14 +1,14 @@
-# @gravity-ui/app-layout · [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
+# @gravity-ui/app-layout &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## 安装
+## 설치
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
 ```
 
-## 使用方法
+## 사용법
 
-使用 `express`：
+`express`와 함께:
 
 ```js
 import express from 'express';
@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
   res.send(
     renderLayout({
       // RenderParams
-      title: '首页',
+      title: 'Home page',
       bodyContent: {
         root: 'Hello world!',
       },
@@ -33,61 +33,61 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
-其中
+여기서
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何兼容 JSON 的数据，将在页面上设置到 window.__DATA__
+  // 페이지에 window.__DATA__로 설정될 JSON 호환 데이터
   data?: Data;
-  // favicon
+  // 파비콘
   icon?: Icon;
-  // 设置到相应标签上的 nonce
+  // 적절한 태그에 설정될 nonce
   nonce?: string;
 
-  // 通用选项
-  // 页面标题
+  // 공통 옵션
+  // 페이지 제목
   title: string;
-  // 页面语言，将设置到 html 标签
+  // 페이지 언어, html 태그에 설정됨
   lang?: string;
   isMobile?: boolean;
 
-  // html 属性
+  // html 속성
   htmlAttributes?: string;
-  // header 标签内容
-  // meta 标签
+  // header 태그 콘텐츠
+  // 메타 태그
   meta?: Meta[];
-  // link 标签
+  // 링크 태그
   links?: Link[];
-  // script 标签
+  // 스크립트 태그
   scripts?: Script[];
-  // 样式表标签
+  // 스타일 태그
   styleSheets?: Stylesheet[];
-  // 内联代码的 script 标签
+  // 인라인 코드가 포함된 스크립트 태그
   inlineScripts?: string[];
-  // 内联样式的样式标签
+  // 인라인 스타일이 포함된 스타일 태그
   inlineStyleSheets?: string[];
 
-  // body 标签内容
+  // body 태그 콘텐츠
   bodyContent?: {
-    // body 标签的类名
+    // body 태그의 클래스 이름
     className?: string;
-    // body 属性
+    // body 속성
     attributes?: string;
-    // id 为 root 的 div 标签前的内容
+    // id가 root인 div 태그 이전의 body 콘텐츠
     beforeRoot?: string;
-    // id 为 root 的 div 标签的 innerHtml 内容
+    // id가 root인 div 태그의 innerHtml 콘텐츠
     root?: string;
-    // id 为 root 的 div 标签后的内容
+    // id가 root인 div 태그 이후의 body 콘텐츠
     afterRoot?: string;
   };
-  // 插件选项
+  // 플러그인 옵션
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
-### Meta
+### 메타
 
-描述 `meta` 标签：
+`meta` 태그를 설명합니다:
 
 ```typescript
 interface Meta {
@@ -96,27 +96,27 @@ interface Meta {
 }
 ```
 
-示例：
+예시:
 
 ```js
 const meta = [
-  {name: 'description', content: '一些文本'},
+  {name: 'description', content: 'some text'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: '某个标题'},
+  {name: 'og:title', content: 'Some title'},
 ];
 ```
 
-将渲染为：
+다음과 같이 렌더링됩니다:
 
 ```html
-<meta name="description" content="一些文本" />
+<meta name="description" content="some text" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="某个标题" />
+<meta property="og:title" content="Some title" />
 ```
 
-### Icon
+### 아이콘
 
-描述页面 favicon：
+페이지 파비콘을 설명합니다:
 
 ```typescript
 interface Icon {
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-默认值为：
+기본값은 다음과 같습니다:
 
 ```js
 const icon = {
@@ -136,9 +136,9 @@ const icon = {
 };
 ```
 
-### Links
+### 링크
 
-描述 `link` 标签：
+`link` 태그를 설명합니다:
 
 ```typescript
 interface Link {
@@ -152,7 +152,7 @@ interface Link {
 }
 ```
 
-示例：
+예시:
 
 ```js
 const link = {
@@ -164,15 +164,15 @@ const link = {
 };
 ```
 
-将渲染为：
+다음과 같이 렌더링됩니다:
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
 ```
 
-### Scripts
+### 스크립트
 
-描述带有预加载的脚本链接：
+프리로드가 포함된 스크립트 링크를 설명합니다:
 
 ```typescript
 interface Script {
@@ -184,7 +184,7 @@ interface Script {
 }
 ```
 
-示例：
+예시:
 
 ```js
 const script = {
@@ -195,7 +195,7 @@ const script = {
 };
 ```
 
-将渲染为：
+다음과 같이 렌더링됩니다:
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -203,9 +203,9 @@ const script = {
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### 样式表
+#### 스타일시트
 
-描述样式链接：
+스타일 링크를 설명합니다:
 
 ```typescript
 interface Stylesheet {
@@ -213,7 +213,7 @@ interface Stylesheet {
 }
 ```
 
-示例：
+예시:
 
 ```js
 const styleSheet = {
@@ -221,25 +221,25 @@ const styleSheet = {
 };
 ```
 
-将渲染为：
+다음과 같이 렌더링됩니다:
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
 ```
 
-## 插件
+## 플러그인
 
-渲染函数可以通过插件扩展。插件可以重写用户定义的渲染内容。
-插件是一个带有 `name` 和 `apply` 属性的对象：
+렌더 함수는 플러그인으로 확장할 수 있습니다. 플러그인은 사용자 정의 렌더 콘텐츠를 재작성할 수 있습니다.
+플러그인은 `name`과 `apply` 속성을 가진 객체입니다:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // 通过 `renderLayout` 函数中的 `pluginsOptions` 参数传递。
+    options: Options | undefined; // `renderLayout` 함수의 `pluginsOptions` 매개변수를 통해 전달됨.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated 使用 `renderContent.helpers` 代替 */
+    /** @deprecated use `renderContent.helpers` instead */
     utils: RenderHelpers;
   }) => void;
 }
@@ -285,18 +285,19 @@ export interface RenderHelpers {
 }
 ```
 
-此包中包含一些插件：
+이 패키지에는 몇 가지 플러그인이 포함되어 있습니다:
 
 ### Google Analytics
 
-在页面上添加 Google Analytics 计数器。
+페이지에 Google Analytics 카운터를 추가합니다.
 
-使用方法：
+사용법:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
+
 ```
 
 ```js
@@ -317,7 +318,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+플러그인 옵션:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -332,9 +333,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-在页面上添加 Yandex 指标计数器。
+페이지에 Yandex 메트릭 카운터를 추가합니다.
 
-用法：
+사용법:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -361,7 +362,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+플러그인 옵션:
 
 ```typescript
 export type UserParams = {
@@ -392,9 +393,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-从 webpack 资产生成清单文件中添加脚本和样式。
+Webpack 에셋 매니페스트 파일에서 스크립트와 스타일을 추가합니다.
 
-用法：
+사용법:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -417,7 +418,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+플러그인 옵션:
 
 ```typescript
 export interface LayoutOptions {
@@ -428,9 +429,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-添加 body 属性。
+body 속성을 추가합니다.
 
-用法：
+사용법:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -452,7 +453,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+플러그인 옵션:
 
 ```typescript
 interface UikitPluginOptions {
@@ -463,13 +464,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-在页面上添加微前端版本信息。
+페이지에 마이크로프론트엔드 버전 정보를 추가합니다.
 
-此插件会创建一个全局的 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本信息，可用于模块联邦或其他类似的微前端架构，以确定加载远程模块的版本。
+이 플러그인은 제공된 마이크로프론트엔드 버전을 포함하는 전역 `window.__REMOTE_VERSIONS__` 객체를 생성하며, 모듈 페더레이션이나 유사한 마이크로프론트엔드 아키텍처에서 원격 모듈의 버전을 결정하는 데 사용할 수 있습니다.
 
-它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 结合使用，并启用 `moduleFederation.remotesRuntimeVersioning` 选项，以自动加载对应版本的远程模块。
+[App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation)와 함께 사용하며 `moduleFederation.remotesRuntimeVersioning` 옵션을 통해 해당 버전의 원격 모듈을 자동으로 로드할 수 있습니다.
 
-用法：
+사용법:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -492,7 +493,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+플러그인 옵션:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -500,7 +501,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-有一个辅助函数可以创建所有插件：
+모든 플러그인을 생성하는 헬퍼가 있습니다:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -527,9 +528,9 @@ app.get((req, res) => {
 })
 ```
 
-## 替代用法
+## Alternative usage
 
-使用部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 通过 HTML 流式传输：
+HTML 스트리밍을 통해 `generateRenderContent`, `renderHeadContent`, `renderBodyContent` 등의 부분 렌더러를 사용하는 방법:
 
 ```js
 import express from 'express';
@@ -584,4 +585,3 @@ res.write(`
 
 app.listen(3000);
 ```
-*(注意：提供的源文件内容似乎是纯代码片段，没有可翻译的自然语言文本。根据您的指示，我保留了所有代码、HTML 片段和库名称不变。如果这是 README 文件的一部分，请提供包含中文翻译目标的文本内容以便进一步处理。)*

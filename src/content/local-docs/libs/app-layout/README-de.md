@@ -1,14 +1,14 @@
 # @gravity-ui/app-layout · [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## 安装
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
 ```
 
-## 使用方法
+## Verwendung
 
-使用 `express`：
+Mit `express`:
 
 ```js
 import express from 'express';
@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
   res.send(
     renderLayout({
       // RenderParams
-      title: '首页',
+      title: 'Home page',
       bodyContent: {
         root: 'Hello world!',
       },
@@ -33,61 +33,61 @@ app.get('/', function (req, res) {
 app.listen(3000);
 ```
 
-其中
+wobei
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何兼容 JSON 的数据，将在页面上设置到 window.__DATA__
+  // Beliebige JSON-kompatible Daten, die auf der Seite in window.__DATA__ gesetzt werden
   data?: Data;
-  // favicon
+  // Favicon
   icon?: Icon;
-  // 设置到相应标签上的 nonce
+  // Nonce, das auf den entsprechenden Tags gesetzt wird
   nonce?: string;
 
-  // 通用选项
-  // 页面标题
+  // Gemeinsame Optionen
+  // Titel der Seite
   title: string;
-  // 页面语言，将设置到 html 标签
+  // Sprache der Seite, die im html-Tag gesetzt wird
   lang?: string;
   isMobile?: boolean;
 
-  // html 属性
+  // HTML-Attribute
   htmlAttributes?: string;
-  // header 标签内容
-  // meta 标签
+  // Inhalt des header-Tags
+  // Meta-Tags
   meta?: Meta[];
-  // link 标签
+  // Link-Tags
   links?: Link[];
-  // script 标签
+  // Script-Tags
   scripts?: Script[];
-  // 样式表标签
+  // Style-Tags
   styleSheets?: Stylesheet[];
-  // 内联代码的 script 标签
+  // Script-Tags mit eingebettetem Code
   inlineScripts?: string[];
-  // 内联样式的样式标签
+  // Style-Tags mit eingebetteten Stilen
   inlineStyleSheets?: string[];
 
-  // body 标签内容
+  // Inhalt des body-Tags
   bodyContent?: {
-    // body 标签的类名
+    // Klassenname für das body-Tag
     className?: string;
-    // body 属性
+    // Body-Attribute
     attributes?: string;
-    // id 为 root 的 div 标签前的内容
+    // Body-Inhalt vor dem div-Tag mit id root
     beforeRoot?: string;
-    // id 为 root 的 div 标签的 innerHtml 内容
+    // innerHtml-Inhalt des div-Tags mit id root
     root?: string;
-    // id 为 root 的 div 标签后的内容
+    // Body-Inhalt nach dem div-Tag mit id root
     afterRoot?: string;
   };
-  // 插件选项
+  // Plugin-Optionen
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
 ### Meta
 
-描述 `meta` 标签：
+Beschreibt das `meta`-Tag:
 
 ```typescript
 interface Meta {
@@ -96,27 +96,27 @@ interface Meta {
 }
 ```
 
-示例：
+Beispiel:
 
 ```js
 const meta = [
-  {name: 'description', content: '一些文本'},
+  {name: 'description', content: 'some text'},
   {name: 'robots', content: 'noindex'},
-  {name: 'og:title', content: '某个标题'},
+  {name: 'og:title', content: 'Some title'},
 ];
 ```
 
-将渲染为：
+Wird gerendert als:
 
 ```html
-<meta name="description" content="一些文本" />
+<meta name="description" content="some text" />
 <meta name="robots" content="noindex" />
-<meta property="og:title" content="某个标题" />
+<meta property="og:title" content="Some title" />
 ```
 
 ### Icon
 
-描述页面 favicon：
+Beschreibt das Favicon der Seite:
 
 ```typescript
 interface Icon {
@@ -126,7 +126,7 @@ interface Icon {
 }
 ```
 
-默认值为：
+Standardwert ist:
 
 ```js
 const icon = {
@@ -138,7 +138,7 @@ const icon = {
 
 ### Links
 
-描述 `link` 标签：
+Beschreibt das `link`-Tag:
 
 ```typescript
 interface Link {
@@ -152,7 +152,7 @@ interface Link {
 }
 ```
 
-示例：
+Beispiel:
 
 ```js
 const link = {
@@ -164,7 +164,7 @@ const link = {
 };
 ```
 
-将渲染为：
+Wird gerendert als:
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -172,7 +172,7 @@ const link = {
 
 ### Scripts
 
-描述带有预加载的脚本链接：
+Beschreibt den Link zu einem Script mit Preload:
 
 ```typescript
 interface Script {
@@ -184,7 +184,7 @@ interface Script {
 }
 ```
 
-示例：
+Beispiel:
 
 ```js
 const script = {
@@ -195,7 +195,7 @@ const script = {
 };
 ```
 
-将渲染为：
+Wird gerendert als:
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -203,9 +203,9 @@ const script = {
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### 样式表
+#### Stylesheets
 
-描述样式链接：
+Beschreibt den Link zu Stilen:
 
 ```typescript
 interface Stylesheet {
@@ -213,7 +213,7 @@ interface Stylesheet {
 }
 ```
 
-示例：
+Beispiel:
 
 ```js
 const styleSheet = {
@@ -221,25 +221,25 @@ const styleSheet = {
 };
 ```
 
-将渲染为：
+Wird gerendert als:
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
 ```
 
-## 插件
+## Plugins
 
-渲染函数可以通过插件扩展。插件可以重写用户定义的渲染内容。
-插件是一个带有 `name` 和 `apply` 属性的对象：
+Die Render-Funktion kann durch Plugins erweitert werden. Ein Plugin kann den vom Benutzer definierten Render-Inhalt überschreiben.
+Ein Plugin ist ein Objekt mit den Eigenschaften `name` und `apply`:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // 通过 `renderLayout` 函数中的 `pluginsOptions` 参数传递。
+    options: Options | undefined; // Wird über den `renderLayout`-Funktionsparameter `pluginsOptions` übergeben.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated 使用 `renderContent.helpers` 代替 */
+    /** @deprecated Verwenden Sie stattdessen `renderContent.helpers` */
     utils: RenderHelpers;
   }) => void;
 }
@@ -285,21 +285,21 @@ export interface RenderHelpers {
 }
 ```
 
-此包中包含一些插件：
+Dieses Paket enthält einige Plugins:
 
 ### Google Analytics
 
-在页面上添加 Google Analytics 计数器。
+Fügt den Google-Analytics-Zähler auf der Seite hinzu.
 
-使用方法：
+Verwendung:
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
+
 ```
 
-```js
 app.get((req, res) => {
   res.send(
     renderLayout({
@@ -317,7 +317,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Plugin-Optionen:
 
 ```typescript
 interface GoogleAnalyticsCounter {
@@ -332,9 +332,9 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-在页面上添加 Yandex 指标计数器。
+Fügt Yandex-Metriken-Zähler auf der Seite hinzu.
 
-用法：
+Verwendung:
 
 ```js
 import {createRenderFunction, createYandexMetrikaPlugin} from '@gravity-ui/app-layout';
@@ -361,7 +361,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Plugin-Optionen:
 
 ```typescript
 export type UserParams = {
@@ -392,9 +392,9 @@ export type MetrikaOptions = {
 
 ### Layout
 
-从 webpack 资产生成清单文件中添加脚本和样式。
+Fügt Skripte und Styles aus der Webpack-Assets-Manifest-Datei hinzu.
 
-用法：
+Verwendung:
 
 ```js
 import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -417,7 +417,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Plugin-Optionen:
 
 ```typescript
 export interface LayoutOptions {
@@ -428,9 +428,9 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-添加 body 属性。
+Fügt Body-Attribute hinzu.
 
-用法：
+Verwendung:
 
 ```js
 import {createRenderFunction, createUikitPlugin} from '@gravity-ui/app-layout';
@@ -452,7 +452,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Plugin-Optionen:
 
 ```typescript
 interface UikitPluginOptions {
@@ -463,13 +463,13 @@ interface UikitPluginOptions {
 
 ### Remote Versions
 
-在页面上添加微前端版本信息。
+Fügt Informationen zu Microfrontend-Versionen auf der Seite hinzu.
 
-此插件会创建一个全局的 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本信息，可用于模块联邦或其他类似的微前端架构，以确定加载远程模块的版本。
+Dieses Plugin erstellt ein globales `window.__REMOTE_VERSIONS__`-Objekt, das die angegebenen Microfrontend-Versionen enthält. Dies kann von Module Federation oder ähnlichen Microfrontend-Architekturen genutzt werden, um zu bestimmen, welche Versionen der Remote-Module geladen werden sollen.
 
-它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 结合使用，并启用 `moduleFederation.remotesRuntimeVersioning` 选项，以自动加载对应版本的远程模块。
+Es kann in Kombination mit [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) und der Option `moduleFederation.remotesRuntimeVersioning` verwendet werden, um Remote-Module automatisch mit den entsprechenden Versionen zu laden.
 
-用法：
+Verwendung:
 
 ```js
 import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
@@ -492,7 +492,7 @@ app.get((req, res) => {
 });
 ```
 
-插件选项：
+Plugin-Optionen:
 
 ```typescript
 type RemoteVersionsPluginOptions = Record<string, string>;
@@ -500,7 +500,7 @@ type RemoteVersionsPluginOptions = Record<string, string>;
 
 ### Helpers
 
-有一个辅助函数可以创建所有插件：
+Es gibt einen Helfer, um alle Plugins zu erstellen:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -527,9 +527,9 @@ app.get((req, res) => {
 })
 ```
 
-## 替代用法
+## Alternative Verwendung
 
-使用部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 通过 HTML 流式传输：
+Mit Teile-Renderern `generateRenderContent`, `renderHeadContent`, `renderBodyContent` über HTML-Streaming:
 
 ```js
 import express from 'express';
@@ -584,4 +584,3 @@ res.write(`
 
 app.listen(3000);
 ```
-*(注意：提供的源文件内容似乎是纯代码片段，没有可翻译的自然语言文本。根据您的指示，我保留了所有代码、HTML 片段和库名称不变。如果这是 README 文件的一部分，请提供包含中文翻译目标的文本内容以便进一步处理。)*
