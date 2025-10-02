@@ -1,31 +1,31 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-一个基于 React 的库，用于使用 Canvas 渲染构建交互式时间线可视化。
+Eine auf React basierende Bibliothek zum Erstellen interaktiver Timeline-Visualisierungen mit Canvas-Rendering.
 
-## 文档
+## Dokumentation
 
-详情请参阅 [文档](./docs/docs.md)。
+Für Details siehe [Dokumentation](./docs/docs.md).
 
-## 特性
+## Features
 
-- 基于 Canvas 的渲染，实现高性能
-- 交互式时间线，支持缩放和平移功能
-- 支持事件、标记、轴和网格
-- 智能标记分组，自动缩放到组 - 点击分组标记以缩放到其单个组件
-- 虚拟化渲染，提高大型数据集的性能（仅在时间线内容超过视口时激活）
-- 可自定义外观和行为
-- 支持 TypeScript，提供完整的类型定义
-- 与 React 集成，使用自定义钩子
+- Canvas-basiertes Rendering für hohe Performance
+- Interaktive Timeline mit Zoom- und Pan-Fähigkeiten
+- Unterstützung für Events, Marker, Achsen und Gitter
+- Intelligente Marker-Gruppierung mit automatischer Zoom-Funktion zur Gruppe – Klicken Sie auf gruppierte Marker, um in ihre individuellen Komponenten zu zoomen
+- Virtualisiertes Rendering für bessere Performance bei großen Datensätzen (nur aktiv, wenn der Timeline-Inhalt das Sichtfenster überschreitet)
+- Anpassbares Aussehen und Verhalten
+- TypeScript-Unterstützung mit vollständigen Typdefinitionen
+- React-Integration mit benutzerdefinierten Hooks
 
-## 安装
+## Installation
 
 ```bash
 npm install @gravity-ui/timeline
 ```
 
-## 使用方法
+## Nutzung
 
-时间线组件可以在 React 应用中使用，以下是基本设置：
+Die Timeline-Komponente kann in React-Anwendungen mit der folgenden grundlegenden Einrichtung verwendet werden:
 
 ```tsx
 import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
@@ -57,9 +57,9 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### 标记结构
+### Marker-Struktur
 
-每个标记需要以下结构：
+Jeder Marker erfordert die folgende Struktur:
 
 ```typescript
 type TimelineMarker = {
@@ -76,9 +76,9 @@ type TimelineMarker = {
 };
 ```
 
-### 标记分组和缩放
+### Marker-Gruppierung und Zoom
 
-时间线会自动对相近的标记进行分组，并提供缩放功能：
+Die Timeline gruppiert Marker automatisch, die nah beieinander liegen, und bietet Zoom-Funktionalität:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -114,36 +114,36 @@ const MyTimelineComponent = () => {
 };
 ```
 
-## 工作原理
+## So funktioniert es
 
-时间线组件使用 React 构建，提供了一种灵活的方式来创建交互式时间线可视化。下面是其工作原理：
+Die Timeline-Komponente ist mit React aufgebaut und bietet einen flexiblen Weg, interaktive Timeline-Visualisierungen zu erstellen. Hier ist, wie sie funktioniert:
 
-### 组件架构
+### Komponentenarchitektur
 
-时间线实现为一个 React 组件，可以通过两个主要对象进行配置：
+Die Timeline wird als React-Komponente implementiert, die über zwei Hauptobjekte konfiguriert werden kann:
 
-1. **TimelineSettings**：控制时间线核心行为和外观
-   - `start`：时间线的起始时间
-   - `end`：时间线的结束时间
-   - `axes`：轴配置数组
-   - `events`：事件配置数组
-   - `markers`：标记配置数组
+1. **TimelineSettings**: Steuert das Kernverhalten und Aussehen der Timeline
+   - `start`: Startzeit der Timeline
+   - `end`: Endzeit der Timeline
+   - `axes`: Array von Achsenkonfigurationen
+   - `events`: Array von Event-Konfigurationen
+   - `markers`: Array von Marker-Konfigurationen
 
-2. **ViewConfiguration**：管理视觉表示和交互设置
-   - 控制外观、缩放级别和交互行为
-   - 可以自定义或使用默认值
+2. **ViewConfiguration**: Verwaltet die visuelle Darstellung und Interaktionseinstellungen
+   - Steuert Aussehen, Zoom-Level und Interaktionsverhalten
+   - Kann angepasst oder Standardwerte verwendet werden
 
-### 事件处理
+### Event-Behandlung
 
-时间线组件支持多种交互事件：
+Die Timeline-Komponente unterstützt mehrere interaktive Events:
 
-- `on-click`：点击时间线时触发
-- `on-context-click`：右键点击/上下文菜单时触发
-- `on-select-change`：选择变化时触发
-- `on-hover`：悬停在时间线元素上时触发
-- `on-leave`：鼠标离开时间线元素时触发
+- `on-click`: Wird ausgelöst, wenn auf die Timeline geklickt wird
+- `on-context-click`: Wird bei Rechtsklick/Kontextmenü ausgelöst
+- `on-select-change`: Wird ausgelöst, wenn die Auswahl geändert wird
+- `on-hover`: Wird ausgelöst, wenn über Timeline-Elemente gehovert wird
+- `on-leave`: Wird ausgelöst, wenn die Maus Timeline-Elemente verlässt
 
-事件处理示例：
+Beispiel für Event-Behandlung:
 
 ```tsx
 import { useTimelineEvent } from '@gravity-ui/timeline/react';
@@ -163,52 +163,52 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### React 集成
+### React-Integration
 
-组件使用自定义钩子来管理时间线：
+Die Komponente verwendet benutzerdefinierte Hooks für das Timeline-Management:
 
-- `useTimeline`：管理时间线实例及其生命周期
-  - 创建并初始化时间线
-  - 在组件卸载时处理清理
-  - 提供对时间线实例的访问
+- `useTimeline`: Verwaltet die Timeline-Instanz und ihren Lebenszyklus
+  - Erstellt und initialisiert die Timeline
+  - Handhabt Cleanup beim Unmount der Komponente
+  - Bietet Zugriff auf die Timeline-Instanz
 
-- `useTimelineEvent`：处理事件订阅和清理
-  - 管理事件监听器的生命周期
-  - 在卸载时自动清理监听器
+- `useTimelineEvent`: Handhabt Event-Abonnements und Cleanup
+  - Verwaltet den Lebenszyklus von Event-Listenern
+  - Räumt Listener automatisch beim Unmount auf
 
-组件会在卸载时自动处理时间线实例的清理和销毁。
+Die Komponente handhabt automatisch das Cleanup und die Zerstörung der Timeline-Instanz beim Unmount.
 
-### 事件结构
+### Event-Struktur
 
-时间线中的事件遵循以下结构：
+Events in der Timeline folgen dieser Struktur:
 
 ```typescript
 type TimelineEvent = {
-  id: string;             // 唯一标识符
-  from: number;           // 开始时间戳
-  to?: number;            // 结束时间戳（点事件可选）
-  axisId: string;         // 该事件所属轴的 ID
-  trackIndex: number;     // 轴轨道中的索引
-  renderer?: AbstractEventRenderer; // 可选的自定义渲染器
-  color?: string;         // 可选的事件颜色
-  selectedColor?: string; // 可选的选中状态颜色
+  id: string;             // Unique identifier
+  from: number;           // Start timestamp
+  to?: number;            // End timestamp (optional for point events)
+  axisId: string;         // ID of the axis this event belongs to
+  trackIndex: number;     // Index in the axis track
+  renderer?: AbstractEventRenderer; // Optional custom renderer
+  color?: string;         // Optional event color
+  selectedColor?: string; // Optional selected state color
 };
 ```
 
-### 直接使用 TypeScript
+### Direkte TypeScript-Nutzung
 
-Timeline 类可以在 TypeScript 中直接使用，而无需 React。这对于与其他框架或纯 JavaScript 应用集成非常有用：
+Die Timeline-Klasse kann direkt in TypeScript ohne React verwendet werden. Das ist nützlich für die Integration in andere Frameworks oder reine JavaScript-Anwendungen:
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// 创建时间线实例
+// Create a timeline instance
 const timeline = new Timeline({
   settings: {
     start: timestamp,
-    end: timestamp + 3600000, // 现在时间后 1 小时
+    end: timestamp + 3600000, // 1 hour from now
     axes: [
       {
         id: 'main',
@@ -219,8 +219,8 @@ const timeline = new Timeline({
     events: [
       {
         id: 'event1',
-        from: timestamp + 1800000, // 现在时间后 30 分钟
-        to: timestamp + 2400000,   // 现在时间后 40 分钟
+        from: timestamp + 1800000, // 30 minutes from now
+        to: timestamp + 2400000,   // 40 minutes from now
         label: 'Sample Event',
         axisId: 'main'
       }
@@ -228,7 +228,7 @@ const timeline = new Timeline({
     markers: [
       {
         id: 'marker1',
-        time: timestamp + 1200000, // 现在时间后 20 分钟
+        time: timestamp + 1200000, // 20 minutes from now
         label: 'Important Point',
         color: '#ff0000',
         activeColor: '#ff5252',
@@ -237,20 +237,20 @@ const timeline = new Timeline({
     ]
   },
   viewConfiguration: {
-    // 可选：自定义视图设置
+    // Optional: customize view settings
     zoomLevels: [1, 2, 4, 8, 16],
     hideRuler: false,
     showGrid: true
   }
 });
 
-// 使用 canvas 元素初始化
+// Initialize with a canvas element
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// 添加事件监听器
+// Add event listeners
 timeline.on('on-click', (detail) => {
   console.log('Timeline clicked:', detail);
 });
@@ -259,31 +259,31 @@ timeline.on('on-select-change', (detail) => {
   console.log('Selection changed:', detail);
 });
 
-// 完成后清理
+// Clean up when done
 timeline.destroy();
 ```
 
-Timeline 类提供了丰富的 API 来管理时间线：
+Die Timeline-Klasse bietet eine umfangreiche API zur Verwaltung der Timeline:
 
-- **事件管理**：
+- **Event-Verwaltung**:
   ```typescript
-  // 添加事件监听器
+  // Add event listener
   timeline.on('eventClick', (detail) => {
     console.log('Event clicked:', detail);
   });
 
-  // 移除事件监听器
+  // Remove event listener
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // 发出自定义事件
+  // Emit custom events
   timeline.emit('customEvent', { data: 'custom data' });
   ```
 
-- **时间线控制**：
+- **Timeline-Steuerung**:
   ```typescript
-  // 更新时间线数据
+  // Update timeline data
   timeline.api.setEvents([
     {
       id: 'newEvent',
@@ -295,7 +295,7 @@ Timeline 类提供了丰富的 API 来管理时间线：
     }
   ]);
 
-  // 更新轴
+  // Update axes
   timeline.api.setAxes([
     {
       id: 'newAxis',
@@ -304,7 +304,7 @@ Timeline 类提供了丰富的 API 来管理时间线：
     }
   ]);
 
-  // 更新标记
+  // Update markers
   timeline.api.setMarkers([
     {
       id: 'newMarker',
@@ -317,36 +317,36 @@ Timeline 类提供了丰富的 API 来管理时间线：
   ]);
   ```
 
-## 实时示例
+## Live-Beispiele
 
-在我们的 [Storybook](https://preview.gravity-ui.com/timeline/) 中探索交互式示例：
+Erkunden Sie interaktive Beispiele in unserem [Storybook](https://preview.gravity-ui.com/timeline/):
 
-- [Basic Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - 带有事件和轴的简单时间线
-- [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - 带有事件和轴的无尽时间线
-- [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 带有垂直标记和标签的时间线
-- [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - 带有自定义事件渲染的时间线
+- [Basic Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Einfache Timeline mit Events und Achsen
+- [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Endlose Timeline mit Events und Achsen
+- [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Timeline mit vertikalen Markern und Beschriftungen
+- [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Timeline mit benutzerdefinierter Event-Darstellung
 
 
-## 开发
+## Entwicklung
 
 ### Storybook
 
-此项目包含 Storybook，用于组件开发和文档。
+Dieses Projekt enthält Storybook für die Komponentenentwicklung und Dokumentation.
 
-运行 Storybook：
+Um Storybook zu starten:
 
 ```bash
 npm run storybook
 ```
 
-这将启动 Storybook 开发服务器，端口为 6006。您可以在 http://localhost:6006 访问它。
+Dadurch wird der Storybook-Entwicklungsserver auf Port 6006 gestartet. Sie können ihn unter http://localhost:6006 aufrufen.
 
-构建 Storybook 的静态版本以供部署：
+Um eine statische Version von Storybook für die Bereitstellung zu erstellen:
 
 ```bash
 npm run build-storybook
 ```
 
-## 许可证
+## Lizenz
 
 MIT
