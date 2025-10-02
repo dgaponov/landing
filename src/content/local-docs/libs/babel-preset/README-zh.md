@@ -1,6 +1,6 @@
 # @gravity-ui/babel-preset
 
-Gravity UI 项目专用的 Babel 预设
+Gravity UI 项目的 Babel 预设
 
 ## 安装
 ```
@@ -16,10 +16,10 @@ npm install --save-dev @gravity-ui/babel-preset
   "presets": [
       "@gravity-ui/babel-preset",
       {
-        "env": {modules: false}, // 默认值为 {}
-        "runtime": {useESModules: true}, // 默认值为 {}
-        "typescript": true, // 默认值为 false
-        "react": {runtime: "automatic"} // 默认值为 {}
+        "env": {modules: false}, // defaults to {}
+        "runtime": {useESModules: true}, // defaults to {}
+        "typescript": true, // defaults to false
+        "react": {runtime: "automatic"} // defaults to {}
       }
   ]
 }
