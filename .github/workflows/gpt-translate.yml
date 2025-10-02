@@ -22,7 +22,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          MODIFIED_FILES=$(git d iff --name-only HEAD^ HEAD | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
+          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
           echo "modified_files=$(echo "$MODIFIED_FILES" | tr '\n' ' ' | sed 's/ $//')" >> $GITHUB_OUTPUT
       - name: Prepare inputs for ${{ matrix.language }}
         id: prepare-inputs
