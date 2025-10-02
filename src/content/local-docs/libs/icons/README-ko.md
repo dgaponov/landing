@@ -1,14 +1,14 @@
 # @gravity-ui/icons &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/icons)](https://www.npmjs.com/package/@gravity-ui/icons) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/icons/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/icons/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/icons/)
 
-Gravity UI 图标包。图标提供两种格式：SVG 和 React。请查看 [展示页面](https://preview.gravity-ui.com/icons/)。
+Gravity UI 아이콘 팩입니다. 아이콘은 SVG와 React 두 가지 형태로 제공됩니다. [쇼케이스](https://preview.gravity-ui.com/icons/) 페이지를 확인해 보세요.
 
-## 安装
+## 설치
 
 ```shell
 npm install --save-dev @gravity-ui/icons
 ```
 
-## 使用
+## 사용법
 
 ### React
 
@@ -16,7 +16,7 @@ npm install --save-dev @gravity-ui/icons
 import Cloud from '@gravity-ui/icons/Cloud';
 ```
 
-或
+또는
 
 ```js
 import {Cloud} from '@gravity-ui/icons';
@@ -24,7 +24,7 @@ import {Cloud} from '@gravity-ui/icons';
 
 ### SVG
 
-> 您可能需要合适的加载器来支持此功能
+> 이를 사용하려면 적절한 로더가 필요할 수 있습니다.
 
 ```js
 import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';
