@@ -37,55 +37,55 @@ app.listen(3000);
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // 任何与 json 兼容的数据，将被设置到页面的 window.__DATA__ 中
+  // Any json compatible data, will be set to window.__DATA__ on the page
   data?: Data;
   // favicon
   icon?: Icon;
-  // 要在相应标签上设置的 nonce
+  // nonce to be set on the appropriate tags
   nonce?: string;
 
-  // 通用选项
-  // 页面标题
+  // common options
+  // Page title
   title: string;
-  // 页面语言，将被设置到 html 标签
+  // language of page, will be set to html tag
   lang?: string;
   isMobile?: boolean;
 
-  // html 属性
+  // html attributes
   htmlAttributes?: string;
-  // header 标签内容
-  // meta 标签
+  // header tag content
+  // meta tags
   meta?: Meta[];
-  // link 标签
+  // link tags
   links?: Link[];
-  // script 标签
+  // script tags
   scripts?: Script[];
-  // style 标签
+  // style tags
   styleSheets?: Stylesheet[];
-  // 内联代码的 script 标签
+  // script tags with inlined code
   inlineScripts?: string[];
-  // 内联样式的 style 标签
+  // style tags with inlined styles
   inlineStyleSheets?: string[];
 
-  // body 标签的内容
+  // content of body tag
   bodyContent?: {
-    // body 标签的类名
+    // class name for body tag
     className?: string;
-    // body 属性
+    // body attributes
     attributes?: string;
-    // id 为 root 的 div 标签之前的 body 内容
+    // body content before div tag with id root
     beforeRoot?: string;
-    // id 为 root 的 div 标签的 innerHtml 内容
+    // innerHtml content of div tag with id root
     root?: string;
-    // id 为 root 的 div 标签之后的 body 内容
+    // body content after div tag with id root
     afterRoot?: string;
   };
-  // 插件选项
+  // plugins options
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
-### Meta
+### 元数据
 
 描述 `meta` 标签：
 
@@ -106,7 +106,7 @@ const meta = [
 ];
 ```
 
-将被渲染为：
+将渲染为：
 
 ```html
 <meta name="description" content="some text" />
@@ -114,9 +114,9 @@ const meta = [
 <meta property="og:title" content="Some title" />
 ```
 
-### Icon
+### 图标
 
-描述页面 favicon：
+描述页面图标（favicon）：
 
 ```typescript
 interface Icon {
@@ -136,7 +136,7 @@ const icon = {
 };
 ```
 
-### Links
+### 链接
 
 描述 `link` 标签：
 
@@ -164,15 +164,15 @@ const link = {
 };
 ```
 
-将被渲染为：
+将渲染为：
 
 ```html
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
 ```
 
-### Scripts
+### 脚本
 
-描述带预加载的脚本链接：
+描述带有预加载的脚本链接：
 
 ```typescript
 interface Script {
@@ -195,7 +195,7 @@ const script = {
 };
 ```
 
-将被渲染为：
+将渲染为：
 
 ```html
 <link href="url/to/script" rel="preload" as="script" crossorigin="anonymous" />
@@ -203,7 +203,7 @@ const script = {
 <script src="url/to/script" defer="true" async="false" crossorigin="anonymous" nonce="..."></script>
 ```
 
-#### Style sheets
+#### 样式表
 
 描述样式链接：
 
@@ -221,7 +221,7 @@ const styleSheet = {
 };
 ```
 
-将被渲染为：
+将渲染为：
 
 ```html
 <link href="url/to/stylesheet" rel="stylesheet" />
@@ -230,7 +230,7 @@ const styleSheet = {
 ## 插件
 
 渲染函数可以通过插件扩展。插件可以重写用户定义的渲染内容。
-插件是一个具有 `name` 和 `apply` 属性的对象：
+插件是一个带有 `name` 和 `apply` 属性的对象：
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
@@ -239,7 +239,7 @@ interface Plugin<Options = any, Name = string> {
     options: Options | undefined; // 通过 `renderLayout` 函数中的 `pluginsOptions` 参数传递。
     commonOptions: CommonOptions;
     renderContent: RenderContent;
-    /** @deprecated 使用 `renderContent.helpers` 代替 */
+    /** @deprecated use `renderContent.helpers` instead */
     utils: RenderHelpers;
   }) => void;
 }
@@ -285,18 +285,20 @@ export interface RenderHelpers {
 }
 ```
 
-此包中有一些插件：
+此包中包含一些插件：
 
-### Google analytics
+### Google Analytics
 
 在页面上添加 Google Analytics 计数器。
 
-用法：
+使用方法：
 
 ```js
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
+
+```
 
 app.get((req, res) => {
   res.send(
@@ -304,7 +306,7 @@ app.get((req, res) => {
       title: 'Home page',
       pluginsOptions: {
         googleAnalytics: {
-          useBeaconTransport: true, // 启用 navigator.sendBeacon
+          useBeaconTransport: true, // enables use of navigator.sendBeacon
           counter: {
             id: 'some id',
           },
@@ -330,7 +332,7 @@ interface GoogleAnalyticsOptions {
 
 ### Yandex Metrika
 
-在页面上添加 Yandex Metrika 计数器。
+在页面上添加 Yandex 指标计数器。
 
 用法：
 
@@ -390,7 +392,7 @@ export type MetrikaOptions = {
 
 ### Layout
 
-从 webpack 资源清单文件添加脚本和样式。
+从 webpack 资产生成清单文件中添加脚本和样式。
 
 用法：
 
@@ -459,9 +461,46 @@ interface UikitPluginOptions {
 }
 ```
 
+### Remote Versions
+
+在页面上添加微前端版本信息。
+
+此插件会创建一个全局 `window.__REMOTE_VERSIONS__` 对象，其中包含提供的微前端版本信息，可用于模块联邦或其他类似微前端架构，以确定加载远程模块的版本。
+
+它可以与 [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) 结合使用，并启用 `moduleFederation.remotesRuntimeVersioning` 选项，以自动加载对应版本的远程模块。
+
+用法：
+
+```js
+import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
+
+const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
+
+app.get((req, res) => {
+  res.send(
+    renderLayout({
+      title: 'Home page',
+      pluginsOptions: {
+        remoteVersions: {
+          header: '1.2.3',
+          footer: '2.1.0',
+          sidebar: '0.5.1',
+        },
+      },
+    }),
+  );
+});
+```
+
+插件选项：
+
+```typescript
+type RemoteVersionsPluginOptions = Record<string, string>;
+```
+
 ### Helpers
 
-有一个帮助函数可以创建所有插件：
+有一个辅助函数可以创建所有插件：
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -490,7 +529,7 @@ app.get((req, res) => {
 
 ## 替代用法
 
-通过 html 流使用部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent`：
+使用部分渲染器 `generateRenderContent`、`renderHeadContent`、`renderBodyContent` 通过 HTML 流式传输：
 
 ```js
 import express from 'express';
@@ -518,7 +557,10 @@ app.get('/', async function (req, res) {
 
   const {htmlAttributes, helpers, bodyContent} = content;
 
-  res.write(`
+```
+
+```javascript
+res.write(`
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>

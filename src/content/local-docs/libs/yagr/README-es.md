@@ -19,7 +19,7 @@ Yagr es un renderizador de gráficos de alto rendimiento para HTML5 canvas basad
 -   [Cruces configurables, marcadores de cursor y ajuste](https://yagr.tech/en/api/cursor)
 -   Typescript
 -   [Localización](https://yagr.tech/en/api/settings#localization)
--   [Variables CSS en nombres de color](https://yagr.tech/en/api/css)
+-   [Variables CSS en nombres de colores](https://yagr.tech/en/api/css)
 -   [Leyenda en línea paginada](https://yagr.tech/en/plugins/legend)
 -   [Manejo de errores y ganchos extendidos](https://yagr.tech/en/api/lifecycle)
 -   [Alineación de datos e interpolación para datos faltantes](https://yagr.tech/en/api/data-processing)
@@ -76,10 +76,10 @@ new Yagr(document.body, {
 
 ### Ejemplos
 
-¿Necesitas algo específico? Yagr incluye algunos ejemplos útiles en la carpeta [demo/examples](./demo/examples/). Cómo iniciarlos con la versión actual:
+¿Necesitas algo específico? Yagr presenta algunos ejemplos útiles en la carpeta [demo/examples](./demo/examples/). Cómo iniciarlos con la versión actual:
 
 1. Clona el repositorio.
-2. Instala las dependencias con `npm i`.
+2. Instala las dependencias `npm i`.
 3. Ejecuta `npm run build`.
 4. Ejecuta `npx http-server .`.
 5. Abre los ejemplos en el navegador según la salida de http-server.

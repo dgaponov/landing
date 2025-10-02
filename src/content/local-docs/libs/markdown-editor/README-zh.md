@@ -20,7 +20,7 @@ npm install @gravity-ui/markdown-editor
 
 ### 必需依赖
 
-请注意，要开始使用该包，您的项目还需要安装以下依赖：`@diplodoc/transform`、`react`、`react-dom`、`@gravity-ui/uikit`、`@gravity-ui/components` 等。请查看 `package.json` 中的 `peerDependencies` 部分以获取准确信息。
+请注意，要开始使用该包，您的项目还需要安装以下内容：`@diplodoc/transform`、`react`、`react-dom`、`@gravity-ui/uikit`、`@gravity-ui/components` 等。请查看 `package.json` 中的 `peerDependencies` 部分以获取准确信息。
 
 ## 快速开始
 

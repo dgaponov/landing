@@ -1,4 +1,4 @@
-# Gravity UI 包家族的 Browserslist 配置
+# Gravity UI 包系列的 Browserslist 配置
 
 ## 兼容浏览器
 
@@ -20,7 +20,7 @@ npm i --save-dev @gravity-ui/browserslist-config
 }
 ```
 
-您可以根据目标受众指定额外的浏览器，例如：
+您可以根据受众需求指定额外的浏览器，例如：
 ```json
 {
   "browserslist": [

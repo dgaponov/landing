@@ -1,4 +1,4 @@
-# Browserslist-Konfiguration der Gravity UI-Paketfamilie
+# Browserslist-Konfiguration für die Gravity UI-Paketfamilie
 
 ## Kompatible Browser
 

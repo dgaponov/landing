@@ -33,4 +33,4 @@ npm i --save-dev @gravity-ui/browserslist-config
 
 ## Использование
 
-Пакет предоставляет версию browserslist для production.
+Этот пакет предоставляет production-версию конфигурации browserslist.

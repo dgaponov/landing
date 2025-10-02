@@ -1,6 +1,6 @@
 # @gravity-ui/app-layout &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/app-layout)](https://www.npmjs.com/package/@gravity-ui/app-layout) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/app-layout/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/app-layout/actions/workflows/ci.yml?query=branch:main)
 
-## Instalar
+## Instalación
 
 ```shell
 npm install --save-dev @gravity-ui/app-layout
@@ -37,57 +37,57 @@ donde
 
 ```typescript
 interface RenderParams<Data, Plugins> {
-  // Any json compatible data, will be set to window.__DATA__ on the page
+  // Cualquier dato compatible con JSON, se establecerá en window.__DATA__ en la página
   data?: Data;
   // favicon
   icon?: Icon;
-  // nonce to be set on the appropriate tags
+  // nonce para establecer en las etiquetas correspondientes
   nonce?: string;
 
-  // common options
-  // Page title
+  // opciones comunes
+  // Título de la página
   title: string;
-  // language of page, will be set to html tag
+  // idioma de la página, se establecerá en la etiqueta html
   lang?: string;
   isMobile?: boolean;
 
-  // html attributes
+  // atributos html
   htmlAttributes?: string;
-  // header tag content
-  // meta tags
+  // contenido de la etiqueta header
+  // etiquetas meta
   meta?: Meta[];
-  // link tags
+  // etiquetas link
   links?: Link[];
-  // script tags
+  // etiquetas script
   scripts?: Script[];
-  // style tags
+  // etiquetas style
   styleSheets?: Stylesheet[];
-  // script tags with inlined code
+  // etiquetas script con código en línea
   inlineScripts?: string[];
-  // style tags with inlined styles
+  // etiquetas style con estilos en línea
   inlineStyleSheets?: string[];
 
-  // content of body tag
+  // contenido de la etiqueta body
   bodyContent?: {
-    // class name for body tag
+    // nombre de clase para la etiqueta body
     className?: string;
-    // body attributes
+    // atributos de body
     attributes?: string;
-    // body content before div tag with id root
+    // contenido de body antes de la etiqueta div con id root
     beforeRoot?: string;
-    // innerHtml content of div tag with id root
+    // contenido innerHtml de la etiqueta div con id root
     root?: string;
-    // body content after div tag with id root
+    // contenido de body después de la etiqueta div con id root
     afterRoot?: string;
   };
-  // plugins options
+  // opciones de plugins
   pluginsOptions?: Partial<PluginsOptions<Plugins>>;
 }
 ```
 
 ### Meta
 
-Describe la `meta` etiqueta:
+Describe la etiqueta `meta`:
 
 ```typescript
 interface Meta {
@@ -114,7 +114,7 @@ Se renderizará como:
 <meta property="og:title" content="Some title" />
 ```
 
-### Icono
+### Icon
 
 Describe el favicon de la página:
 
@@ -136,9 +136,9 @@ const icon = {
 };
 ```
 
-### Vínculos
+### Links
 
-Describe la `link` etiqueta:
+Describe la etiqueta `link`:
 
 ```typescript
 interface Link {
@@ -170,9 +170,9 @@ se renderizará como:
 <link href="myFont.woff2" rel="preload" as="font" type="font/woff2" crossorigin="anonymous" />
 ```
 
-### Guiones
+### Scripts
 
-Describe el enlace al script con precarga:
+Describe el enlace a un script con precarga:
 
 ```typescript
 interface Script {
@@ -205,7 +205,7 @@ se renderizará como:
 
 #### Hojas de estilo
 
-Describa el enlace a los estilos:
+Describe el enlace a estilos:
 
 ```typescript
 interface Stylesheet {
@@ -229,14 +229,14 @@ se renderizará como:
 
 ## Plugins
 
-La función de renderizado se puede ampliar mediante complementos. El complemento puede reescribir el contenido de renderizado definido por el usuario.
-El complemento es un objeto con `name` `apply` propiedades:
+La función de renderizado puede extenderse mediante plugins. Un plugin puede reescribir el contenido de renderizado definido por el usuario.
+Un plugin es un objeto con las propiedades `name` y `apply`:
 
 ```typescript
 interface Plugin<Options = any, Name = string> {
   name: Name;
   apply: (params: {
-    options: Options | undefined; // passed through `renderLayout` function in `pluginsOptions` parameter.
+    options: Options | undefined; // pasado a través de la función `renderLayout` en el parámetro `pluginsOptions`.
     commonOptions: CommonOptions;
     renderContent: RenderContent;
     /** @deprecated use `renderContent.helpers` instead */
@@ -285,11 +285,11 @@ export interface RenderHelpers {
 }
 ```
 
-Hay algunos complementos en este paquete:
+Este paquete incluye algunos plugins:
 
-### Google analytics
+### Google Analytics
 
-Añade el contador de Google Analytics a la página.
+Añade el contador de Google Analytics en la página.
 
 Uso:
 
@@ -297,6 +297,8 @@ Uso:
 import {createRenderFunction, createGoogleAnalyticsPlugin} from '@gravity-ui/app-layout';
 
 const renderLayout = createRenderFunction([createGoogleAnalyticsPlugin()]);
+
+```
 
 app.get((req, res) => {
   res.send(
@@ -328,9 +330,9 @@ interface GoogleAnalyticsOptions {
 }
 ```
 
-### Yandex Metric
+### Yandex Metrika
 
-Añade contadores de métricas de Yandex a la página.
+Agrega contadores de métricas de Yandex en la página.
 
 Uso:
 
@@ -388,9 +390,9 @@ export type MetrikaOptions = {
 };
 ```
 
-### Disposición
+### Layout
 
-Agrega scripts y estilos del archivo de manifiesto de activos del paquete web.
+Agrega scripts y estilos desde el archivo de manifiesto de assets de webpack.
 
 Uso:
 
@@ -426,7 +428,7 @@ export interface LayoutOptions {
 
 ### @gravity-ui/uikit
 
-Añade atributos de cuerpo.
+Agrega atributos al body.
 
 Uso:
 
@@ -459,9 +461,46 @@ interface UikitPluginOptions {
 }
 ```
 
-### Ayudantes
+### Remote Versions
 
-Hay un ayudante para crear todos los complementos:
+Agrega información de versiones de microfrontends a la página.
+
+Este plugin crea un objeto global `window.__REMOTE_VERSIONS__` que contiene las versiones de microfrontends proporcionadas, las cuales pueden usarse en arquitecturas de module federation o similares para determinar qué versiones de módulos remotos cargar.
+
+Se puede usar en combinación con [App Builder](https://github.com/gravity-ui/app-builder?tab=readme-ov-file#module-federation) y la opción `moduleFederation.remotesRuntimeVersioning` para cargar automáticamente módulos remotos con las versiones correspondientes.
+
+Uso:
+
+```js
+import {createRenderFunction, createRemoteVersionsPlugin} from '@gravity-ui/app-layout';
+
+const renderLayout = createRenderFunction([createRemoteVersionsPlugin()]);
+
+app.get((req, res) => {
+  res.send(
+    renderLayout({
+      title: 'Home page',
+      pluginsOptions: {
+        remoteVersions: {
+          header: '1.2.3',
+          footer: '2.1.0',
+          sidebar: '0.5.1',
+        },
+      },
+    }),
+  );
+});
+```
+
+Opciones del plugin:
+
+```typescript
+type RemoteVersionsPluginOptions = Record<string, string>;
+```
+
+### Helpers
+
+Hay un helper para crear todos los plugins:
 
 ```js
 import {createMiddleware, createDefaultPlugins} from '@gravity-ui/app-layout';
@@ -490,7 +529,7 @@ app.get((req, res) => {
 
 ## Uso alternativo
 
-Con renderizadores de piezas `generateRenderContent` `renderHeadContent`, `renderBodyContent` mediante transmisión de HTML:
+Con renderizadores de partes `generateRenderContent`, `renderHeadContent`, `renderBodyContent` mediante streaming de HTML:
 
 ```js
 import express from 'express';
@@ -518,7 +557,10 @@ app.get('/', async function (req, res) {
 
   const {htmlAttributes, helpers, bodyContent} = content;
 
-  res.write(`
+```
+
+```javascript
+res.write(`
         <!DOCTYPE html>
         <html ${helpers.attrs({...htmlAttributes})}>
         <head>

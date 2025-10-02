@@ -20,7 +20,7 @@ npm install @gravity-ui/markdown-editor
 
 ### Dependencias requeridas
 
-Ten en cuenta que para comenzar a usar el paquete, tu proyecto también debe tener instalados los siguientes: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` y algunos otros. Consulta la sección `peerDependencies` del `package.json` para obtener información precisa.
+Ten en cuenta que, para comenzar a usar el paquete, tu proyecto también debe tener instalados los siguientes: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` y algunos otros. Consulta la sección `peerDependencies` del `package.json` para obtener información precisa.
 
 ## Primeros pasos
 
@@ -82,6 +82,6 @@ configure({
 
 No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
 
-### Contribución
+### Contribuyendo
 
 - [Guías para colaboradores](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)

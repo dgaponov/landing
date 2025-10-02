@@ -6,7 +6,7 @@
 npm install --save-dev prettier @gravity-ui/prettier-config
 ```
 
-## 使用方法
+## 使用
 
 在项目根目录中添加 `.prettierrc.js` 文件，内容如下：
 

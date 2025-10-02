@@ -4,7 +4,7 @@ Yagr ist ein hochperformanter HTML5-Canvas-Diagramm-Renderer, der auf [uPlot](ht
 
 <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/demo.png" width="800" />
 
-## Funktionen
+## Features
 
 -   [Linien, Flächen, Säulen und Punkte als Visualisierungstypen. Konfigurierbar pro Serie](https://yagr.tech/en/api/visualization)
 -   [Konfigurierbarer Legenden-Tooltip](https://yagr.tech/en/plugins/tooltip)
@@ -14,7 +14,7 @@ Yagr ist ein hochperformanter HTML5-Canvas-Diagramm-Renderer, der auf [uPlot](ht
 -   [Responsive Diagramme](https://yagr.tech/en/api/settings#adaptivity) (erfordert [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
 -   [Erweiterte Unterstützung für gestapelte Flächen/Säulen](https://yagr.tech/en/api/scales#stacking)
 -   [Konfigurierbare Marker](./docs/api/markers.md)
--   [Helles/Dunkles Theme](https://yagr.tech/en/api/settings#theme)
+-   [Light/Dark-Theme](https://yagr.tech/en/api/settings#theme)
 -   [Daten-Normalisierung](https://yagr.tech/en/api/scales#normalization)
 -   [Konfigurierbare Fadenkreuze, Cursor-Marker und Snapping](https://yagr.tech/en/api/cursor)
 -   Typescript
@@ -27,7 +27,7 @@ Yagr ist ein hochperformanter HTML5-Canvas-Diagramm-Renderer, der auf [uPlot](ht
 
 ## [Dokumentation](https://yagr.tech)
 
-## Schneller Einstieg
+## Schnellstart
 
 ```
 npm i @gravity-ui/yagr
@@ -76,7 +76,7 @@ new Yagr(document.body, {
 
 ### Beispiele
 
-Suchen Sie etwas Spezielles? Yagr enthält nützliche Beispiele im Ordner [demo/examples](./demo/examples/). So starten Sie sie mit der aktuellen Version:
+Brauchen Sie etwas Spezielles? Yagr enthält nützliche Beispiele im Ordner [demo/examples](./demo/examples/). So starten Sie sie mit der aktuellen Version:
 
 1. Klonen Sie das Repository.
 2. Installieren Sie die Abhängigkeiten mit `npm i`.

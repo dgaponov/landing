@@ -1,15 +1,15 @@
-![Markdown Editor](https://github.com/user-attachments/assets/0b4e5f65-54cf-475f-9c68-557a4e9edb46)
+![Редактор Markdown](https://github.com/user-attachments/assets/0b4e5f65-54cf-475f-9c68-557a4e9edb46)
 
 # @gravity-ui/markdown-editor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/markdown-editor)](https://www.npmjs.com/package/@gravity-ui/markdown-editor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/markdown-editor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/markdown-editor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/md-editor/)
 
 ## Редактор Markdown в режимах WYSIWYG и разметки
 
-MarkdownEditor — это мощный инструмент для работы с Markdown, который сочетает в себе режимы WYSIWYG и разметки. Это позволяет создавать и редактировать контент в удобном визуальном режиме, а также полностью контролировать разметку.
+MarkdownEditor — это мощный инструмент для работы с Markdown, который сочетает в себе режимы WYSIWYG и разметки. Это значит, что вы можете создавать и редактировать контент в удобном визуальном режиме, а также иметь полный контроль над разметкой.
 
 ### 🔧 Основные возможности
 
 - Поддержка базового синтаксиса Markdown и [YFM](https://ydocs.tech).
-- Расширяемость с использованием движков ProseMirror и CodeMirror.
+- Расширяемость благодаря использованию движков ProseMirror и CodeMirror.
 - Возможность работы в режимах WYSIWYG и разметки для максимальной гибкости.
 
 ## Установка
@@ -24,7 +24,7 @@ npm install @gravity-ui/markdown-editor
 
 ## Начало работы
 
-Редактор Markdown поставляется в виде React-хука для создания экземпляра редактора и компонента для отображения интерфейса.\
+Редактор Markdown поставляется в виде React-хука для создания экземпляра редактора и компонента для рендеринга представления.\
 Для настройки стилей и темы обратитесь к [документации UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
@@ -81,6 +81,6 @@ configure({
 
 Не забудьте вызвать `configure()` из [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) и других UI-библиотек.
 
-### Вклад в разработку
+### Вклад в проект
 
 - [Правила для контрибьюторов](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)

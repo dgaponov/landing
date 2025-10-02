@@ -1,21 +1,21 @@
-# @gravity -ui/línea de tiempo [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline) (https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release) (https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685) (https://preview.gravity-ui.com/timeline/)
+# @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-Una biblioteca basada en React para crear visualizaciones de línea de tiempo interactivas con renderizado de lienzo.
+Una biblioteca basada en React para crear visualizaciones interactivas de líneas de tiempo con renderizado en canvas.
 
 ## Documentación
 
-Para obtener más información, consulte [la documentación](./docs/docs.md).
+Para más detalles, consulta la [Documentación](./docs/docs.md).
 
 ## Características
 
-- Renderización basada en lienzo para un alto rendimiento
-- Cronología interactiva con funciones de zoom y panorámica
-- Soporte para eventos, marcadores, ejes y cuadrículas
-- Agrupación inteligente de marcadores con zoom automático para agrupar: haga clic en los marcadores agrupados para ampliar sus componentes individuales
-- Renderización virtualizada para mejorar el rendimiento con conjuntos de datos de gran tamaño (solo se activa cuando el contenido de la línea de tiempo supera la ventana gráfica)
+- Renderizado basado en canvas para un alto rendimiento
+- Línea de tiempo interactiva con capacidades de zoom y desplazamiento (pan)
+- Soporte para eventos, marcadores, ejes y cuadrícula
+- Agrupación inteligente de marcadores con zoom automático al grupo: haz clic en marcadores agrupados para hacer zoom en sus componentes individuales
+- Renderizado virtualizado para mejorar el rendimiento con grandes conjuntos de datos (solo se activa cuando el contenido de la línea de tiempo excede el área visible)
 - Apariencia y comportamiento personalizables
-- Soporte de TypeScript con definiciones de tipos completas
-- Integración de React con ganchos personalizados
+- Soporte para TypeScript con definiciones de tipos completas
+- Integración con React mediante hooks personalizados
 
 ## Instalación
 
@@ -28,190 +28,229 @@ npm install @gravity-ui/timeline
 El componente de línea de tiempo se puede usar en aplicaciones React con la siguiente configuración básica:
 
 ```tsx
-import {TimelineCanvas, useTimeline} from '@gravity-ui/timeline/react';
+import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
 
 const MyTimelineComponent = () => {
-  const {timeline} = useTimeline({
+  const { timeline, api, start, stop } = useTimeline({
     settings: {
       start: Date.now(),
-      end: Date.now() + 3600000, // 1 hour from now
+      end: Date.now() + 3600000, // 1 hora a partir de ahora
       axes: [],
       events: [],
-      markers: [],
+      markers: []
     },
     viewConfiguration: {
-      // Optional view configuration
-    },
+      // Configuración de vista opcional
+    }
   });
 
+  // timeline - Instancia de Timeline
+  // api - Instancia de CanvasApi (igual que timeline.api)
+  // start - Función para inicializar la línea de tiempo con el canvas
+  // stop - Función para destruir la línea de tiempo
+
   return (
-    <div style={{width: '100%', height: '100%'}}>
+    <div style={{ width: '100%', height: '100%' }}>
       <TimelineCanvas timeline={timeline} />
     </div>
   );
 };
 ```
 
-### Agrupación de marcadores y zoom
+### Estructura de Marcadores
 
-La línea de tiempo agrupa automáticamente los marcadores que están cerca unos de otros y proporciona la función de zoom:
+Cada marcador requiere la siguiente estructura:
+
+```typescript
+type TimelineMarker = {
+  time: number;           // Marca de tiempo para la posición del marcador
+  color: string;          // Color de la línea del marcador
+  activeColor: string;    // Color cuando el marcador está seleccionado (requerido)
+  hoverColor: string;     // Color cuando el marcador está hovereado (requerido)
+  lineWidth?: number;     // Ancho opcional de la línea del marcador
+  label?: string;         // Texto de etiqueta opcional
+  labelColor?: string;    // Color de etiqueta opcional
+  renderer?: AbstractMarkerRenderer; // Renderizador personalizado opcional
+  nonSelectable?: boolean;// Si el marcador puede ser seleccionado
+  group?: boolean;        // Si el marcador representa un grupo
+};
+```
+
+### Agrupación de Marcadores y Zoom
+
+La línea de tiempo agrupa automáticamente los marcadores que están cerca uno del otro y ofrece funcionalidad de zoom:
 
 ```tsx
 const MyTimelineComponent = () => {
-  const {timeline} = useTimeline({
+  const { timeline } = useTimeline({
     settings: {
       start: Date.now(),
       end: Date.now() + 3600000,
       axes: [],
       events: [],
       markers: [
-        // These markers will be grouped together
-        {time: Date.now(), color: '#ff0000', label: 'Event 1'},
-        {time: Date.now() + 1000, color: '#ff0000', label: 'Event 2'},
-        {time: Date.now() + 2000, color: '#ff0000', label: 'Event 3'},
-      ],
+        // Estos marcadores se agruparán juntos
+        { time: Date.now(), color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Evento 1' },
+        { time: Date.now() + 1000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Evento 2' },
+        { time: Date.now() + 2000, color: '#ff0000', activeColor: '#ff5252', hoverColor: '#ff1744', label: 'Evento 3' },
+      ]
     },
     viewConfiguration: {
       markers: {
-        collapseMinDistance: 8, // Group markers within 8 pixels
-        groupZoomEnabled: true, // Enable zoom on group click
-        groupZoomPadding: 0.3, // 30% padding around group
-        groupZoomMaxFactor: 0.3, // Max zoom factor
-      },
-    },
+        collapseMinDistance: 8,        // Agrupar marcadores dentro de 8 píxeles
+        groupZoomEnabled: true,        // Habilitar zoom al hacer clic en el grupo
+        groupZoomPadding: 0.3,        // 30% de relleno alrededor del grupo
+        groupZoomMaxFactor: 0.3,      // Factor máximo de zoom
+      }
+    }
   });
 
-  // Listen for group zoom events
+  // Escuchar eventos de zoom en grupo
   useTimelineEvent(timeline, 'on-group-marker-click', (data) => {
-    console.log('Group zoomed:', data);
+    console.log('Grupo con zoom:', data);
   });
 
   return <TimelineCanvas timeline={timeline} />;
 };
 ```
 
-## Cómo funciona
+## Cómo Funciona
 
-El componente de cronograma se crea con React y proporciona una forma flexible de crear visualizaciones interactivas de cronograma. Así es como funciona:
+El componente de línea de tiempo está construido con React y ofrece una forma flexible de crear visualizaciones interactivas de líneas de tiempo. Aquí te explicamos cómo funciona:
 
-### Arquitectura de componentes
+### Arquitectura del Componente
 
-La línea de tiempo se implementa como un componente de React que se puede configurar a través de dos objetos principales:
+La línea de tiempo se implementa como un componente de React que se configura mediante dos objetos principales:
 
-1. **Configuración de la línea** de tiempo: Controla el comportamiento y la apariencia principales de la línea temporal
+1. **TimelineSettings**: Controla el comportamiento y la apariencia principal de la línea de tiempo
+   - `start`: Tiempo de inicio de la línea de tiempo
+   - `end`: Tiempo de fin de la línea de tiempo
+   - `axes`: Arreglo de configuraciones de ejes
+   - `events`: Arreglo de configuraciones de eventos
+   - `markers`: Arreglo de configuraciones de marcadores
 
-   - `start`: Hora de inicio de la línea de tiempo
-   - `end`: Hora de finalización del cronograma
-   - `axes`: Conjunto de configuraciones de ejes
-   - `events`: Conjunto de configuraciones de eventos
-   - `markers`: Conjunto de configuraciones de marcadores
-
-2. **Ver configuración**: Gestiona la representación visual y los ajustes de interacción
+2. **ViewConfiguration**: Gestiona la representación visual y las configuraciones de interacción
    - Controla la apariencia, los niveles de zoom y el comportamiento de interacción
    - Se puede personalizar o usar valores predeterminados
 
-### Gestión de eventos
+### Manejo de Eventos
 
-El componente de cronograma admite varios eventos interactivos:
+El componente de línea de tiempo soporta varios eventos interactivos:
 
 - `on-click`: Se activa al hacer clic en la línea de tiempo
-- `on-context-click`: Se activa al hacer clic con el botón derecho/menú contextual
+- `on-context-click`: Se activa con clic derecho/menú contextual
 - `on-select-change`: Se dispara cuando cambia la selección
-- `on-hover`: Se activa al pasar el ratón sobre los elementos de la línea de tiempo
-- `on-leave`: Se activa cuando el ratón abandona los elementos de la línea de tiempo
+- `on-hover`: Se activa al pasar el mouse sobre elementos de la línea de tiempo
+- `on-leave`: Se dispara cuando el mouse sale de los elementos de la línea de tiempo
 
-Ejemplo de gestión de eventos:
+Ejemplo de manejo de eventos:
 
 ```tsx
-import {useTimelineEvent} from '@gravity-ui/timeline/react';
+import { useTimelineEvent } from '@gravity-ui/timeline/react';
 
 const MyTimelineComponent = () => {
-  const {timeline} = useTimeline({
-    /* ... */
-  });
+  const { timeline } = useTimeline({ /* ... */ });
 
   useTimelineEvent(timeline, 'on-click', (data) => {
-    console.log('Timeline clicked:', data);
+    console.log('Línea de tiempo clicada:', data);
   });
 
   useTimelineEvent(timeline, 'on-select-change', (data) => {
-    console.log('Selection changed:', data);
+    console.log('Selección cambiada:', data);
   });
 
   return <TimelineCanvas timeline={timeline} />;
 };
 ```
 
-### Integración de React
+### Integración con React
 
-El componente usa ganchos personalizados para la administración de la línea de tiempo:
+El componente utiliza hooks personalizados para la gestión de la línea de tiempo:
 
-- `useTimeline`: Gestiona la instancia de cronograma y su ciclo de vida
-
+- `useTimeline`: Gestiona la instancia de la línea de tiempo y su ciclo de vida
   - Crea e inicializa la línea de tiempo
-  - Se encarga de la limpieza al desmontar los componentes
-  - Proporciona acceso a la instancia de línea de tiempo
+  - Maneja la limpieza al desmontar el componente
+  - Proporciona acceso a la instancia de la línea de tiempo
 
-- `useTimelineEvent`: Gestiona las suscripciones y la limpieza de eventos
-  - Gestiona el ciclo de vida del detector de eventos
-  - Limpia automáticamente los oyentes al desmontarlos
+- `useTimelineEvent`: Maneja las suscripciones a eventos y la limpieza
+  - Gestiona el ciclo de vida de los listeners de eventos
+  - Limpia automáticamente los listeners al desmontar
 
-El componente gestiona automáticamente la limpieza y la destrucción de la instancia de la línea de tiempo cuando se desmonta.
+El componente maneja automáticamente la limpieza y destrucción de la instancia de la línea de tiempo al desmontar.
+
+### Estructura de Eventos
+
+Los eventos en la línea de tiempo siguen esta estructura:
+
+```typescript
+type TimelineEvent = {
+  id: string;             // Identificador único
+  from: number;           // Marca de tiempo de inicio
+  to?: number;            // Marca de tiempo de fin (opcional para eventos puntuales)
+  axisId: string;         // ID del eje al que pertenece este evento
+  trackIndex: number;     // Índice en la pista del eje
+  renderer?: AbstractEventRenderer; // Renderizador personalizado opcional
+  color?: string;         // Color del evento opcional
+  selectedColor?: string; // Color del estado seleccionado opcional
+};
+```
 
 ### Uso directo de TypeScript
 
-La clase Timeline se puede usar directamente en TypeScript sin React. Esto es útil para la integración con otros marcos o aplicaciones JavaScript estándar:
+La clase Timeline se puede usar directamente en TypeScript sin React. Esto es útil para integrarla con otros frameworks o aplicaciones de JavaScript vanilla:
 
 ```typescript
-import {Timeline} from '@gravity-ui/timeline';
+import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// Create a timeline instance
+// Crear una instancia de timeline
 const timeline = new Timeline({
   settings: {
     start: timestamp,
-    end: timestamp + 3600000, // 1 hour from now
+    end: timestamp + 3600000, // 1 hora a partir de ahora
     axes: [
       {
         id: 'main',
         label: 'Main Axis',
-        color: '#000000',
-      },
+        color: '#000000'
+      }
     ],
     events: [
       {
         id: 'event1',
-        start: timestamp + 1800000, // 30 minutes from now
-        end: timestamp + 2400000, // 40 minutes from now
+        from: timestamp + 1800000, // 30 minutos a partir de ahora
+        to: timestamp + 2400000,   // 40 minutos a partir de ahora
         label: 'Sample Event',
-        axisId: 'main',
-      },
+        axisId: 'main'
+      }
     ],
     markers: [
       {
         id: 'marker1',
-        time: timestamp + 1200000, // 20 minutes from now
+        time: timestamp + 1200000, // 20 minutos a partir de ahora
         label: 'Important Point',
         color: '#ff0000',
-      },
-    ],
+        activeColor: '#ff5252',
+        hoverColor: '#ff1744'
+      }
+    ]
   },
   viewConfiguration: {
-    // Optional: customize view settings
+    // Opcional: personalizar configuraciones de vista
     zoomLevels: [1, 2, 4, 8, 16],
     hideRuler: false,
-    showGrid: true,
-  },
+    showGrid: true
+  }
 });
 
-// Initialize with a canvas element
+// Inicializar con un elemento canvas
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// Add event listeners
+// Agregar listeners de eventos
 timeline.on('on-click', (detail) => {
   console.log('Timeline clicked:', detail);
 });
@@ -220,76 +259,79 @@ timeline.on('on-select-change', (detail) => {
   console.log('Selection changed:', detail);
 });
 
-// Clean up when done
+// Limpiar cuando se termine
 timeline.destroy();
 ```
 
-La clase Timeline proporciona una API completa para administrar la línea de tiempo:
+La clase Timeline proporciona una API rica para gestionar la línea de tiempo:
 
 - **Gestión de eventos**:
-
   ```typescript
-  // Add event listener
+  // Agregar listener de evento
   timeline.on('eventClick', (detail) => {
     console.log('Event clicked:', detail);
   });
 
-  // Remove event listener
+  // Remover listener de evento
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // Emit custom events
-  timeline.emit('customEvent', {data: 'custom data'});
+  // Emitir eventos personalizados
+  timeline.emit('customEvent', { data: 'custom data' });
   ```
 
-- **Control de cronograma**:
-
+- **Control de la línea de tiempo**:
   ```typescript
-  // Update timeline data
+  // Actualizar datos de la línea de tiempo
   timeline.api.setEvents([
     {
       id: 'newEvent',
-      start: Date.now(),
-      end: Date.now() + 3600000,
+      from: Date.now(),
+      to: Date.now() + 3600000,
       label: 'New Event',
-    },
+      axisId: 'main',
+      trackIndex: 0
+    }
   ]);
 
-  // Update axes
+  // Actualizar ejes
   timeline.api.setAxes([
     {
       id: 'newAxis',
       label: 'New Axis',
-      color: '#0000ff',
-    },
+      color: '#0000ff'
+    }
   ]);
 
-  // Update markers
+  // Actualizar marcadores
   timeline.api.setMarkers([
     {
       id: 'newMarker',
       time: Date.now(),
       label: 'New Marker',
       color: '#00ff00',
-    },
+      activeColor: '#4caf50',
+      hoverColor: '#2e7d32'
+    }
   ]);
   ```
 
 ## Ejemplos en vivo
 
-Explore ejemplos interactivos en nuestro [libro de cuentos](https://preview.gravity-ui.com/timeline/):
+Explora ejemplos interactivos en nuestro [Storybook](https://preview.gravity-ui.com/timeline/):
 
-- [Cronología básica](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic): línea de tiempo simple con eventos y ejes
-- [Línea](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) de tiempo infinita: línea de tiempo infinita con eventos y ejes
-- [Marcadores](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic): línea de tiempo con marcadores y etiquetas verticales
-- [Eventos personalizados](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer): cronograma con representación de eventos personalizada
+- [Basic Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Línea de tiempo simple con eventos y ejes
+- [Endless Timeline](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Línea de tiempo infinita con eventos y ejes
+- [Markers](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Línea de tiempo con marcadores verticales y etiquetas
+- [Custom Events](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Línea de tiempo con renderizado personalizado de eventos
+
 
 ## Desarrollo
 
-### Libro de cuentos
+### Storybook
 
-Este proyecto incluye Storybook para el desarrollo y la documentación de los componentes.
+Este proyecto incluye Storybook para el desarrollo de componentes y la documentación.
 
 Para ejecutar Storybook:
 
@@ -297,9 +339,9 @@ Para ejecutar Storybook:
 npm run storybook
 ```
 
-Esto iniciará el servidor de desarrollo de Storybook en el puerto 6006. Puede acceder a él en http://localhost:6006.
+Esto iniciará el servidor de desarrollo de Storybook en el puerto 6006. Puedes acceder a él en http://localhost:6006.
 
-Para crear una versión estática de Storybook para su implementación:
+Para compilar una versión estática de Storybook para despliegue:
 
 ```bash
 npm run build-storybook

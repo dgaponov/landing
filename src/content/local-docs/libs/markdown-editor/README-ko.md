@@ -4,13 +4,13 @@
 
 ## Markdown WYSIWYG 및 마크업 에디터
 
-MarkdownEditor는 Markdown을 다루기 위한 강력한 도구로, WYSIWYG와 Markup 모드를 결합합니다. 이를 통해 편리한 시각 모드에서 콘텐츠를 생성하고 편집할 수 있으며, 마크업에 대한 완전한 제어를 할 수 있습니다.
+MarkdownEditor는 Markdown 작업을 위한 강력한 도구로, WYSIWYG와 Markup 모드를 결합합니다. 이를 통해 편리한 시각 모드에서 콘텐츠를 생성하고 편집할 수 있으며, 마크업에 대한 완전한 제어를 가질 수 있습니다.
 
 ### 🔧 주요 기능
 
 - 기본 Markdown 및 [YFM](https://ydocs.tech) 구문 지원.
 - ProseMirror와 CodeMirror 엔진을 활용한 확장성.
-- 최대 유연성을 위한 WYSIWYG 및 Markup 모드 작업 가능.
+- 최대 유연성을 위한 WYSIWYG 및 Markup 모드 작업 기능.
 
 ## 설치
 
@@ -52,7 +52,7 @@ function Editor({onSubmit}) {
 ```
 더 읽어보기:
 - [Create React App에서 에디터 연결 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
-- [마크업 모드 미리보기 추가 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
+- [마크업 모드에 미리보기 추가 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
 - [HTML 확장 추가 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-html-block--docs)
 - [Latex 확장 추가 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-latex-extension--docs)
 - [Mermaid 확장 추가 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-extensions-mermaid-extension--docs)
@@ -61,7 +61,7 @@ function Editor({onSubmit}) {
 - [마크다운에서 텍스트 바인딩 확장 추가 방법](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### 개발
-dev storybook 시작하기
+dev storybook을 시작하려면
 
 ```shell
 npm start
@@ -84,4 +84,4 @@ configure({
 
 ### 기여
 
-- [기여자 가이드라인](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
+- [기여자 지침](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)

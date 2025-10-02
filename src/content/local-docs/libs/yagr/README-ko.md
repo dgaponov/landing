@@ -6,13 +6,13 @@ Yagr은 [uPlot](https://github.com/leeoniya/uPlot)을 기반으로 한 고성능
 
 ## 기능
 
--   [시각화 유형으로 선, 영역, 막대, 점. 시리즈별로 구성 가능](https://yagr.tech/en/api/visualization)
+-   [선, 영역, 열, 점을 시각화 유형으로 지원. 시리즈별로 구성 가능](https://yagr.tech/en/api/visualization)
 -   [구성 가능한 범례 툴팁](https://yagr.tech/en/plugins/tooltip)
 -   [소수점 정밀도를 위한 추가 옵션이 있는 축](https://yagr.tech/en/api/axes)
--   [구성 가능한 범위 함수와 변환을 지원하는 스케일](https://yagr.tech/en/api/scales)
+-   [범위 함수와 변환을 구성할 수 있는 스케일](https://yagr.tech/en/api/scales)
 -   [플롯 선과 밴드. 구성 가능한 그리기 레이어](https://yagr.tech/en/plugins/plot-lines)
 -   [반응형 차트](https://yagr.tech/en/api/settings#adaptivity) ([ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) 필요)
--   [누적 영역/막대에 대한 고급 지원](https://yagr.tech/en/api/scales#stacking)
+-   [스택 영역/열에 대한 고급 지원](https://yagr.tech/en/api/scales#stacking)
 -   [구성 가능한 마커](./docs/api/markers.md)
 -   [라이트/다크 테마](https://yagr.tech/en/api/settings#theme)
 -   [데이터 정규화](https://yagr.tech/en/api/scales#normalization)
@@ -22,7 +22,7 @@ Yagr은 [uPlot](https://github.com/leeoniya/uPlot)을 기반으로 한 고성능
 -   [색상 이름에 CSS 변수 사용](https://yagr.tech/en/api/css)
 -   [페이지네이션된 인라인 범례](https://yagr.tech/en/plugins/legend)
 -   [오류 처리 및 확장된 훅](https://yagr.tech/en/api/lifecycle)
--   [데이터 정렬 및 누락 데이터 보간](https://yagr.tech/en/api/data-processing)
+-   [누락된 데이터에 대한 데이터 정렬 및 보간](https://yagr.tech/en/api/data-processing)
 -   [실시간 업데이트](https://yagr.tech/en/api/dynamic-updates)
 
 ## [문서](https://yagr.tech)
@@ -79,7 +79,7 @@ new Yagr(document.body, {
 특정 기능이 필요하신가요? Yagr은 [demo/examples](./demo/examples/) 폴더에 유용한 예제를 제공합니다. 현재 버전으로 실행하는 방법:
 
 1. 저장소를 클론합니다.
-2. 종속성을 설치합니다 `npm i`.
+2. 종속성을 설치합니다: `npm i`.
 3. `npm run build`를 실행합니다.
 4. `npx http-server .`를 실행합니다.
 5. http-server 출력에 따라 브라우저에서 예제를 엽니다.
