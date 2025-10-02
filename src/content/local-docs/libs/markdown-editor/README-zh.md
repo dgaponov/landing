@@ -36,7 +36,7 @@ function Editor({onSubmit}) {
 
   React.useEffect(() => {
     function submitHandler() {
-      // Serialize current content to markdown markup
+      // 将当前内容序列化为 Markdown 标记
       const value = editor.getValue();
       onSubmit(value);
     }

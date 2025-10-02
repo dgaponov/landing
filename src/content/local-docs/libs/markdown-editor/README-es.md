@@ -10,7 +10,7 @@ MarkdownEditor es una herramienta potente para trabajar con Markdown que combina
 
 - Soporte para Markdown básico y la sintaxis [YFM](https://ydocs.tech).
 - Extensibilidad mediante el uso de los motores ProseMirror y CodeMirror.
-- La posibilidad de trabajar en modos WYSIWYG y de marcado para una flexibilidad máxima.
+- La capacidad de trabajar en modos WYSIWYG y de marcado para una flexibilidad máxima.
 
 ## Instalación
 
@@ -82,6 +82,6 @@ configure({
 
 No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
 
-### Contribución
+### Contribuyendo
 
 - [Guías para colaboradores](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
