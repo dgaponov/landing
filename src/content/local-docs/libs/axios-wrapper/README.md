@@ -108,10 +108,11 @@ export class API extends AxiosWrapper {
 
 When the `baseURL` parameter is passed into `axios` config, all requested pathnames will be appended to it.
 
-```javascript
+```typescript
 const apiInstance = new API({
   config: {
     baseURL: '/api/v2',
   },
 });
 ```
+
