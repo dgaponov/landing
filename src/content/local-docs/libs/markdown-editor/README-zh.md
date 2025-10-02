@@ -10,7 +10,7 @@ MarkdownEditor 是一个强大的 Markdown 处理工具，它结合了 WYSIWYG�
 
 - 支持基本的 Markdown 和 [YFM](https://ydocs.tech) 语法。
 - 通过 ProseMirror 和 CodeMirror 引擎实现可扩展性。
-- 支持 WYSIWYG 和标记模式，以提供最大灵活性。
+- 支持 WYSIWYG 和标记模式，提供最大灵活性。
 
 ## 安装
 
@@ -50,7 +50,6 @@ function Editor({onSubmit}) {
   return <MarkdownEditorView stickyToolbar autofocus editor={editor} />;
 }
 ```
-
 阅读更多：
 - [如何在 Create React App 中连接编辑器](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-create-react-app--docs)
 - [如何为标记模式添加预览](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-getting-started-preview--docs)
@@ -62,7 +61,6 @@ function Editor({onSubmit}) {
 - [如何在 Markdown 中添加文本绑定扩展](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### 开发
-
 启动开发 Storybook
 
 ```shell

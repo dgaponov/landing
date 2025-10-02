@@ -2,7 +2,7 @@
 
 # @gravity-ui/markdown-editor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/markdown-editor)](https://www.npmjs.com/package/@gravity-ui/markdown-editor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/markdown-editor/actions/workflows/ci.yml?query=branch:main) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/markdown-editor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/markdown-editor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/md-editor/)
 
-## Редактор Markdown в режимах WYSIWYG и разметки
+## Редактор Markdown в режиме WYSIWYG и разметки
 
 MarkdownEditor — это мощный инструмент для работы с Markdown, который сочетает в себе режимы WYSIWYG и разметки. Это позволяет создавать и редактировать контент в удобном визуальном режиме, а также полностью контролировать разметку.
 
@@ -18,13 +18,13 @@ MarkdownEditor — это мощный инструмент для работы 
 npm install @gravity-ui/markdown-editor
 ```
 
-### Необходимые зависимости
+### Зависимости
 
 Обратите внимание, что для начала использования пакета в вашем проекте также должны быть установлены следующие зависимости: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` и некоторые другие. Точную информацию смотрите в разделе `peerDependencies` файла `package.json`.
 
 ## Начало работы
 
-Редактор Markdown поставляется в виде React-хука для создания экземпляра редактора и компонента для отображения интерфейса.\
+Редактор Markdown поставляется в виде React-хука для создания экземпляра редактора и компонента для отображения интерфейса.  
 Для настройки стилей и темы обратитесь к [документации UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#styles).
 
 ```tsx
@@ -81,6 +81,6 @@ configure({
 
 Не забудьте вызвать `configure()` из [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) и других UI-библиотек.
 
-### Вклад в разработку
+### Вклад в проект
 
 - [Правила для контрибьюторов](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)

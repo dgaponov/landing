@@ -4,13 +4,13 @@
 
 ## Editor WYSIWYG y de marcado para Markdown
 
-MarkdownEditor es una herramienta potente para trabajar con Markdown que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual conveniente, así como tener control total sobre el marcado.
+MarkdownEditor es una herramienta potente para trabajar con Markdown que combina los modos WYSIWYG y de marcado. Esto significa que puedes crear y editar contenido en un modo visual conveniente, así como tener un control total sobre el marcado.
 
 ### 🔧 Características principales
 
 - Soporte para Markdown básico y la sintaxis [YFM](https://ydocs.tech).
 - Extensibilidad mediante el uso de los motores ProseMirror y CodeMirror.
-- La posibilidad de trabajar en modos WYSIWYG y de marcado para una flexibilidad máxima.
+- Posibilidad de trabajar en modos WYSIWYG y de marcado para una flexibilidad máxima.
 
 ## Instalación
 
@@ -20,7 +20,7 @@ npm install @gravity-ui/markdown-editor
 
 ### Dependencias requeridas
 
-Ten en cuenta que para comenzar a usar el paquete, tu proyecto también debe tener instalados los siguientes: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` y algunos otros. Consulta la sección `peerDependencies` del `package.json` para obtener información precisa.
+Ten en cuenta que, para comenzar a usar el paquete, tu proyecto también debe tener instalados los siguientes elementos: `@diplodoc/transform`, `react`, `react-dom`, `@gravity-ui/uikit`, `@gravity-ui/components` y algunos otros. Consulta la sección `peerDependencies` del archivo `package.json` para obtener información precisa.
 
 ## Primeros pasos
 
@@ -82,6 +82,6 @@ configure({
 
 No olvides llamar a `configure()` desde [UIKit](https://github.com/gravity-ui/uikit?tab=readme-ov-file#i18n) y otras bibliotecas de UI.
 
-### Contribución
+### Colaboración
 
 - [Guías para colaboradores](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-contributing--docs)
