@@ -1,39 +1,39 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [从 0.x 迁移到 1.x 的指南 →](docs/migration-guides/v0-to-v1.md)
+> [Migrationshandbuch von 0.x zu 1.x →](docs/migration-guides/v0-to-v1.md)
 
-这是一个图可视化库，结合了两者的优点：
-- Canvas 用于查看完整图时的高性能渲染
-- HTML/React 用于放大时丰富的交互体验
+Eine Bibliothek zur Visualisierung von Graphen, die das Beste aus zwei Welten vereint:
+- Canvas für hohe Leistung beim Anzeigen des gesamten Graphen
+- HTML/React für reiche Interaktionen bei Zoom hinein
 
-无需在性能和交互性之间做出选择。非常适合大型图表、流程图和基于节点的编辑器。
+Kein Kompromiss mehr zwischen Leistung und Interaktivität. Ideal für große Diagramme, Flussdiagramme und nodebasierte Editoren.
 
-## 动机
+## Motivation
 
-现代 Web 应用通常需要复杂的可视化和交互性，但现有的解决方案通常只关注单一的渲染技术：
+Moderne Webanwendungen erfordern oft komplexe Visualisierungen und Interaktionen, aber bestehende Lösungen konzentrieren sich in der Regel auf eine einzige Rendering-Technologie:
 
-- **Canvas** 在复杂图形方面提供高性能，但文本处理和交互性有限。
-- **HTML DOM** 便于构建界面，但对于复杂图形或大量元素来说效率较低。
+- **Canvas** bietet hohe Leistung für komplexe Grafiken, ist aber bei der Textverarbeitung und Interaktivität eingeschränkt.
+- **HTML DOM** ist praktisch für Benutzeroberflächen, aber weniger effizient für komplexe Grafiken oder große Elementmengen.
 
-@gravity-ui/graph 通过根据缩放级别自动在 Canvas 和 HTML 之间切换来解决这个问题：
-- **缩小视图**：使用 Canvas 高效渲染整个图
-- **中等缩放**：显示示意图视图，提供基本交互
-- **放大视图**：切换到 HTML/React 组件，实现丰富的交互
+@gravity-ui/graph löst dies, indem es automatisch zwischen Canvas und HTML wechselt, basierend auf dem Zoom-Level:
+- **Herausgezoomt**: Verwendet Canvas für eine effiziente Darstellung des gesamten Graphen
+- **Mittlerer Zoom**: Zeigt eine schematische Ansicht mit grundlegender Interaktivität
+- **Hineingezoomt**: Wechselt zu HTML/React-Komponenten für reiche Interaktionen
 
-## 工作原理
+## Funktionsweise
 
-该库使用智能渲染系统，自动管理 Canvas 和 React 组件之间的切换：
+Die Bibliothek nutzt ein intelligentes Renderingsystem, das den Übergang zwischen Canvas und React-Komponenten automatisch verwaltet:
 
-1. 在低缩放级别时，一切都在 Canvas 上渲染以确保性能
-2. 当放大到详细视图时，`GraphCanvas` 组件：
-   - 跟踪相机视口和缩放变化
-   - 计算当前视口中可见的块（并添加填充以实现平滑滚动）
-   - 仅为可见块渲染 React 组件
-   - 在滚动或缩放时自动更新列表
-   - 在缩小时移除 React 组件
+1. Bei niedrigen Zoom-Leveln wird alles auf Canvas gerendert, um Leistung zu gewährleisten
+2. Beim Hineinzoomen in die Detailansicht übernimmt die `GraphCanvas`-Komponente:
+   - Die Verfolgung von Kamera-Viewport- und Skalenänderungen
+   - Die Berechnung, welche Blöcke im aktuellen Viewport sichtbar sind (mit Polsterung für flüssiges Scrollen)
+   - Das Rendern von React-Komponenten nur für sichtbare Blöcke
+   - Automatische Aktualisierungen der Liste beim Scrollen oder Zoomen
+   - Das Entfernen von React-Komponenten beim Herauszoomen
 
 ```typescript
-// React 组件渲染示例
+// Beispiel für das Rendern von React-Komponenten
 const MyGraph = () => {
   return (
     <GraphCanvas
@@ -51,17 +51,17 @@ const MyGraph = () => {
 
 [Storybook](https://preview.gravity-ui.com/graph/)
 
-## 安装
+## Installation
 
 ```bash
 npm install @gravity-ui/graph
 ```
 
-## 示例
+## Beispiele
 
-### React 示例
+### React-Beispiel
 
-[详细的 React 组件文档](docs/react/usage.md)
+[Detaillierte Dokumentation zu React-Komponenten](docs/react/usage.md)
 
 ```typescript
 import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
@@ -143,19 +143,19 @@ export function GraphEditor() {
 }
 ```
 
-### Vanilla JavaScript 示例
+### Vanilla-JavaScript-Beispiel
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
 
-// 创建容器元素
+// Container-Element erstellen
 const container = document.createElement('div');
 container.style.width = '100vw';
 container.style.height = '100vh';
 container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
-// 使用配置初始化图
+// Graph mit Konfiguration initialisieren
 const graph = new Graph({
     configurationName: "example",
     blocks: [],
@@ -226,34 +226,34 @@ graph.start();
 graph.zoomTo("center", { padding: 100 });
 ```
 
-## 实时示例
+## Live-Beispiele
 
-- [基础示例](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
-- [大规模示例](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [自定义块视图](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
-- [贝塞尔曲线连接](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [连接自定义](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [Grundlegendes Beispiel](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
+- [Beispiel mit großem Umfang](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
+- [Ansicht mit benutzerdefinierten Blöcken](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [Bezier-Verbindung](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
+- [Anpassung von Verbindungen](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
-## 文档
+## Dokumentation
 
-### 目录
+### Inhaltsverzeichnis
 
-1. 系统
-   - [组件生命周期](docs/system/component-lifecycle.md)
-   - [事件](docs/system/events.md)
-   - [图形设置](docs/system/graph-settings.md)
-   - [公共 API](docs/system/public_api.md)
-   - [调度器系统](docs/system/scheduler-system.md)
+1. System
+   - [Komponenten-Lebenszyklus](docs/system/component-lifecycle.md)
+   - [Ereignisse](docs/system/events.md)
+   - [Graph-Einstellungen](docs/system/graph-settings.md)
+   - [Öffentliche API](docs/system/public_api.md)
+   - [Planer-System](docs/system/scheduler-system.md)
 
-2. 组件
-   - [画布图形组件](docs/components/canvas-graph-component.md)
-   - [块组件](docs/components/block-component.md)
-   - [锚点](docs/components/anchors.md)
+2. Komponenten
+   - [Canvas-Graph-Komponente](docs/components/canvas-graph-component.md)
+   - [Block-Komponente](docs/components/block-component.md)
+   - [Ankerpunkte](docs/components/anchors.md)
 
-3. 渲染
-   - [渲染机制](docs/rendering/rendering-mechanism.md)
-   - [图层](docs/rendering/layers.md)
+3. Rendering
+   - [Rendering-Mechanismus](docs/rendering/rendering-mechanism.md)
+   - [Ebenen](docs/rendering/layers.md)
 
-4. 块和连接
-   - [块组](docs/blocks/groups.md)
-   - [画布连接系统](docs/connections/canvas-connection-system.md)
+4. Blöcke und Verbindungen
+   - [Block-Gruppen](docs/blocks/groups.md)
+   - [Canvas-Verbindungs-System](docs/connections/canvas-connection-system.md)

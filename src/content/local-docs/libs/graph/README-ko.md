@@ -1,39 +1,39 @@
 # @gravity-ui/graph · [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [Guía de migración de 0.x a 1.x →](docs/migration-guides/v0-to-v1.md)
+> [0.x에서 1.x로의 마이그레이션 가이드 →](docs/migration-guides/v0-to-v1.md)
 
-Una biblioteca de visualización de gráficos que combina lo mejor de ambos mundos:
-- Canvas para un alto rendimiento al ver el gráfico completo
-- HTML/React para interacciones enriquecidas al hacer zoom
+양쪽 세계의 장점을 결합한 그래프 시각화 라이브러리:
+- 전체 그래프를 볼 때 높은 성능을 위한 Canvas
+- 확대 시 풍부한 상호작용을 위한 HTML/React
 
-Ya no es necesario elegir entre rendimiento e interactividad. Ideal para diagramas grandes, diagramas de flujo y editores basados en nodos.
+더 이상 성능과 상호작용성 사이에서 선택할 필요가 없습니다. 대형 다이어그램, 플로우차트, 노드 기반 에디터에 완벽합니다.
 
-## Motivación
+## 동기
 
-Las aplicaciones web modernas a menudo requieren visualizaciones complejas e interactividad, pero las soluciones existentes suelen centrarse en una sola tecnología de renderizado:
+현대 웹 애플리케이션은 종종 복잡한 시각화와 상호작용성을 요구하지만, 기존 솔루션은 일반적으로 단일 렌더링 기술에 초점을 맞춥니다:
 
-- **Canvas** ofrece un alto rendimiento para gráficos complejos, pero tiene limitaciones en el manejo de texto e interactividad.
-- **HTML DOM** es conveniente para interfaces, pero menos eficiente para gráficos complejos o un gran número de elementos.
+- **Canvas**는 복잡한 그래픽에 높은 성능을 제공하지만, 텍스트 처리와 상호작용성에서 제한적입니다.
+- **HTML DOM**은 인터페이스 구현에 편리하지만, 복잡한 그래픽이나 대량의 요소를 다룰 때는 효율이 떨어집니다.
 
-@gravity-ui/graph resuelve esto al cambiar automáticamente entre Canvas y HTML según el nivel de zoom:
-- **Zoom alejado**: Usa Canvas para un renderizado eficiente del gráfico completo
-- **Zoom medio**: Muestra una vista esquemática con interactividad básica
-- **Zoom acercado**: Cambia a componentes HTML/React para interacciones enriquecidas
+@gravity-ui/graph는 줌 수준에 따라 Canvas와 HTML 사이를 자동으로 전환하여 이 문제를 해결합니다:
+- **축소된 보기**: 전체 그래프의 효율적인 렌더링을 위한 Canvas 사용
+- **중간 줌**: 기본 상호작용이 포함된 개략도 보기 표시
+- **확대된 보기**: 풍부한 상호작용을 위한 HTML/React 컴포넌트로 전환
 
-## Cómo funciona
+## 작동 원리
 
-La biblioteca utiliza un sistema de renderizado inteligente que gestiona automáticamente la transición entre Canvas y componentes React:
+이 라이브러리는 Canvas와 React 컴포넌트 간의 전환을 자동으로 관리하는 스마트 렌더링 시스템을 사용합니다:
 
-1. En niveles de zoom bajos, todo se renderiza en Canvas para un mejor rendimiento
-2. Al hacer zoom para ver detalles, el componente `GraphCanvas`:
-   - Rastrea los cambios en la vista de la cámara y la escala
-   - Calcula qué bloques son visibles en la vista actual (con relleno para un desplazamiento suave)
-   - Renderiza componentes React solo para los bloques visibles
-   - Actualiza automáticamente la lista al desplazarse o hacer zoom
-   - Elimina los componentes React al alejar el zoom
+1. 낮은 줌 수준에서는 모든 요소가 성능을 위해 Canvas에 렌더링됩니다.
+2. 상세 보기에서 확대할 때 `GraphCanvas` 컴포넌트는:
+   - 카메라 뷰포트와 스케일 변경을 추적합니다.
+   - 부드러운 스크롤을 위한 패딩을 포함해 현재 뷰포트에서 보이는 블록을 계산합니다.
+   - 보이는 블록에 대해서만 React 컴포넌트를 렌더링합니다.
+   - 스크롤 또는 확대 시 목록을 자동으로 업데이트합니다.
+   - 확대 축소 시 React 컴포넌트를 제거합니다.
 
 ```typescript
-// Ejemplo de renderizado de componentes React
+// Example of React components rendering
 const MyGraph = () => {
   return (
     <GraphCanvas
@@ -49,19 +49,19 @@ const MyGraph = () => {
 };
 ```
 
-[Storybook](https://preview.gravity-ui.com/graph/)
+[스토리북](https://preview.gravity-ui.com/graph/)
 
-## Instalación
+## 설치
 
 ```bash
 npm install @gravity-ui/graph
 ```
 
-## Ejemplos
+## 예제
 
-### Ejemplo en React
+### React 예제
 
-[Documentación detallada de componentes React](docs/react/usage.md)
+[상세 React 컴포넌트 문서](docs/react/usage.md)
 
 ```typescript
 import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
@@ -143,19 +143,19 @@ export function GraphEditor() {
 }
 ```
 
-### Ejemplo en JavaScript vanilla
+### Vanilla JavaScript 예제
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
 
-// Crear elemento contenedor
+// Create container element
 const container = document.createElement('div');
 container.style.width = '100vw';
 container.style.height = '100vh';
 container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
-// Inicializar el gráfico con la configuración
+// Initialize graph with configuration
 const graph = new Graph({
     configurationName: "example",
     blocks: [],
@@ -226,34 +226,35 @@ graph.start();
 graph.zoomTo("center", { padding: 100 });
 ```
 
-## Ejemplos en Vivo
+## 실시간 예제
 
-- [Ejemplo básico](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
-- [Ejemplo a gran escala](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [Vista de bloques personalizados](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
-- [Conexión de Bezier](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [Personalización de conexiones](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [기본 예제](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
+- [대규모 예제](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
+- [커스텀 블록 뷰](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [베지어 연결](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
+- [연결 커스터마이징](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
-## Documentación
+## 문서
 
-### Tabla de Contenidos
+### 목차
 
-1. Sistema
-   - [Ciclo de Vida del Componente](docs/system/component-lifecycle.md)
-   - [Eventos](docs/system/events.md)
-   - [Configuración del Gráfico](docs/system/graph-settings.md)
-   - [API Pública](docs/system/public_api.md)
-   - [Sistema de Programador](docs/system/scheduler-system.md)
+1. 시스템
+   - [컴포넌트 생명 주기](docs/system/component-lifecycle.md)
+   - [이벤트](docs/system/events.md)
+   - [그래프 설정](docs/system/graph-settings.md)
+   - [공개 API](docs/system/public_api.md)
+   - [스케줄러 시스템](docs/system/scheduler-system.md)
 
-2. Componentes
-   - [Componente de Gráfico en Lienzo](docs/components/canvas-graph-component.md)
-   - [Componente de Bloque](docs/components/block-component.md)
-   - [Anclas](docs/components/anchors.md)
+2. 컴포넌트
+   - [캔버스 그래프 컴포넌트](docs/components/canvas-graph-component.md)
+   - [블록 컴포넌트](docs/components/block-component.md)
+   - [앵커](docs/components/anchors.md)
 
-3. Renderizado
-   - [Mecanismo de Renderizado](docs/rendering/rendering-mechanism.md)
-   - [Capas](docs/rendering/layers.md)
+3. 렌더링
+   - [렌더링 메커니즘](docs/rendering/rendering-mechanism.md)
+   - [레이어](docs/rendering/layers.md)
 
-4. Bloques y Conexiones
-   - [Grupos de Bloques](docs/blocks/groups.md)
-   - [Sistema de Conexiones en Lienzo](docs/connections/canvas-connection-system.md)
+4. 블록 및 연결
+   - [블록 그룹](docs/blocks/groups.md)
+   - [캔버스 연결 시스템](docs/connections/canvas-connection-system.md)
+```
