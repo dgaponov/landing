@@ -1,24 +1,24 @@
 # @gravity-ui/date-utils
 
-日期和时间管理的辅助工具。
+날짜와 시간을 관리하는 도우미.
 
-## 安装
+## 설치
 
 ```shell
 npm i @gravity-ui/date-utils
 ```
 
-## 使用
+## 사용법
 
 ```typescript
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
 
-// 当前日期：2021-08-07T12:10:00
-// 用户时区：Europe/Istanbul
+// 현재 날짜: 2021-08-07T12:10:00
+// 사용자 시간대: Europe/Istanbul
 
 const FORMAT = 'YYYY-MM-DDTHH:mm:ssZ';
 
-// 解析绝对日期
+// 절대 날짜 파싱
 dateTimeParse({year: 2021, month: 7, day: 7})?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse([2021, 7, 7])?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse('2021-08-07')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
@@ -26,7 +26,7 @@ dateTimeParse(1621708204063)?.format(FORMAT); // "2021-05-22T21:30:04+03:00"
 dateTimeParse('')?.format(FORMAT); // undefined
 dateTimeParse('incorrect-date')?.format(FORMAT); // undefined
 
-// 解析相对日期
+// 상대 날짜 파싱
 dateTimeParse('now')?.format(FORMAT); // "2021-08-07T12:10:00+03:00"
 dateTimeParse('now-1d')?.format(FORMAT); // "2021-08-06T12:10:00+03:00"
 dateTimeParse('now-1d+1M')?.format(FORMAT); // "2021-09-06T12:10:00+03:00"
@@ -34,7 +34,7 @@ dateTimeParse('now/d')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse('now+1d/d')?.format(FORMAT); // "2021-08-08T00:00:00+03:00"
 dateTimeParse('now-1f')?.format(FORMAT); // undefined
 
-// 创建 dateTime
+// dateTime 생성
 dateTime().format(FORMAT); // "2021-08-07T12:10:00+03:00"
 dateTime({input: '2021-08-07'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTime({input: '2021-08-07', format: 'YYYY-MM-DD'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
@@ -43,18 +43,18 @@ dateTime({input: ''}).format(FORMAT); // "Invalid Date"
 dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
 ```
 
-## 设置
+## 설정
 
 ```typescript
 import {settings} from '@gravity-ui/date-utils';
 
-// 语言环境管理
-settings.getLocale(); // 默认语言环境 "en"
+// Locale 관리
+settings.getLocale(); // 기본 locale "en"
 settings.loadLocale('de').then(() => {
   settings.setLocale('de');
   settings.getLocale(); // "de"
 });
 
-// 自定义设置
-settings.updateLocale({weekStart: 0}); // 修改一周的第一天
+// 사용자 지정
+settings.updateLocale({weekStart: 0}); // 주의 첫 번째 날 변경
 ```

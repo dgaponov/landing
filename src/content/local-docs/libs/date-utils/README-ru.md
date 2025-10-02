@@ -1,24 +1,24 @@
 # @gravity-ui/date-utils
 
-日期和时间管理的辅助工具。
+Вспомогательные утилиты для работы с датой и временем.
 
-## 安装
+## Установка
 
 ```shell
 npm i @gravity-ui/date-utils
 ```
 
-## 使用
+## Использование
 
 ```typescript
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
 
-// 当前日期：2021-08-07T12:10:00
-// 用户时区：Europe/Istanbul
+// Текущая дата: 2021-08-07T12:10:00
+// Часовой пояс пользователя: Europe/Istanbul
 
 const FORMAT = 'YYYY-MM-DDTHH:mm:ssZ';
 
-// 解析绝对日期
+// парсинг абсолютной даты
 dateTimeParse({year: 2021, month: 7, day: 7})?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse([2021, 7, 7])?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse('2021-08-07')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
@@ -26,7 +26,7 @@ dateTimeParse(1621708204063)?.format(FORMAT); // "2021-05-22T21:30:04+03:00"
 dateTimeParse('')?.format(FORMAT); // undefined
 dateTimeParse('incorrect-date')?.format(FORMAT); // undefined
 
-// 解析相对日期
+// парсинг относительной даты
 dateTimeParse('now')?.format(FORMAT); // "2021-08-07T12:10:00+03:00"
 dateTimeParse('now-1d')?.format(FORMAT); // "2021-08-06T12:10:00+03:00"
 dateTimeParse('now-1d+1M')?.format(FORMAT); // "2021-09-06T12:10:00+03:00"
@@ -34,7 +34,7 @@ dateTimeParse('now/d')?.format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTimeParse('now+1d/d')?.format(FORMAT); // "2021-08-08T00:00:00+03:00"
 dateTimeParse('now-1f')?.format(FORMAT); // undefined
 
-// 创建 dateTime
+// создание dateTime
 dateTime().format(FORMAT); // "2021-08-07T12:10:00+03:00"
 dateTime({input: '2021-08-07'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
 dateTime({input: '2021-08-07', format: 'YYYY-MM-DD'}).format(FORMAT); // "2021-08-07T00:00:00+03:00"
@@ -43,18 +43,18 @@ dateTime({input: ''}).format(FORMAT); // "Invalid Date"
 dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
 ```
 
-## 设置
+## Настройки
 
 ```typescript
 import {settings} from '@gravity-ui/date-utils';
 
-// 语言环境管理
-settings.getLocale(); // 默认语言环境 "en"
+// Управление локалями
+settings.getLocale(); // локаль по умолчанию "en"
 settings.loadLocale('de').then(() => {
   settings.setLocale('de');
   settings.getLocale(); // "de"
 });
 
-// 自定义设置
-settings.updateLocale({weekStart: 0}); // 修改一周的第一天
+// Настройка
+settings.updateLocale({weekStart: 0}); // изменение первого дня недели
 ```
