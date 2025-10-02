@@ -1,6 +1,6 @@
 # Ẏagr <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/yagr.svg" width="24px" height="24px" />
 
-Yagr est un moteur de rendu de graphiques HTML5 canvas haute performance basé sur [uPlot](https://github.com/leeoniya/uPlot). Il fournit des fonctionnalités de haut niveau pour les graphiques uPlot.
+Yagr est un moteur de rendu de graphiques haute performance basé sur HTML5 Canvas, fondé sur [uPlot](https://github.com/leeoniya/uPlot). Il offre des fonctionnalités de haut niveau pour les graphiques uPlot.
 
 <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/demo.png" width="800" />
 
@@ -10,13 +10,13 @@ Yagr est un moteur de rendu de graphiques HTML5 canvas haute performance basé s
 -   [Infobulle de légende configurable](https://yagr.tech/en/plugins/tooltip)
 -   [Axes avec des options supplémentaires pour une précision au niveau décimal](https://yagr.tech/en/api/axes)
 -   [Échelles avec des fonctions de plage configurables et des transformations](https://yagr.tech/en/api/scales)
--   [Lignes de tracé et bandes. Couche de dessin configurable](https://yagr.tech/en/plugins/plot-lines)
+-   [Lignes et bandes de graphique. Couche de dessin configurable](https://yagr.tech/en/plugins/plot-lines)
 -   [Graphiques adaptatifs](https://yagr.tech/en/api/settings#adaptivity) (nécessite [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
 -   [Support de haut niveau pour les aires/colonnes empilées](https://yagr.tech/en/api/scales#stacking)
 -   [Marqueurs configurables](./docs/api/markers.md)
 -   [Thème clair/sombre](https://yagr.tech/en/api/settings#theme)
 -   [Normalisation des données](https://yagr.tech/en/api/scales#normalization)
--   [Réticules configurables, marqueurs de curseur et accrochage](https://yagr.tech/en/api/cursor)
+-   [Croix de visée, marqueurs de curseur et accrochage configurables](https://yagr.tech/en/api/cursor)
 -   Typescript
 -   [Localisation](https://yagr.tech/en/api/settings#localization)
 -   [Variables CSS dans les noms de couleurs](https://yagr.tech/en/api/css)
@@ -76,10 +76,10 @@ new Yagr(document.body, {
 
 ### Exemples
 
-Vous avez besoin de quelque chose de spécifique ? Yagr propose quelques exemples utiles dans le dossier [demo/examples](./demo/examples/). Voici comment les démarrer avec la version actuelle :
+Vous avez besoin de quelque chose de spécifique ? Yagr propose des exemples utiles dans le dossier [demo/examples](./demo/examples/). Voici comment les démarrer avec la version actuelle :
 
 1. Clonez le dépôt.
-2. Installez les dépendances `npm i`.
+2. Installez les dépendances avec `npm i`.
 3. Exécutez `npm run build`.
 4. Lancez `npx http-server .`.
 5. Ouvrez les exemples dans le navigateur en suivant la sortie de http-server.
