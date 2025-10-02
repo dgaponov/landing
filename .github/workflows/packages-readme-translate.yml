@@ -2,8 +2,8 @@ name: Packages readme translate
 
 on:
   pull_request:
-    paths:
-      - 'src/content/local-docs/libs/**/README.md'
+#    paths:
+#      - 'src/content/local-docs/libs/**/README.md'
 
 permissions: write-all
 
