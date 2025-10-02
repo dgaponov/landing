@@ -5,7 +5,7 @@
 ## 安装
 
 ```shell
-npm install --save-dev @gravity-ui/axios-wrapper
+npm install --save-dev @gravity-ui/axios-wrapperrr
 ```
 
 ## HTTP API
