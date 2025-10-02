@@ -1,12 +1,12 @@
 # @gravity-ui/table · [![npm package](https://img.shields.io/npm/v/@gravity-ui/table)](https://www.npmjs.com/package/@gravity-ui/table) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/table/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/table/)
 
-## Instalación
+## Установка
 
 ```shell
 npm install --save @gravity-ui/table
 ```
 
-## Uso
+## Использование
 
 ```tsx
 import React from 'react';
@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Componentes
+## Компоненты
 
-Hay dos componentes de Table que puedes usar:
+В библиотеке есть два компонента для таблицы, которые вы можете использовать:
 
-- `BaseTable` - un componente con estilos básicos solamente;
-- `Table` - un componente con estilos basados en Gravity UI.
+- `BaseTable` — компонент с базовыми стилями;
+- `Table` — компонент со стилями на основе Gravity UI.
 
-### Selección de filas
+### Выбор строк
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...other columns
+  // ...другие колонки
 ];
 
 const data: Person[] = [
@@ -79,9 +79,9 @@ const RowSelectionExample = () => {
 };
 ```
 
-### Ordenación
+### Сортировка
 
-Aprende sobre las propiedades de las columnas en la [documentación de react-table](https://tanstack.com/table/v8/docs/guide/sorting).
+Подробнее о свойствах колонок для сортировки читайте в [документации react-table](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -97,7 +97,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Tu columna DEBE tener accessorFn para que la ordenación esté habilitada
+  // Ваша колонка ОБЯЗАТЕЛЬНО должна иметь accessorFn, чтобы сортировка работала
 
   const table = useTable({
     columns,
@@ -114,7 +114,7 @@ const SortingExample = () => {
 };
 ```
 
-Si deseas ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
+Если вы хотите сортировать элементы вручную, передайте свойство `manualSorting`:
 
 ```tsx
 const table = useTable({
@@ -123,7 +123,7 @@ const table = useTable({
 });
 ```
 
-### Agrupación
+### Группировка
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -186,11 +186,11 @@ const GroupingExample = () => {
 };
 ```
 
-Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la configuración de la columna.
+Чтобы включить стили для вложенности, передайте `withNestingStyles = true` в конфигурацию колонки.
 
-Los indicadores de anidamiento se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
+Индикаторы вложенности можно отключить, передав `showTreeDepthIndicators = false`.
 
-Para agregar un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con un componente personalizado similar:
+Чтобы добавить элемент управления для раскрытия/сворачивания строк, оберните содержимое ячейки в компонент `TreeExpandableCell` или в аналогичный кастомный компонент:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -206,11 +206,11 @@ const columns: ColumnDef<Item>[] = [
       <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
     ),
   },
-  // ...other columns
+  // ...другие колонки
 ];
 ```
 
-### Reordenación
+### Переупорядочивание
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -218,7 +218,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...other columns
+  // ...другие колонки
 ];
 
 const data: Person[] = [
@@ -248,12 +248,20 @@ const ReorderingExample = () => {
     },
     [],
   );
-
 ```
 
-### Virtualización
+```tsx
+return (
+  <ReorderingProvider table={table} onReorder={handleReorder}>
+    <Table table={table} />
+  </ReorderingProvider>
+);
+};
+```
 
-Utilice esto si desea usar el contenedor de cuadrícula como el elemento de desplazamiento (si desea usar la ventana, vea la sección de virtualización de ventana). Asegúrese de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
+### Виртуализация
+
+Используйте, если хотите применять контейнер сетки в качестве элемента прокрутки (если хотите использовать окно браузера, см. раздел о виртуализации окна). Обязательно задайте фиксированную высоту контейнера; иначе виртуализация не сработает.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -290,7 +298,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-Si usa virtualización con la función de reordenamiento, también debe pasar la opción `rangeExtractor`:
+Если вы используете виртуализацию вместе с функцией переупорядочивания, также передайте опцию `rangeExtractor`:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -314,9 +322,9 @@ return (
 );
 ```
 
-### Virtualización de ventana
+### Виртуализация окна
 
-Utilice esto si desea usar la ventana como el elemento de desplazamiento.
+Используйте, если хотите применять окно браузера в качестве элемента прокрутки
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -349,7 +357,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Redimensionamiento
+### Изменение размеров
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -372,7 +380,7 @@ const ResizingDemo = () => {
 };
 ```
 
-### Configuración de columnas
+### Настройки колонок
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -418,4 +426,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Aprenda más sobre la tabla y las propiedades de redimensionamiento de columnas en la documentación de react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
+Подробнее о таблице и свойствах изменения размеров колонок читайте в документации react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
