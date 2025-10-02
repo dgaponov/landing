@@ -1,12 +1,12 @@
 # @gravity-ui/date-components · [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
 
-## 安装
+## 설치
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
 ```
 
-## 使用
+## 사용법
 
 ```jsx
 import {createRoot} from 'react-dom/client';
@@ -31,17 +31,17 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-### 本地化
+### 지역화
 
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// 加载应用中将使用的日期区域设置。
+// 애플리케이션에서 사용할 날짜 로케일을 로드합니다.
 settings.loadLocale('ru');
 
 function App() {
   return (
-    // 为组件设置要使用的语言。
+    // 컴포넌트에서 사용할 언어를 설정합니다.
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
@@ -53,17 +53,17 @@ function App() {
 }
 ```
 
-如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或者在切换语言前加载区域设置：
+앱이 언어 전환을 지원하는 경우, 앱이 처음 로드될 때 모든 지원 로케일을 미리 로드하거나 언어 전환 전에 로케일을 로드하세요:
 
 ```jsx
-// 预加载区域设置
+// 로케일 미리 로드
 settings.loadLocale('ru');
 settings.loadLocale('nl');
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// 或者按需加载区域设置。
+// 또는 필요에 따라 로케일을 로드합니다.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,25 +78,25 @@ function App() {
 }
 ```
 
-组件支持英语和俄语翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
+컴포넌트는 영어와 러시아어로 번역되어 있습니다. 다른 언어로의 번역을 추가하려면 `@gravity-ui/uikit`의 `addLanguageKeysets`를 사용하세요:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// 使用 Keyset 类型为所有可用组件指定翻译
+// 모든 사용 가능한 컴포넌트에 대한 번역을 지정하기 위해 Keyset 타입을 사용하세요
 addLanguageKeysets<Keysets>(lang, {...});
 
-// 或者使用 PartialKeysets 类型仅指定所需的翻译
+// 또는 필요한 것만 지정하기 위해 PartialKeysets 타입을 사용하세요
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// 为某些组件指定翻译
+// 일부 컴포넌트에 대한 번역을 지정하려면
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
-## 开发
+## 개발
 
-要启动带有 Storybook 的开发服务器，请运行以下命令：
+스토리북과 함께 개발 서버를 시작하려면 다음 명령어를 실행하세요:
 
 ```shell
 npm start
