@@ -47,7 +47,7 @@ jobs:
         with:
           provider: 'openrouter'
           apikey: ${{ secrets.OPENROUTER_API_KEY }}
-          model: 'deepseek/deepseek-r1-0528:free'
+          model: 'x-ai/grok-4-fast:free'
           inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
           outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
           languages: ${{ matrix.language }}
