@@ -1,4 +1,4 @@
-# Axios Wrapper
+# Axios Wrapper1
 
 This library provides a convenient wrapper around Axios adding automatic cancelling of concurrent requests
 to its features.
