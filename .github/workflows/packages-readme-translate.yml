@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'src/content/local-docs/libs/**/README.md'
+      - 'src/content/local-docs/libs/**'
 
 permissions: write-all
 
