@@ -57,7 +57,7 @@ jobs:
           echo "README file: $LIBRARY_README"
 
           OUTPUT_FILES=""
-          for LANGUAGE in "${{ env.LANGUAGES }}"; do
+          for LANGUAGE in ${{ env.LANGUAGES }}; do
             OUTPUT_FILES="$OUTPUT_FILES src/content/local-docs/libs/${LIBRARY}/README-${LANGUAGE}.md"
           done
 
