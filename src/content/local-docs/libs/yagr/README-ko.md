@@ -1,4 +1,4 @@
-# Yagr <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/yagr.svg" width="24px" height="24px" />
+# Ẏagr <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/yagr.svg" width="24px" height="24px" />
 
 Yagr은 [uPlot](https://github.com/leeoniya/uPlot)을 기반으로 한 고성능 HTML5 캔버스 차트 렌더러입니다. uPlot 차트에 대한 고급 기능을 제공합니다.
 
@@ -8,8 +8,8 @@ Yagr은 [uPlot](https://github.com/leeoniya/uPlot)을 기반으로 한 고성능
 
 -   [시각화 유형으로 선, 영역, 막대, 점. 시리즈별로 구성 가능](https://yagr.tech/en/api/visualization)
 -   [구성 가능한 범례 툴팁](https://yagr.tech/en/plugins/tooltip)
--   [소수점 정밀도를 위한 추가 옵션이 있는 축](https://yagr.tech/en/api/axes)
--   [구성 가능한 범위 함수와 변환을 지원하는 스케일](https://yagr.tech/en/api/scales)
+-   [소수점 수준 정밀도를 위한 추가 옵션이 있는 축](https://yagr.tech/en/api/axes)
+-   [구성 가능한 범위 함수와 변환을 가진 스케일](https://yagr.tech/en/api/scales)
 -   [플롯 선과 밴드. 구성 가능한 그리기 레이어](https://yagr.tech/en/plugins/plot-lines)
 -   [반응형 차트](https://yagr.tech/en/api/settings#adaptivity) ([ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) 필요)
 -   [누적 영역/막대에 대한 고급 지원](https://yagr.tech/en/api/scales#stacking)
@@ -22,7 +22,7 @@ Yagr은 [uPlot](https://github.com/leeoniya/uPlot)을 기반으로 한 고성능
 -   [색상 이름에 CSS 변수 사용](https://yagr.tech/en/api/css)
 -   [페이지네이션된 인라인 범례](https://yagr.tech/en/plugins/legend)
 -   [오류 처리 및 확장된 훅](https://yagr.tech/en/api/lifecycle)
--   [데이터 정렬 및 누락 데이터 보간](https://yagr.tech/en/api/data-processing)
+-   [누락된 데이터에 대한 데이터 정렬 및 보간](https://yagr.tech/en/api/data-processing)
 -   [실시간 업데이트](https://yagr.tech/en/api/dynamic-updates)
 
 ## [문서](https://yagr.tech)

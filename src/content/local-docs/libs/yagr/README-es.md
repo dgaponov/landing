@@ -1,6 +1,6 @@
 # Ẏagr <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/yagr.svg" width="24px" height="24px" />
 
-Yagr es un renderizador de gráficos de alto rendimiento para HTML5 canvas basado en [uPlot](https://github.com/leeoniya/uPlot). Proporciona funciones de alto nivel para gráficos de uPlot.
+Yagr es un renderizador de gráficos de alto rendimiento en HTML5 canvas basado en [uPlot](https://github.com/leeoniya/uPlot). Proporciona características de alto nivel para gráficos de uPlot.
 
 <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/demo.png" width="800" />
 
@@ -76,10 +76,10 @@ new Yagr(document.body, {
 
 ### Ejemplos
 
-¿Necesitas algo específico? Yagr incluye algunos ejemplos útiles en la carpeta [demo/examples](./demo/examples/). Cómo iniciarlos con la versión actual:
+¿Necesitas algo específico? Yagr presenta algunos ejemplos útiles en la carpeta [demo/examples](./demo/examples/). Cómo iniciarlos con la versión actual:
 
 1. Clona el repositorio.
-2. Instala las dependencias con `npm i`.
+2. Instala las dependencias `npm i`.
 3. Ejecuta `npm run build`.
 4. Ejecuta `npx http-server .`.
 5. Abre los ejemplos en el navegador según la salida de http-server.

@@ -1,16 +1,16 @@
 # Ẏagr <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/yagr.svg" width="24px" height="24px" />
 
-Yagr est un moteur de rendu de graphiques HTML5 canvas haute performance basé sur [uPlot](https://github.com/leeoniya/uPlot). Il fournit des fonctionnalités de haut niveau pour les graphiques uPlot.
+Yagr est un moteur de rendu de graphiques haute performance basé sur le canvas HTML5, fondé sur [uPlot](https://github.com/leeoniya/uPlot). Il offre des fonctionnalités de haut niveau pour les graphiques uPlot.
 
 <img src="https://raw.githubusercontent.com/gravity-ui/yagr/main/docs/assets/demo.png" width="800" />
 
 ## Fonctionnalités
 
--   [Lignes, aires, colonnes et points comme types de visualisation. Configurable par série](https://yagr.tech/en/api/visualization)
+-   [Lignes, aires, colonnes et points en tant que types de visualisation. Configurable par série](https://yagr.tech/en/api/visualization)
 -   [Infobulle de légende configurable](https://yagr.tech/en/plugins/tooltip)
 -   [Axes avec des options supplémentaires pour une précision au niveau décimal](https://yagr.tech/en/api/axes)
 -   [Échelles avec des fonctions de plage configurables et des transformations](https://yagr.tech/en/api/scales)
--   [Lignes de tracé et bandes. Couche de dessin configurable](https://yagr.tech/en/plugins/plot-lines)
+-   [Lignes et bandes de graphique. Couche de dessin configurable](https://yagr.tech/en/plugins/plot-lines)
 -   [Graphiques adaptatifs](https://yagr.tech/en/api/settings#adaptivity) (nécessite [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver))
 -   [Support de haut niveau pour les aires/colonnes empilées](https://yagr.tech/en/api/scales#stacking)
 -   [Marqueurs configurables](./docs/api/markers.md)
@@ -76,10 +76,10 @@ new Yagr(document.body, {
 
 ### Exemples
 
-Vous avez besoin de quelque chose de spécifique ? Yagr propose quelques exemples utiles dans le dossier [demo/examples](./demo/examples/). Voici comment les démarrer avec la version actuelle :
+Vous avez besoin de quelque chose de spécifique ? Yagr propose des exemples utiles dans le dossier [demo/examples](./demo/examples/). Voici comment les démarrer avec la version actuelle :
 
 1. Clonez le dépôt.
-2. Installez les dépendances `npm i`.
+2. Installez les dépendances avec `npm i`.
 3. Exécutez `npm run build`.
 4. Lancez `npx http-server .`.
 5. Ouvrez les exemples dans le navigateur en suivant la sortie de http-server.
