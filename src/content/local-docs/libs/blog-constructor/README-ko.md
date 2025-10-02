@@ -1,6 +1,6 @@
 # @gravity-ui/blog-constructor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/blog-constructor)](https://www.npmjs.com/package/@gravity-ui/blog-constructor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/blog-constructor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/blog-constructor/actions/workflows/ci.yml?query=branch:main) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/blog-constructor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/blog-constructor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/blog-constructor/)
 
-## Instalación
+## 설치
 
 ```shell
 npm install @gravity-ui/blog-constructor
@@ -8,18 +8,18 @@ npm install @gravity-ui/blog-constructor
 
 ## Blog-constructor
 
-`Blog-constructor` es una biblioteca basada en la biblioteca [Page-constructor](https://github.com/gravity-ui/page-constructor) para crear páginas web en formato de blog. Blog-constructor utiliza la prop [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) de page-constructor para agregar los componentes necesarios para el blog.
+`Blog-constructor`는 블로그 형식의 웹 페이지를 생성하기 위한 [Page-constructor](https://github.com/gravity-ui/page-constructor) 라이브러리를 기반으로 한 라이브러리입니다. Blog-constructor는 page-constructor의 [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) 속성을 사용하여 블로그에 필요한 컴포넌트를 추가합니다.
 
-### Documentación - [storybook](https://preview.gravity-ui.com/blog-constructor/)
+### 문서 - [storybook](https://preview.gravity-ui.com/blog-constructor/)
 
-### Primeros pasos
+### 시작하기
 
-Blog-constructor incluye tanto componentes de cliente como de servidor para importar. La página de blog se importa como un componente de React. Para asegurarte de que funcione correctamente, envuélvela en `BlogConstructorProvider`:
+Blog-constructor는 클라이언트 컴포넌트와 서버 컴포넌트를 모두 지원하여 가져올 수 있습니다. 블로그 페이지는 React 컴포넌트로 가져옵니다. 제대로 작동하도록 하려면 `BlogConstructorProvider`로 감싸야 합니다:
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
-// Página principal del blog
+// Main blog page
 <BlogConstructorProvider {...providerProps}>
     <BlogPage
         content={content}
@@ -34,7 +34,7 @@ import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
 import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
 
-// Página de publicación
+// Post page
 <BlogConstructorProvider {...providerProps}>
     <BlogPostPage
         content={content}
@@ -47,9 +47,9 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 ```
 
-Documentación sobre [providerProps](./src/constructor/README.md).
+[providerProps](./src/constructor/README.md)에 대한 문서.
 
-Además, blog-constructor incluye componentes de servidor para ayudarte a transformar tus datos si lo necesitas:
+또한 blog-constructor는 데이터 변환을 필요로 할 때 도움이 되는 서버 컴포넌트를 제공합니다.
 
 ```jsx
 import {
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-La biblioteca `blog-constructor` está basada en `uikit`, y utilizamos una instancia de `i18n` de uikit. Para configurar la internacionalización, solo necesitas usar `configure` de uikit:
+`blog-constructor`는 `uikit-based` 라이브러리이며, uikit의 `i18n` 인스턴스를 사용합니다. 국제화를 설정하려면 uikit의 `configure`를 사용하기만 하면 됩니다:
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';
@@ -70,7 +70,7 @@ configure({
 });
 ```
 
-## Desarrollo
+## 개발
 
 ```bash
 npm ci
