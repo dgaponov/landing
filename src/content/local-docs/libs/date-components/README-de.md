@@ -1,12 +1,12 @@
 # @gravity-ui/date-components · [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
 
-## Instalación
+## Installation
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
 ```
 
-## Uso
+## Verwendung
 
 ```jsx
 import {createRoot} from 'react-dom/client';
@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date:</label>
+        <label forHtml="date-picker">Datum:</label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -31,21 +31,21 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-### Localización
+### Lokalisierung
 
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Cargar los locales de fecha que se usarán en la aplicación.
-settings.loadLocale('ru');
+// Laden Sie die Datums-Lokalisierungen, die in der Anwendung verwendet werden sollen.
+settings.loadLocale('de');
 
 function App() {
   return (
-    // Establecer el idioma a usar con los componentes.
-    <ThemeProvider lang="ru">
+    // Stellen Sie die Sprache für die Komponenten ein.
+    <ThemeProvider lang="de">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Дата:</label>
+        <label forHtml="date-picker">Datum:</label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -53,17 +53,17 @@ function App() {
 }
 ```
 
-Si la aplicación admite el cambio de idioma, precargue todos los locales compatibles al cargar la aplicación por primera vez, o cargue los locales antes de cambiar el idioma:
+Falls die App das Wechseln der Sprache unterstützt, laden Sie alle unterstützten Lokalisierungen beim ersten Start der App vorab oder laden Sie sie vor dem Sprachwechsel:
 
 ```jsx
-// Precargar locales
-settings.loadLocale('ru');
+// Lokalisierungen vorab laden
+settings.loadLocale('de');
 settings.loadLocale('nl');
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// O cargar locales bajo demanda.
+// Oder Lokalisierungen bei Bedarf laden.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,25 +78,25 @@ function App() {
 }
 ```
 
-Los componentes tienen traducciones al inglés y al ruso. Para agregar traducciones a otros idiomas, use `addLanguageKeysets` de `@gravity-ui/uikit`:
+Die Komponenten verfügen über Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwenden Sie `addLanguageKeysets` aus `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// Use el tipo Keyset para especificar traducciones para todos los componentes disponibles
+// Verwenden Sie den Keyset-Typ, um Übersetzungen für alle verfügbaren Komponenten anzugeben
 addLanguageKeysets<Keysets>(lang, {...});
 
-// O use el tipo PartialKeysets para especificar solo los que necesite
+// Oder verwenden Sie den PartialKeysets-Typ, um nur die benötigten anzugeben
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// Para especificar traducciones para algunos componentes
+// Um Übersetzungen für bestimmte Komponenten anzugeben
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
-## Desarrollo
+## Entwicklung
 
-Para iniciar el servidor de desarrollo con Storybook, ejecute lo siguiente:
+Um den Entwicklungsserver mit Storybook zu starten, führen Sie Folgendes aus:
 
 ```shell
 npm start

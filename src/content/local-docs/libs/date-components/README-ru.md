@@ -1,12 +1,12 @@
-# @gravity-ui/date-components · [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
+# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
 
-## Instalación
+## Установка
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
 ```
 
-## Uso
+## Использование
 
 ```jsx
 import {createRoot} from 'react-dom/client';
@@ -31,17 +31,17 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-### Localización
+### Локализация
 
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Cargar los locales de fecha que se usarán en la aplicación.
+// Load date locales that will be used in an application.
 settings.loadLocale('ru');
 
 function App() {
   return (
-    // Establecer el idioma a usar con los componentes.
+    // Set the language to use with components.
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
@@ -53,17 +53,17 @@ function App() {
 }
 ```
 
-Si la aplicación admite el cambio de idioma, precargue todos los locales compatibles al cargar la aplicación por primera vez, o cargue los locales antes de cambiar el idioma:
+Если приложение поддерживает переключение языков, предварительно загрузите все поддерживаемые локали при первом запуске приложения или загрузите локали перед переключением языка:
 
 ```jsx
-// Precargar locales
+// Preload locales
 settings.loadLocale('ru');
 settings.loadLocale('nl');
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// O cargar locales bajo demanda.
+// or load locales on demand.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,25 +78,25 @@ function App() {
 }
 ```
 
-Los componentes tienen traducciones al inglés y al ruso. Para agregar traducciones a otros idiomas, use `addLanguageKeysets` de `@gravity-ui/uikit`:
+Компоненты имеют переводы на английский и русский языки. Чтобы добавить переводы на другие языки, используйте `addLanguageKeysets` из `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// Use el tipo Keyset para especificar traducciones para todos los componentes disponibles
+// Use the Keyset type to specify translations for all available components
 addLanguageKeysets<Keysets>(lang, {...});
 
-// O use el tipo PartialKeysets para especificar solo los que necesite
+// or use the PartialKeysets type to specify only the ones you need
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// Para especificar traducciones para algunos componentes
+// To specify translations for some components
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
-## Desarrollo
+## Разработка
 
-Para iniciar el servidor de desarrollo con Storybook, ejecute lo siguiente:
+Чтобы запустить сервер разработки со Storybook, выполните следующую команду:
 
 ```shell
 npm start
