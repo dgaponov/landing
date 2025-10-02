@@ -1,12 +1,12 @@
 # @gravity-ui/table &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/table)](https://www.npmjs.com/package/@gravity-ui/table) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/table/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/table/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/table/)
 
-## Instalación
+## Installation
 
 ```shell
 npm install --save @gravity-ui/table
 ```
 
-## Uso
+## Verwendung
 
 ```tsx
 import React from 'react';
@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Componentes
+## Komponenten
 
-Hay dos componentes de tabla que puedes usar:
+Es gibt zwei Table-Komponenten, die Sie verwenden können:
 
-- `BaseTable` - un componente con estilos básicos solamente;
-- `Table` - un componente con estilos basados en Gravity UI.
+- `BaseTable` – eine Komponente mit grundlegenden Stilen;
+- `Table` – eine Komponente mit Stilen basierend auf Gravity UI.
 
-### Selección de filas
+### Zeilenauswahl
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -79,9 +79,9 @@ const RowSelectionExample = () => {
 };
 ```
 
-### Ordenación
+### Sortierung
 
-Aprende sobre las propiedades de las columnas en la [documentación de react-table](https://tanstack.com/table/v8/docs/guide/sorting)
+Erfahren Sie mehr über die Spalteneigenschaften in der react-table [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -97,7 +97,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Tu columna DEBE tener accessorFn para que la ordenación esté habilitada
+  // Ihre Spalte MUSS eine accessorFn haben, damit die Sortierung aktiviert werden kann
 
   const table = useTable({
     columns,
@@ -114,7 +114,7 @@ const SortingExample = () => {
 };
 ```
 
-Si deseas ordenar los elementos manualmente, pasa la propiedad `manualSorting`:
+Falls Sie die Elemente manuell sortieren möchten, geben Sie die Eigenschaft `manualSorting` weiter:
 
 ```tsx
 const table = useTable({
@@ -123,7 +123,7 @@ const table = useTable({
 });
 ```
 
-### Agrupación
+### Gruppierung
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -186,11 +186,11 @@ const GroupingExample = () => {
 };
 ```
 
-Para habilitar los estilos de anidamiento, pasa `withNestingStyles = true` en la configuración de la columna.
+Um verschachtelte Stile zu aktivieren, geben Sie `withNestingStyles = true` in der Spaltenkonfiguration weiter.
 
-Los indicadores de profundidad del árbol se pueden deshabilitar pasando `showTreeDepthIndicators = false`.
+Verschachtelungsindikatoren können deaktiviert werden, indem Sie `showTreeDepthIndicators = false` weitergeben.
 
-Para agregar un control para expandir/colapsar filas, envuelve el contenido de la celda con el componente `TreeExpandableCell` o con un componente personalizado similar:
+Um eine Steuerung für das Erweitern/Zuklappen von Zeilen hinzuzufügen, umschließen Sie den Zellinhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -210,7 +210,7 @@ const columns: ColumnDef<Item>[] = [
 ];
 ```
 
-### Reordenación
+### Umordnen
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -260,9 +260,9 @@ return (
 };
 ```
 
-### Virtualización
+### Virtualisierung
 
-Úsala si deseas utilizar el contenedor de cuadrícula como el elemento de desplazamiento (si prefieres usar la ventana, consulta la sección de virtualización de ventana). Asegúrate de establecer una altura fija en el contenedor; de lo contrario, la virtualización no funcionará.
+Verwenden Sie dies, wenn Sie den Grid-Container als Scroll-Element nutzen möchten (falls Sie das Fenster verwenden möchten, siehe Abschnitt zur Fenster-Virtualisierung). Stellen Sie sicher, dass der Container eine feste Höhe hat; andernfalls funktioniert die Virtualisierung nicht.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -299,7 +299,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-Si usas virtualización con la función de reordenamiento, también necesitas pasar la opción `rangeExtractor`:
+Wenn Sie Virtualisierung zusammen mit der Reordering-Funktion verwenden, müssen Sie auch die Option `rangeExtractor` übergeben:
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -323,9 +323,9 @@ return (
 );
 ```
 
-### Virtualización de ventana
+### Fenster-Virtualisierung
 
-Úsala si deseas utilizar la ventana como el elemento de desplazamiento.
+Verwenden Sie dies, wenn Sie das Fenster als Scroll-Element nutzen möchten
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -358,7 +358,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Redimensionamiento
+### Größenänderung (Resizing)
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -381,19 +381,19 @@ const ResizingDemo = () => {
 };
 ```
 
-### Configuración de columnas
+### Spalteneinstellungen
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  // ...other columns
+  // ...andere Spalten
   {
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Opcional. Permite ocultar esta columna del popover de configuración
-      titleInSettings: 'ReactNode', // Opcional. Sobrescribe el campo header para el popover de configuración (si necesitas contenido diferente para el header y el popover de configuración)
+      hideInSettings: false, // Optional. Erlaubt es, diese Spalte aus dem Einstellungs-Popover zu verstecken
+      titleInSettings: 'ReactNode', // Optional. Überschreibt das Header-Feld für das Einstellungs-Popover (falls Sie unterschiedlichen Inhalt für Header und Einstellungs-Popover benötigen)
     },
-  }, // o puedes usar la función getSettingsColumn
+  }, // oder Sie können die Funktion getSettingsColumn verwenden
 ];
 
 const data: Person[] = [
@@ -402,14 +402,14 @@ const data: Person[] = [
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // para control externo y estado inicial
-    column_id: false, // para ocultar por defecto
+    // für externe Steuerung und Initialzustand
+    column_id: false, // für Standardverstecken
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
-  ]); // para control externo y estado inicial
+    /* IDs der Leaf-Spalten */
+  ]); // für externe Steuerung und Initialzustand
 
-  // Variante alternativa para obtener estado, callbacks y establecer callbacks al aplicar la configuración: usando el hook useTableSettings
+  // Alternative Variante, um Zustand, Callbacks und Setzen von Callbacks bei Anwenden der Einstellungen zu erhalten – mit dem useTableSettings-Hook:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -427,4 +427,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Aprende más sobre la tabla y las propiedades de redimensionamiento de columnas en la documentación de react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
+Erfahren Sie mehr über die Tabelle und die Eigenschaften zur Spaltengrößenänderung in der react-table [Dokumentation](https://tanstack.com/table/v8/docs/api/features/column-sizing)
