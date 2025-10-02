@@ -1,22 +1,22 @@
 # @gravity-ui/stylelint-config
 
-Gravity UI 项目的 Stylelint 配置。
+Configuration Stylelint pour les projets Gravity UI.
 
-## 要求
+## Exigences
 
 - Node.js >= 20.x
 - Stylelint 16.18.0
 - PostCSS 8.x
 
-## 安装
+## Installation
 
 ```
 npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 ```
 
-## 使用
+## Utilisation
 
-在项目根目录添加 `.stylelintrc` 文件，内容如下：
+Ajoutez un fichier `.stylelintrc` à la racine de votre projet avec le contenu suivant :
 
 ```json
 {
@@ -26,7 +26,7 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 
 ### Prettier
 
-如果您正在使用 Prettier，请通过额外规则扩展根配置：
+Si vous utilisez Prettier, étendez la configuration racine avec les règles supplémentaires suivantes :
 
 ```json
 {
@@ -36,7 +36,7 @@ npm install --save-dev stylelint postcss @gravity-ui/stylelint-config
 
 ### Order
 
-如果您希望对 CSS 文件中的属性进行排序，请通过额外规则扩展根配置：
+Si vous souhaitez ordonner les propriétés dans vos fichiers CSS, étendez la configuration racine avec les règles supplémentaires suivantes :
 
 ```json
 {
