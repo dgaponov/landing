@@ -16,10 +16,10 @@ npm install --save-dev @gravity-ui/babel-preset
   "presets": [
       "@gravity-ui/babel-preset",
       {
-        "env": {modules: false}, // defaults to {}
-        "runtime": {useESModules: true}, // defaults to {}
-        "typescript": true, // defaults to false
-        "react": {runtime: "automatic"} // defaults to {}
+        "env": {modules: false}, // valor predeterminado {}
+        "runtime": {useESModules: true}, // valor predeterminado {}
+        "typescript": true, // valor predeterminado false
+        "react": {runtime: "automatic"} // valor predeterminado {}
       }
   ]
 }
