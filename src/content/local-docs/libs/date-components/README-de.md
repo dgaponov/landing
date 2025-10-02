@@ -1,12 +1,12 @@
-# @gravity-ui/date-components · [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
+# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
 
-## 安装
+## Installation
 
 ```shell
 npm install react react-dom @gravity-ui/uikit @gravity-ui/date-components @gravity-ui/date-utils
 ```
 
-## 使用
+## Verwendung
 
 ```jsx
 import {createRoot} from 'react-dom/client';
@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date:</label>
+        <label forHtml="date-picker">Datum:</label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -31,17 +31,17 @@ const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
-### 本地化
+### Lokalisierung
 
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// 加载应用程序中将使用的日期区域设置。
+// Laden Sie die Datums-Lokalisierungen, die in der Anwendung verwendet werden sollen.
 settings.loadLocale('ru');
 
 function App() {
   return (
-    // 设置组件使用的语言。
+    // Legen Sie die zu verwendende Sprache für die Komponenten fest.
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
@@ -53,17 +53,17 @@ function App() {
 }
 ```
 
-如果应用支持语言切换，请在应用首次加载时预加载所有支持的区域设置，或者在切换语言之前加载区域设置：
+Falls die App das Wechseln der Sprache unterstützt, laden Sie alle unterstützten Lokalisierungen beim ersten Start der App vorab oder laden Sie sie vor dem Sprachwechsel:
 
 ```jsx
-// 预加载区域设置
+// Lokalisierungen vorab laden
 settings.loadLocale('ru');
 settings.loadLocale('nl');
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// 或者按需加载区域设置。
+// Oder Lokalisierungen bei Bedarf laden.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,25 +78,25 @@ function App() {
 }
 ```
 
-这些组件支持英语和俄语翻译。要添加其他语言的翻译，请使用 `@gravity-ui/uikit` 中的 `addLanguageKeysets`：
+Die Komponenten verfügen über Übersetzungen ins Englische und Russische. Um Übersetzungen in andere Sprachen hinzuzufügen, verwenden Sie `addLanguageKeysets` aus `@gravity-ui/uikit`:
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';
 import type {Keysets, PartialKeysets} from '@gravity-ui/date-components';
 
-// 使用 Keyset 类型为所有可用组件指定翻译
+// Verwenden Sie den Keyset-Typ, um Übersetzungen für alle verfügbaren Komponenten anzugeben
 addLanguageKeysets<Keysets>(lang, {...});
 
-// 或者使用 PartialKeysets 类型仅指定所需的翻译
+// Oder verwenden Sie den PartialKeysets-Typ, um nur die benötigten anzugeben
 addLanguageKeysets<PartialKeysets>(lang, {...});
 
-// 为某些组件指定翻译
+// Um Übersetzungen für bestimmte Komponenten anzugeben
 addLanguageKeysets<Pick<Keysets, 'g-date-calendar' | 'g-date-date-field' | 'g-date-date-picker'>>(lang, {...});
 ```
 
-## 开发
+## Entwicklung
 
-要启动带有 Storybook 的开发服务器，请运行以下命令：
+Um den Entwicklungsserver mit Storybook zu starten, führen Sie Folgendes aus:
 
 ```shell
 npm start
