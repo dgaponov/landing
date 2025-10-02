@@ -76,7 +76,9 @@ jobs:
           echo "modified_library_readmes=$JSON_OUTPUT" >> $GITHUB_OUTPUT
 
   translations:
-    needs: prepare-inputs
+    needs:
+      - update-packages-readme
+      - prepare-inputs
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -84,6 +86,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: refs/pull/${{ needs.update-packages-readme.outputs.pr_number }}/head
           fetch-depth: 2
       - name: Prepare inputs for ${{ matrix.library }}
         id: prepare-inputs
