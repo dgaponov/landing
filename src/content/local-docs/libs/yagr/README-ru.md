@@ -22,7 +22,7 @@ Yagr — это высокопроизводительный рендерер г
 -   [CSS-переменные в именах цветов](https://yagr.tech/en/api/css)
 -   [Пагинированная встроенная легенда](https://yagr.tech/en/plugins/legend)
 -   [Обработка ошибок и расширенные хуки](https://yagr.tech/en/api/lifecycle)
--   [Выравнивание данных и интерполяция для отсутствующих данных](https://yagr.tech/en/api/data-processing)
+-   [Выравнивание данных и интерполяция для пропущенных значений](https://yagr.tech/en/api/data-processing)
 -   [Обновления в реальном времени](https://yagr.tech/en/api/dynamic-updates)
 
 ## [Документация](https://yagr.tech)
