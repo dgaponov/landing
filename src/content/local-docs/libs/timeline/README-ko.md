@@ -1,31 +1,31 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-Una biblioteca basada en React para crear visualizaciones interactivas de líneas de tiempo con renderizado en canvas.
+캔버스 렌더링을 사용한 인터랙티브 타임라인 시각화를 구축하기 위한 React 기반 라이브러리입니다.
 
-## Documentación
+## 문서
 
-Para más detalles, consulta la [Documentación](./docs/docs.md).
+자세한 내용은 [문서](./docs/docs.md)를 참조하세요.
 
-## Características
+## 기능
 
-- Renderizado basado en canvas para un alto rendimiento
-- Línea de tiempo interactiva con capacidades de zoom y desplazamiento (pan)
-- Soporte para eventos, marcadores, ejes y cuadrícula
-- Agrupación inteligente de marcadores con zoom automático al grupo: haz clic en marcadores agrupados para acercarte a sus componentes individuales
-- Renderizado virtualizado para mejorar el rendimiento con grandes conjuntos de datos (solo se activa cuando el contenido de la línea de tiempo excede la vista)
-- Apariencia y comportamiento personalizables
-- Soporte para TypeScript con definiciones de tipos completas
-- Integración con React mediante hooks personalizados
+- 높은 성능을 위한 캔버스 기반 렌더링
+- 확대 및 이동 기능을 갖춘 인터랙티브 타임라인
+- 이벤트, 마커, 축 및 그리드 지원
+- 그룹으로 자동 확대되는 스마트 마커 그룹화 - 그룹화된 마커를 클릭하여 개별 구성 요소로 확대
+- 대규모 데이터셋의 성능 향상을 위한 가상화 렌더링 (타임라인 콘텐츠가 뷰포트를 초과할 때만 활성화)
+- 사용자 지정 가능한 외관 및 동작
+- 완전한 타입 정의를 포함한 TypeScript 지원
+- 커스텀 훅을 사용한 React 통합
 
-## Instalación
+## 설치
 
 ```bash
 npm install @gravity-ui/timeline
 ```
 
-## Uso
+## 사용법
 
-El componente de línea de tiempo se puede usar en aplicaciones React con la siguiente configuración básica:
+타임라인 컴포넌트는 다음 기본 설정으로 React 애플리케이션에서 사용할 수 있습니다:
 
 ```tsx
 import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
@@ -57,9 +57,9 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### Estructura de Marcadores
+### 마커 구조
 
-Cada marcador requiere la siguiente estructura:
+각 마커는 다음 구조를 필요로 합니다:
 
 ```typescript
 type TimelineMarker = {
@@ -76,9 +76,9 @@ type TimelineMarker = {
 };
 ```
 
-### Agrupación de Marcadores y Zoom
+### 마커 그룹화 및 확대
 
-La línea de tiempo agrupa automáticamente los marcadores que están cerca uno del otro y ofrece funcionalidad de zoom:
+타임라인은 가까운 마커를 자동으로 그룹화하고 확대 기능을 제공합니다:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -114,36 +114,36 @@ const MyTimelineComponent = () => {
 };
 ```
 
-## Cómo Funciona
+## 작동 원리
 
-El componente de línea de tiempo está construido con React y ofrece una forma flexible de crear visualizaciones interactivas de líneas de tiempo. Así es como funciona:
+타임라인 컴포넌트는 React를 기반으로 구축되었으며, 인터랙티브 타임라인 시각화를 유연하게 생성할 수 있는 방법을 제공합니다. 작동 방식은 다음과 같습니다:
 
-### Arquitectura del Componente
+### 컴포넌트 아키텍처
 
-La línea de tiempo se implementa como un componente de React que se puede configurar mediante dos objetos principales:
+타임라인은 두 개의 주요 객체를 통해 구성할 수 있는 React 컴포넌트로 구현됩니다:
 
-1. **TimelineSettings**: Controla el comportamiento y la apariencia principal de la línea de tiempo
-   - `start`: Tiempo de inicio de la línea de tiempo
-   - `end`: Tiempo de fin de la línea de tiempo
-   - `axes`: Arreglo de configuraciones de ejes
-   - `events`: Arreglo de configuraciones de eventos
-   - `markers`: Arreglo de configuraciones de marcadores
+1. **TimelineSettings**: 핵심 타임라인 동작 및 외관 제어
+   - `start`: 타임라인 시작 시간
+   - `end`: 타임라인 종료 시간
+   - `axes`: 축 구성 배열
+   - `events`: 이벤트 구성 배열
+   - `markers`: 마커 구성 배열
 
-2. **ViewConfiguration**: Gestiona la representación visual y las configuraciones de interacción
-   - Controla la apariencia, los niveles de zoom y el comportamiento de interacción
-   - Se puede personalizar o usar valores predeterminados
+2. **ViewConfiguration**: 시각적 표현 및 상호작용 설정 관리
+   - 외관, 확대 수준 및 상호작용 동작 제어
+   - 사용자 지정 가능하거나 기본값 사용
 
-### Manejo de Eventos
+### 이벤트 처리
 
-El componente de línea de tiempo soporta varios eventos interactivos:
+타임라인 컴포넌트는 여러 인터랙티브 이벤트를 지원합니다:
 
-- `on-click`: Se activa al hacer clic en la línea de tiempo
-- `on-context-click`: Se activa con clic derecho/menú contextual
-- `on-select-change`: Se dispara cuando cambia la selección
-- `on-hover`: Se activa al pasar el cursor sobre elementos de la línea de tiempo
-- `on-leave`: Se dispara cuando el cursor sale de los elementos de la línea de tiempo
+- `on-click`: 타임라인 클릭 시 트리거
+- `on-context-click`: 우클릭/컨텍스트 메뉴 시 트리거
+- `on-select-change`: 선택 변경 시 발생
+- `on-hover`: 타임라인 요소 위에 마우스 호버 시 트리거
+- `on-leave`: 마우스가 타임라인 요소를 벗어날 때 발생
 
-Ejemplo de manejo de eventos:
+이벤트 처리 예시:
 
 ```tsx
 import { useTimelineEvent } from '@gravity-ui/timeline/react';
@@ -163,24 +163,24 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### Integración con React
+### React 통합
 
-El componente utiliza hooks personalizados para la gestión de la línea de tiempo:
+컴포넌트는 타임라인 관리를 위한 커스텀 훅을 사용합니다:
 
-- `useTimeline`: Gestiona la instancia de la línea de tiempo y su ciclo de vida
-  - Crea e inicializa la línea de tiempo
-  - Maneja la limpieza al desmontar el componente
-  - Proporciona acceso a la instancia de la línea de tiempo
+- `useTimeline`: 타임라인 인스턴스 및 수명 주기 관리
+  - 타임라인 생성 및 초기화
+  - 컴포넌트 언마운트 시 정리 처리
+  - 타임라인 인스턴스 접근 제공
 
-- `useTimelineEvent`: Maneja las suscripciones a eventos y la limpieza
-  - Gestiona el ciclo de vida de los listeners de eventos
-  - Limpia automáticamente los listeners al desmontar
+- `useTimelineEvent`: 이벤트 구독 및 정리 처리
+  - 이벤트 리스너 수명 주기 관리
+  - 언마운트 시 리스너 자동 정리
 
-El componente maneja automáticamente la limpieza y destrucción de la instancia de la línea de tiempo al desmontar.
+컴포넌트는 언마운트 시 타임라인 인스턴스의 정리 및 소멸을 자동으로 처리합니다.
 
-### Estructura de Eventos
+### 이벤트 구조
 
-Los eventos en la línea de tiempo siguen esta estructura:
+타임라인의 이벤트는 다음 구조를 따릅니다:
 
 ```typescript
 type TimelineEvent = {
@@ -195,41 +195,41 @@ type TimelineEvent = {
 };
 ```
 
-### Uso Directo en TypeScript
+### 직접 TypeScript 사용
 
-La clase Timeline se puede usar directamente en TypeScript sin React. Esto es útil para integrarla con otros frameworks o aplicaciones de JavaScript vanilla:
+Timeline 클래스는 React 없이 TypeScript에서 직접 사용할 수 있습니다. 이는 다른 프레임워크나 순수 JavaScript 애플리케이션과 통합할 때 유용합니다:
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
 
 const timestamp = Date.now();
 
-// Crear una instancia de timeline
+// Create a timeline instance
 const timeline = new Timeline({
   settings: {
     start: timestamp,
-    end: timestamp + 3600000, // 1 hora a partir de ahora
+    end: timestamp + 3600000, // 1 hour from now
     axes: [
       {
         id: 'main',
-        label: 'Eje Principal',
+        label: 'Main Axis',
         color: '#000000'
       }
     ],
     events: [
       {
         id: 'event1',
-        from: timestamp + 1800000, // 30 minutos a partir de ahora
-        to: timestamp + 2400000,   // 40 minutos a partir de ahora
-        label: 'Evento de Ejemplo',
+        from: timestamp + 1800000, // 30 minutes from now
+        to: timestamp + 2400000,   // 40 minutes from now
+        label: 'Sample Event',
         axisId: 'main'
       }
     ],
     markers: [
       {
         id: 'marker1',
-        time: timestamp + 1200000, // 20 minutos a partir de ahora
-        label: 'Punto Importante',
+        time: timestamp + 1200000, // 20 minutes from now
+        label: 'Important Point',
         color: '#ff0000',
         activeColor: '#ff5252',
         hoverColor: '#ff1744'
@@ -237,20 +237,20 @@ const timeline = new Timeline({
     ]
   },
   viewConfiguration: {
-    // Opcional: personalizar configuraciones de vista
+    // Optional: customize view settings
     zoomLevels: [1, 2, 4, 8, 16],
     hideRuler: false,
     showGrid: true
   }
 });
 
-// Inicializar con un elemento canvas
+// Initialize with a canvas element
 const canvas = document.querySelector('canvas');
 if (canvas instanceof HTMLCanvasElement) {
   timeline.init(canvas);
 }
 
-// Agregar listeners de eventos
+// Add event listeners
 timeline.on('on-click', (detail) => {
   console.log('Timeline clicked:', detail);
 });
@@ -259,57 +259,57 @@ timeline.on('on-select-change', (detail) => {
   console.log('Selection changed:', detail);
 });
 
-// Limpiar al finalizar
+// Clean up when done
 timeline.destroy();
 ```
 
-La clase Timeline proporciona una API rica para gestionar la línea de tiempo:
+Timeline 클래스는 타임라인을 관리하기 위한 풍부한 API를 제공합니다:
 
-- **Gestión de Eventos**:
+- **이벤트 관리**:
   ```typescript
-  // Agregar listener de evento
+  // Add event listener
   timeline.on('eventClick', (detail) => {
     console.log('Event clicked:', detail);
   });
 
-  // Remover listener de evento
+  // Remove event listener
   const handler = (detail) => console.log(detail);
   timeline.on('eventClick', handler);
   timeline.off('eventClick', handler);
 
-  // Emitir eventos personalizados
+  // Emit custom events
   timeline.emit('customEvent', { data: 'custom data' });
   ```
 
-- **Control de la Línea de Tiempo**:
+- **타임라인 제어**:
   ```typescript
-  // Actualizar datos de la línea de tiempo
+  // Update timeline data
   timeline.api.setEvents([
     {
       id: 'newEvent',
       from: Date.now(),
       to: Date.now() + 3600000,
-      label: 'Nuevo Evento',
+      label: 'New Event',
       axisId: 'main',
       trackIndex: 0
     }
   ]);
 
-  // Actualizar ejes
+  // Update axes
   timeline.api.setAxes([
     {
       id: 'newAxis',
-      label: 'Nuevo Eje',
+      label: 'New Axis',
       color: '#0000ff'
     }
   ]);
 
-  // Actualizar marcadores
+  // Update markers
   timeline.api.setMarkers([
     {
       id: 'newMarker',
       time: Date.now(),
-      label: 'Nuevo Marcador',
+      label: 'New Marker',
       color: '#00ff00',
       activeColor: '#4caf50',
       hoverColor: '#2e7d32'
@@ -317,36 +317,36 @@ La clase Timeline proporciona una API rica para gestionar la línea de tiempo:
   ]);
   ```
 
-## Ejemplos en Vivo
+## 실시간 예제
 
-Explora ejemplos interactivos en nuestro [Storybook](https://preview.gravity-ui.com/timeline/):
+[Storybook](https://preview.gravity-ui.com/timeline/)에서 인터랙티브 예제를 확인해 보세요:
 
-- [Línea de Tiempo Básica](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - Línea de tiempo simple con eventos y ejes
-- [Línea de Tiempo Infinita](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - Línea de tiempo infinita con eventos y ejes
-- [Marcadores](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - Línea de tiempo con marcadores verticales y etiquetas
-- [Eventos Personalizados](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - Línea de tiempo con renderizado personalizado de eventos
+- [기본 타임라인](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - 이벤트와 축이 포함된 간단한 타임라인
+- [무한 타임라인](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - 이벤트와 축이 포함된 무한 타임라인
+- [마커](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 수직 마커와 레이블이 포함된 타임라인
+- [커스텀 이벤트](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - 커스텀 이벤트 렌더링이 포함된 타임라인
 
 
-## Desarrollo
+## 개발
 
 ### Storybook
 
-Este proyecto incluye Storybook para el desarrollo y documentación de componentes.
+이 프로젝트에는 컴포넌트 개발과 문서화를 위한 Storybook이 포함되어 있습니다.
 
-Para ejecutar Storybook:
+Storybook을 실행하려면:
 
 ```bash
 npm run storybook
 ```
 
-Esto iniciará el servidor de desarrollo de Storybook en el puerto 6006. Puedes acceder a él en http://localhost:6006.
+이 명령은 포트 6006에서 Storybook 개발 서버를 시작합니다. http://localhost:6006에서 접근할 수 있습니다.
 
-Para compilar una versión estática de Storybook para despliegue:
+배포를 위한 Storybook의 정적 버전을 빌드하려면:
 
 ```bash
 npm run build-storybook
 ```
 
-## Licencia
+## 라이선스
 
 MIT
