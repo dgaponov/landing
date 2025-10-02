@@ -1,14 +1,14 @@
 # @gravity-ui/date-utils
 
-用于管理日期和时间的辅助工具。
+날짜와 시간을 관리하는 도우미입니다.
 
-## 安装
+## 설치
 
 ```shell
 npm i @gravity-ui/date-utils
 ```
 
-## 使用方法
+## 사용법
 
 ```typescript
 import {dateTimeParse, dateTime} from '@gravity-ui/date-utils';
@@ -43,7 +43,7 @@ dateTime({input: ''}).format(FORMAT); // "Invalid Date"
 dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
 ```
 
-## 设置
+## 설정
 
 ```typescript
 import {settings} from '@gravity-ui/date-utils';

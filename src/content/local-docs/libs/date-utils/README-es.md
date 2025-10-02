@@ -1,8 +1,8 @@
 # @gravity-ui/date-utils
 
-Ayudantes para gestionar la fecha y la hora.
+Utilidades para el manejo de fechas y horas.
 
-## Instalar
+## Instalación
 
 ```shell
 npm i @gravity-ui/date-utils
@@ -43,18 +43,18 @@ dateTime({input: ''}).format(FORMAT); // "Invalid Date"
 dateTime({input: '2021-08', format: 'YYYY-MM-DD'}).format(FORMAT); // "Invalid Date"
 ```
 
-## Ajustes
+## Configuración
 
 ```typescript
 import {settings} from '@gravity-ui/date-utils';
 
-// Locales management
-settings.getLocale(); // default locale "en"
+// Gestión de idiomas
+settings.getLocale(); // idioma predeterminado "en"
 settings.loadLocale('de').then(() => {
   settings.setLocale('de');
   settings.getLocale(); // "de"
 });
 
-// Customization
-settings.updateLocale({weekStart: 0}); // change first day of week
+// Personalización
+settings.updateLocale({weekStart: 0}); // cambiar el primer día de la semana
 ```
