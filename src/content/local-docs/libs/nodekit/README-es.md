@@ -1,16 +1,16 @@
 # NodeKit
 
-NodeKit es un conjunto de herramientas sencillo para sus aplicaciones, scripts y bibliotecas de Node.js. Proporciona funciones para el registro, la telemetría, la configuración y la gestión de errores, para que pueda tener una base familiar en sus diferentes proyectos.
+NodeKit es un kit de herramientas simple para tus aplicaciones, scripts y bibliotecas de Node.js. Proporciona funcionalidad para el registro de logs, telemetría, configuración y manejo de errores, para que puedas tener una base familiar en tus diferentes proyectos.
 
-## Cómo empezar
+## Primeros pasos
 
-Agregue dependencia a su proyecto:
+Añade la dependencia a tu proyecto:
 
 ```bash
 npm install --save @gravity-ui/nodekit
 ```
 
-Y luego importe e inicie NodeKit en su aplicación:
+Y luego importa e inicializa NodeKit en tu aplicación:
 
 ```typescript
 import {NodeKit} from '@gravity-ui/nodekit';
@@ -21,35 +21,35 @@ nodekit.ctx.log('App is ready');
 
 ## Documentación
 
-Consulte el `docs/` directorio para obtener documentación adicional:
+Consulta el directorio `docs/` para documentación adicional:
 
-- [`docs/configuration.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/configuration.md) especifica cómo puedes configurar tanto el propio nodekit como tus aplicaciones basadas en nodekit
-- [`docs/contexts.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/contexts.md) describe el concepto de contextos, registro y rastreo de NodeKit
-- [`docs/app-error.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/app-error.md) contiene una descripción de la útil clase de error personalizada que NodeKit proporciona para sus aplicaciones
-- [`docs/utils.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/utils.md) enumera algunas funciones auxiliares adicionales que se incluyen con NodeKit
+- [`docs/configuration.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/configuration.md) especifica cómo puedes configurar tanto NodeKit en sí como tus aplicaciones basadas en NodeKit
+- [`docs/contexts.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/contexts.md) describe el concepto de contextos de NodeKit, registro de logs y trazado
+- [`docs/app-error.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/app-error.md) contiene la descripción de la clase de error personalizada útil que NodeKit proporciona para tus aplicaciones
+- [`docs/utils.md`](https://github.com/gravity-ui/nodekit/blob/main/docs/utils.md) enumera algunas funciones auxiliares adicionales que vienen empaquetadas con NodeKit
 
-## Contribuyendo
+## Contribución
 
-### Cómo empezar
+### Primeros pasos
 
-Obtenga copias del repositorio de NodeKit y de las aplicaciones de ejemplo:
+Obtén copias del repositorio de NodeKit y las aplicaciones de ejemplo:
 
 ```bash
 git clone git@github.com:gravity-ui/nodekit
 git clone git@github.com:gravity-ui/nodekit-examples
 ```
 
-Vincula tu nodekit a npm e inicia un compilador:
+Enlaza tu NodeKit a npm e inicia el compilador:
 
 ```bash
 cd nodekit && npm link && npm run dev
 ```
 
-Luego, en otro terminal, ve a los ejemplos, abre el que te interese, vincula tu nodekit allí e inicia la aplicación:
+Luego, en otra terminal, ve a examples, abre la que te interese, enlaza tu NodeKit allí y luego inicia la app:
 
 ```bash
 cd nodekit-examples/basic-app && npm i && npm link @gravity-ui/nodekit
 npm run dev
 ```
 
-En este punto, puede realizar cambios tanto en NodeKit como en la aplicación de demostración y ver los resultados en tiempo real.
+En este punto puedes hacer cambios tanto en NodeKit como en la app de demostración, y ver los resultados en tiempo real.
