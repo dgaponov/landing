@@ -1,14 +1,14 @@
 # @gravity-ui/icons &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/icons)](https://www.npmjs.com/package/@gravity-ui/icons) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/icons/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/icons/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/icons/)
 
-Gravity UI 图标包。图标提供 SVG 和 React 两种格式。请查看 [展示页面](https://preview.gravity-ui.com/icons/)。
+Ein Paket von Gravity UI Icons. Die Icons stammen aus zwei Quellen: SVG und React. Werfen Sie einen Blick auf die [Showcase-Seite](https://preview.gravity-ui.com/icons/).
 
-## 安装
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/icons
 ```
 
-## 使用
+## Verwendung
 
 ### React
 
@@ -16,7 +16,7 @@ npm install --save-dev @gravity-ui/icons
 import Cloud from '@gravity-ui/icons/Cloud';
 ```
 
-或
+oder
 
 ```js
 import {Cloud} from '@gravity-ui/icons';
@@ -24,7 +24,7 @@ import {Cloud} from '@gravity-ui/icons';
 
 ### SVG
 
-> 对于此，您可能需要合适的加载器
+> Sie benötigen möglicherweise einen geeigneten Loader dafür
 
 ```js
 import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';
