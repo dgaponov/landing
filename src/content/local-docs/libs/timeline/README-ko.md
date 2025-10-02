@@ -1,31 +1,31 @@
 # @gravity-ui/timeline [![npm package](https://img.shields.io/npm/v/@gravity-ui/timeline)](https://www.npmjs.com/package/@gravity-ui/timeline) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/timeline/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/timeline/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/timeline/)
 
-一个基于 React 的库，用于构建交互式时间线可视化，支持 Canvas 渲染。
+캔버스 렌더링을 사용한 인터랙티브 타임라인 시각화를 구축하기 위한 React 기반 라이브러리입니다.
 
-## 文档
+## 문서
 
-详情请参阅 [文档](./docs/docs.md)。
+자세한 내용은 [문서](./docs/docs.md)를 참조하세요.
 
-## 特性
+## 주요 기능
 
-- 基于 Canvas 的渲染，提供高性能
-- 交互式时间线，支持缩放和平移功能
-- 支持事件、标记、轴和网格
-- 智能标记分组，自动缩放到组 - 点击分组标记以缩放到其单个组件
-- 虚拟化渲染，提升大数据集性能（仅在时间线内容超出视口时激活）
-- 可自定义外观和行为
-- 支持 TypeScript，提供完整的类型定义
-- 与 React 集成，使用自定义钩子
+- 높은 성능을 위한 캔버스 기반 렌더링
+- 확대 및 이동 기능을 지원하는 인터랙티브 타임라인
+- 이벤트, 마커, 축 및 그리드 지원
+- 자동 그룹 확대를 통한 스마트 마커 그룹화 - 그룹화된 마커를 클릭하면 개별 구성 요소로 확대됩니다
+- 대규모 데이터셋에 대한 성능 향상을 위한 가상화 렌더링 (타임라인 콘텐츠가 뷰포트를 초과할 때만 활성화됨)
+- 사용자 지정 가능한 외관 및 동작
+- 완전한 타입 정의를 포함한 TypeScript 지원
+- 커스텀 훅을 통한 React 통합
 
-## 安装
+## 설치
 
 ```bash
 npm install @gravity-ui/timeline
 ```
 
-## 使用方法
+## 사용법
 
-时间线组件可在 React 应用中使用，以下是基本设置示例：
+타임라인 컴포넌트는 다음 기본 설정으로 React 애플리케이션에서 사용할 수 있습니다:
 
 ```tsx
 import { TimelineCanvas, useTimeline } from '@gravity-ui/timeline/react';
@@ -57,28 +57,28 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### 标记结构
+### 마커 구조
 
-每个标记都需要以下结构：
+각 마커는 다음 구조를 필요로 합니다:
 
 ```typescript
 type TimelineMarker = {
-  time: number;           // 标记位置的时间戳
-  color: string;          // 标记线的颜色
-  activeColor: string;    // 标记选中时的颜色（必需）
-  hoverColor: string;     // 标记悬停时的颜色（必需）
-  lineWidth?: number;     // 标记线的可选宽度
-  label?: string;         // 可选标签文本
-  labelColor?: string;    // 可选标签颜色
-  renderer?: AbstractMarkerRenderer; // 可选自定义渲染器
-  nonSelectable?: boolean;// 标记是否可选中
-  group?: boolean;        // 标记是否表示一个组
+  time: number;           // Timestamp for the marker position
+  color: string;          // Color of the marker line
+  activeColor: string;    // Color when marker is selected (required)
+  hoverColor: string;     // Color when marker is hovered (required)
+  lineWidth?: number;     // Optional width of the marker line
+  label?: string;         // Optional label text
+  labelColor?: string;    // Optional label color
+  renderer?: AbstractMarkerRenderer; // Optional custom renderer
+  nonSelectable?: boolean;// Whether marker can be selected
+  group?: boolean;        // Whether marker represents a group
 };
 ```
 
-### 标记分组和缩放
+### 마커 그룹화 및 확대
 
-时间线会自动对相近的标记进行分组，并提供缩放功能：
+타임라인은 가까운 마커를 자동으로 그룹화하고 확대 기능을 제공합니다:
 
 ```tsx
 const MyTimelineComponent = () => {
@@ -114,36 +114,36 @@ const MyTimelineComponent = () => {
 };
 ```
 
-## 工作原理
+## 작동 원리
 
-时间线组件基于 React 构建，提供了一种灵活的方式来创建交互式时间线可视化。下面是其工作原理：
+타임라인 컴포넌트는 React를 사용해 구축되었으며, 인터랙티브 타임라인 시각화를 유연하게 생성할 수 있습니다. 작동 방식은 다음과 같습니다:
 
-### 组件架构
+### 컴포넌트 아키텍처
 
-时间线实现为一个 React 组件，可通过两个主要对象进行配置：
+타임라인은 두 개의 주요 객체를 통해 구성할 수 있는 React 컴포넌트로 구현되었습니다:
 
-1. **TimelineSettings**：控制时间线核心行为和外观
-   - `start`：时间线的起始时间
-   - `end`：时间线的结束时间
-   - `axes`：轴配置数组
-   - `events`：事件配置数组
-   - `markers`：标记配置数组
+1. **TimelineSettings**: 타임라인의 핵심 동작과 외관을 제어합니다
+   - `start`: 타임라인의 시작 시간
+   - `end`: 타임라인의 종료 시간
+   - `axes`: 축 구성 배열
+   - `events`: 이벤트 구성 배열
+   - `markers`: 마커 구성 배열
 
-2. **ViewConfiguration**：管理视觉表示和交互设置
-   - 控制外观、缩放级别和交互行为
-   - 可自定义或使用默认值
+2. **ViewConfiguration**: 시각적 표현 및 상호작용 설정을 관리합니다
+   - 외관, 확대 수준 및 상호작용 동작을 제어합니다
+   - 사용자 지정하거나 기본값을 사용할 수 있습니다
 
-### 事件处理
+### 이벤트 처리
 
-时间线组件支持多种交互事件：
+타임라인 컴포넌트는 여러 인터랙티브 이벤트를 지원합니다:
 
-- `on-click`：点击时间线时触发
-- `on-context-click`：右键/上下文菜单时触发
-- `on-select-change`：选中项更改时触发
-- `on-hover`：悬停在时间线元素上时触发
-- `on-leave`：鼠标离开时间线元素时触发
+- `on-click`: 타임라인을 클릭할 때 발생
+- `on-context-click`: 오른쪽 클릭/컨텍스트 메뉴 시 발생
+- `on-select-change`: 선택이 변경될 때 발생
+- `on-hover`: 타임라인 요소 위에 마우스를 올릴 때 발생
+- `on-leave`: 마우스가 타임라인 요소를 벗어날 때 발생
 
-事件处理示例：
+이벤트 처리 예시:
 
 ```tsx
 import { useTimelineEvent } from '@gravity-ui/timeline/react';
@@ -163,24 +163,24 @@ const MyTimelineComponent = () => {
 };
 ```
 
-### React 集成
+### React 통합
 
-组件使用自定义钩子来管理时间线：
+컴포넌트는 타임라인 관리를 위한 커스텀 훅을 사용합니다:
 
-- `useTimeline`：管理时间线实例及其生命周期
-  - 创建并初始化时间线
-  - 在组件卸载时处理清理
-  - 提供对时间线实例的访问
+- `useTimeline`: 타임라인 인스턴스와 생명 주기를 관리합니다
+  - 타임라인을 생성하고 초기화합니다
+  - 컴포넌트 언마운트 시 정리 작업을 처리합니다
+  - 타임라인 인스턴스에 접근할 수 있게 합니다
 
-- `useTimelineEvent`：处理事件订阅和清理
-  - 管理事件监听器的生命周期
-  - 在卸载时自动清理监听器
+- `useTimelineEvent`: 이벤트 구독 및 정리 작업을 처리합니다
+  - 이벤트 리스너 생명 주기를 관리합니다
+  - 언마운트 시 리스너를 자동으로 정리합니다
 
-组件会在卸载时自动处理时间线实例的清理和销毁。
+컴포넌트는 언마운트 시 타임라인 인스턴스의 정리 및 소멸을 자동으로 처리합니다.
 
-### 事件结构
+### 이벤트 구조
 
-时间线中的事件遵循以下结构：
+타임라인의 이벤트는 다음 구조를 따릅니다:
 
 ```typescript
 type TimelineEvent = {
@@ -195,9 +195,9 @@ type TimelineEvent = {
 };
 ```
 
-### 直接使用 TypeScript
+### 직접 TypeScript 사용
 
-Timeline 类可以在不使用 React 的情况下直接在 TypeScript 中使用。这对于与其他框架或纯 JavaScript 应用集成非常有用：
+Timeline 클래스는 React 없이 TypeScript에서 직접 사용할 수 있습니다. 이는 다른 프레임워크나 순수 JavaScript 애플리케이션과 통합할 때 유용합니다:
 
 ```typescript
 import { Timeline } from '@gravity-ui/timeline';
@@ -263,9 +263,9 @@ timeline.on('on-select-change', (detail) => {
 timeline.destroy();
 ```
 
-Timeline 类提供了丰富的 API 用于管理时间线：
+Timeline 클래스는 타임라인을 관리하기 위한 풍부한 API를 제공합니다:
 
-- **事件管理**：
+- **이벤트 관리**:
   ```typescript
   // Add event listener
   timeline.on('eventClick', (detail) => {
@@ -281,7 +281,7 @@ Timeline 类提供了丰富的 API 用于管理时间线：
   timeline.emit('customEvent', { data: 'custom data' });
   ```
 
-- **时间线控制**：
+- **타임라인 제어**:
   ```typescript
   // Update timeline data
   timeline.api.setEvents([
@@ -317,36 +317,36 @@ Timeline 类提供了丰富的 API 用于管理时间线：
   ]);
   ```
 
-## 实时示例
+## 실시간 예제
 
-在我们的 [Storybook](https://preview.gravity-ui.com/timeline/) 中探索交互式示例：
+[Storybook](https://preview.gravity-ui.com/timeline/)에서 인터랙티브 예제를 확인해 보세요:
 
-- [基本时间线](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - 带有事件和轴的简单时间线
-- [无限时间线](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - 带有事件和轴的无限时间线
-- [标记](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 带有垂直标记和标签的时间线
-- [自定义事件](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - 带有自定义事件渲染的时间线
+- [기본 타임라인](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--basic) - 이벤트와 축이 포함된 간단한 타임라인
+- [무한 타임라인](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--endless-timelines) - 이벤트와 축이 포함된 무한 타임라인
+- [마커](https://preview.gravity-ui.com/timeline/?path=/story/timeline-markers--basic) - 수직 마커와 레이블이 포함된 타임라인
+- [커스텀 이벤트](https://preview.gravity-ui.com/timeline/?path=/story/timeline-events--custom-renderer) - 커스텀 이벤트 렌더링이 포함된 타임라인
 
 
-## 开发
+## 개발
 
 ### Storybook
 
-此项目包含 Storybook，用于组件开发和文档。
+이 프로젝트는 컴포넌트 개발과 문서화를 위한 Storybook을 포함합니다.
 
-运行 Storybook：
+Storybook을 실행하려면:
 
 ```bash
 npm run storybook
 ```
 
-这将启动 Storybook 开发服务器，端口为 6006。您可以通过 http://localhost:6006 访问它。
+이 명령은 6006 포트에서 Storybook 개발 서버를 시작합니다. http://localhost:6006에서 접근할 수 있습니다.
 
-构建 Storybook 的静态版本以进行部署：
+배포를 위한 Storybook의 정적 버전을 빌드하려면:
 
 ```bash
 npm run build-storybook
 ```
 
-## 许可证
+## 라이선스
 
 MIT
