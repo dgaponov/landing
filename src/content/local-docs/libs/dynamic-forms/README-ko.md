@@ -1,30 +1,30 @@
 # @gravity-ui/dynamic-forms &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/dynamic-forms)](https://www.npmjs.com/package/@gravity-ui/dynamic-forms) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/dynamic-forms/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/dynamic-forms/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/dynamic-forms/)
 
-基于 JSON Schema 的表单渲染和表单值处理库。
+폼과 폼 값을 렌더링하기 위한 JSON Schema 기반 라이브러리.
 
-## 安装
+## 설치
 
 ```shell
 npm install --save-dev @gravity-ui/dynamic-forms
 ```
 
-## 使用
+## 사용법
 
 ```jsx
 import {DynamicField, Spec, dynamicConfig} from '@gravity-ui/dynamic-forms';
 
-// 用于嵌入到 final-form 中
+// final-form에 임베드하기 위해
 <DynamicField name={name} spec={spec} config={config} />;
 
 import {DynamicView, dynamicViewConfig} from '@gravity-ui/dynamic-forms';
 
-// 用于查看值的概览
+// 값의 개요를 확인하기 위해
 <DynamicView value={value} spec={spec} config={dynamicViewConfig} />;
 ```
 
-### 国际化 (I18N)
+### I18N
 
-某些组件包含文本令牌（单词和短语），这些令牌支持两种语言：`en`（默认语言）和 `ru`。要设置语言，请使用 `configure` 函数：
+일부 컴포넌트에는 `en` (기본값)과 `ru` 두 언어로 제공되는 텍스트 토큰(단어와 구문)이 포함되어 있습니다. 언어를 설정하려면 `configure` 함수를 사용하세요:
 
 ```js
 // index.js
@@ -34,9 +34,9 @@ import {configure, Lang} from '@gravity-ui/dynamic-forms';
 configure({lang: Lang.Ru});
 ```
 
-## 开发
+## 개발
 
-要启动开发服务器并运行 Storybook，请执行以下命令：
+storybook과 함께 개발 서버를 시작하려면 다음 명령어를 실행하세요:
 
 ```shell
 npm ci
