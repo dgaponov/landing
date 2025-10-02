@@ -8,7 +8,7 @@ on:
 permissions: write-all
 
 env:
-  LANGUAGES: 'ru,ko,es,de,zh,fr'
+  LANGUAGES: 'ru ko es de zh fr'
 
 jobs:
   prepare-inputs:
@@ -57,7 +57,7 @@ jobs:
           echo "README file: $LIBRARY_README"
 
           OUTPUT_FILES=""
-          for LANGUAGE in $(echo "${{ env.LANGUAGES }}" | tr ',' ' '); do
+          for LANGUAGE in "${{ env.LANGUAGES }}"; do
             OUTPUT_FILES="$OUTPUT_FILES src/content/local-docs/libs/${LIBRARY}/README-${LANGUAGE}.md"
           done
 
