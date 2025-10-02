@@ -1,14 +1,14 @@
 # @gravity-ui/prettier-config
 
-## Instalación
+## 설치
 
 ```
 npm install --save-dev prettier @gravity-ui/prettier-config
 ```
 
-## Uso
+## 사용 방법
 
-Crea un archivo `.prettierrc.js` en la raíz del proyecto con el siguiente contenido:
+프로젝트 루트에 다음 내용을 포함한 `.prettierrc.js` 파일을 추가하세요:
 
 ```js
 module.exports = require('@gravity-ui/prettier-config');
