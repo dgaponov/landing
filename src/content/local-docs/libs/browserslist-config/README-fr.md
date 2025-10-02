@@ -33,4 +33,4 @@ Vous pouvez spécifier des navigateurs supplémentaires en fonction de votre aud
 
 ## Utilisation
 
-Ce paquet fournit la version de production de browserslist.
+Ce package fournit la version de production de browserslist.

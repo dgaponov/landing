@@ -10,7 +10,7 @@ Sie können die kompatiblen Browser auf [browsersl.ist](https://browsersl.ist/#q
 npm i --save-dev @gravity-ui/browserslist-config
 ```
 
-Fügen Sie die Konfiguration in `package.json` im Abschnitt `browserslist` hinzu:
+Fügen Sie die Konfiguration zu `package.json` im Abschnitt `browserslist` hinzu:
 
 ```json
 {
