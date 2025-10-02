@@ -22,8 +22,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
-          echo "modified_files=$(echo "$MODIFIED_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+          MODIFIED_FILES=$(git d iff --name-only HEAD^ HEAD | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
+          echo "modified_files=$(echo "$MODIFIED_FILES" | tr '\n' ' ' | sed 's/ $//')" >> $GITHUB_OUTPUT
       - name: Prepare inputs for ${{ matrix.language }}
         id: prepare-inputs
         env:
@@ -34,13 +34,13 @@ jobs:
           OUTPUT_FILES=$(echo "$MODIFIED_FILES" | sed "s/README\.md/README-$LANGUAGE.md/g")
 
           echo "Files to translate to $LANGUAGE:"
-          echo "$MODIFIED_FILES" | tr ',' '\n'
+          echo "$MODIFIED_FILES" | tr ' ' '\n'
 
           echo "Resulting files after translation to $LANGUAGE:"
-          echo "$OUTPUT_FILES" | tr ',' '\n'
+          echo "$OUTPUT_FILES" | tr ' ' '\n'
 
-          echo "input_files=$(echo "$MODIFIED_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
-          echo "output_files=$(echo "$OUTPUT_FILES" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_OUTPUT
+          echo "input_files=$(echo "$MODIFIED_FILES")" >> $GITHUB_OUTPUT
+          echo "output_files=$(echo "$OUTPUT_FILES")" >> $GITHUB_OUTPUT
       - name: Run translations
         uses: dgaponov/gpt-translate@master
         with:
