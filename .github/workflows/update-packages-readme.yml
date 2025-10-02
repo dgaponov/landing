@@ -116,6 +116,7 @@ jobs:
           model: 'x-ai/grok-4-fast:free'
           inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
           outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
+          pullRequestNumber: ${{ needs.update-packages-readme.outputs.pr_number }}
           languages: ${{ env.LANGUAGES }}
           prompt: |
             Please translate the README source file to {targetLanguage}. \
