@@ -1,16 +1,16 @@
 # UIKit &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/uikit?logo=npm)](https://www.npmjs.com/package/@gravity-ui/uikit) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/ci.yml?query=branch:main) [![storybook tests](https://img.shields.io/github/actions/workflow/status/gravity-ui/uikit/.github/workflows/test-storybook.yml?label=Storybook%20Tests&logo=github)](https://github.com/gravity-ui/uikit/actions/workflows/test-storybook.yml) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685?logo=storybook)](https://preview.gravity-ui.com/uikit/)
 
-一套灵活、高效且实用的 React 组件，用于构建丰富的 Web 应用。
+Un ensemble de composants React flexibles, hautement pratiques et efficaces pour créer des applications web riches.
 
 <!--GITHUB_BLOCK-->
 
 ![Cover image](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/uikit_cover.png)
 
-## 资源
+## Ressources
 
-### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [网站](https://gravity-ui.com)
+### ![Globe Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_light.svg#gh-light-mode-only) ![Globe Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/globe_dark.svg#gh-dark-mode-only) [Site web](https://gravity-ui.com)
 
-### ![Documentation Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_light.svg#gh-light-mode-only) ![Documentation Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_dark.svg#gh-dark-mode-only) [文档](https://gravity-ui.com/components/uikit/alert)
+### ![Documentation Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_light.svg#gh-light-mode-only) ![Documentation Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/book-open_dark.svg#gh-dark-mode-only) [Documentation](https://gravity-ui.com/components/uikit/alert)
 
 ### ![Figma Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_light.svg#gh-light-mode-only) ![Figma Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/figma_dark.svg#gh-dark-mode-only) [Figma](<https://www.figma.com/community/file/1271150067798118027/Gravity-UI-Design-System-(Beta)>)
 
@@ -18,17 +18,17 @@
 
 ### ![Storybook Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_light.svg#gh-light-mode-only) ![Storybook Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/storybook_dark.svg#gh-dark-mode-only) [Storybook](https://preview.gravity-ui.com/uikit/)
 
-### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [社区](https://t.me/gravity_ui)
+### ![Community Logo Light](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_light.svg#gh-light-mode-only) ![Community Logo Dark](https://raw.githubusercontent.com/gravity-ui/uikit/main/docs/assets/telegram_dark.svg#gh-dark-mode-only) [Communauté](https://t.me/gravity_ui)
 
 <!--/GITHUB_BLOCK-->
 
-## 安装
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/uikit
 ```
 
-## 使用
+## Utilisation
 
 ```jsx
 import {Button} from '@gravity-ui/uikit';
@@ -36,9 +36,9 @@ import {Button} from '@gravity-ui/uikit';
 const SubmitButton = <Button view="action" size="l" />;
 ```
 
-### 样式
+### Styles
 
-UIKit 自带基础样式和主题。为了让一切看起来更美观，请在入口文件的顶部引入以下内容：
+UIKit inclut un style de base et un thème. Pour que tout ait une belle apparence, ajoutez ceci en haut de votre fichier d'entrée :
 
 ```js
 // index.js
@@ -49,7 +49,7 @@ import '@gravity-ui/uikit/styles/styles.css';
 // ...
 ```
 
-UIKit 支持多种主题：浅色、深色及其对比变体。您的应用必须在 `ThemeProvider` 内渲染：
+UIKit prend en charge différents thèmes : clair, sombre et leurs variantes à contraste élevé. Votre application doit être rendue à l'intérieur de `ThemeProvider` :
 
 ```js
 import {createRoot} from 'react-dom/client';
@@ -63,7 +63,7 @@ root.render(
 );
 ```
 
-在 SSR 期间，可以生成初始的根 CSS 类，以避免主题闪烁：
+Il est possible de générer les classes CSS racine initiales pendant le SSR pour éviter le clignotement du thème :
 
 ```js
 import {getRootClassName} from '@gravity-ui/uikit/server';
@@ -80,12 +80,12 @@ const html = `
 `;
 ```
 
-此外，还有一个 SCSS [mixins](styles/mixins.scss) 文件，包含适用于您应用的实用助手工具。
+Il existe également un fichier SCSS [mixins](styles/mixins.scss) avec des utilitaires utiles à utiliser dans votre application.
 
-### 国际化 (I18N)
+### I18N
 
-某些组件包含文本令牌（单词和短语）。它们支持两种语言：`en`（默认）和 `ru`。
-要设置语言，请使用 `configure` 函数：
+Certains composants contiennent des jetons de texte (mots et phrases). Ils sont disponibles en deux langues : `en` (par défaut) et `ru`.
+Pour définir la langue, utilisez la fonction `configure` :
 
 ```js
 // index.js
@@ -97,9 +97,9 @@ configure({
 });
 ```
 
-## 开发
+## Développement
 
-要启动开发服务器并运行 Storybook，请执行以下命令：
+Pour démarrer le serveur de développement avec Storybook, exécutez la commande suivante :
 
 ```shell
 git clone git@github.com:gravity-ui/uikit.git
