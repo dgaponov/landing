@@ -27,7 +27,7 @@ jobs:
           MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
 
           # Prepare output with library names for matrix strategy
-          JSON_OUTPUT=$(echo "$MODIFIED_FILES" | awk 'NF' | jq -R -s '
+          JSON_OUTPUT=$(echo "$MODIFIED_FILES" | awk 'NF' | jq -R -c -s '
             split("\n") |
             map(select(length > 0)) |
             map(capture("src/content/local-docs/libs/(?<lib>[^/]+)/README\\.md").lib)
