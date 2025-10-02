@@ -1,14 +1,14 @@
 # @gravity-ui/prettier-config
 
-## 安装
+## Installation
 
 ```
 npm install --save-dev prettier @gravity-ui/prettier-config
 ```
 
-## 使用方法
+## Utilisation
 
-在项目根目录添加 `.prettierrc.js` 文件，内容如下：
+Ajoutez un fichier `.prettierrc.js` à la racine du projet avec le contenu suivant :
 
 ```js
 module.exports = require('@gravity-ui/prettier-config');
