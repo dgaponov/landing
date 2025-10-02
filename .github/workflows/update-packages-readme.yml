@@ -133,6 +133,10 @@ jobs:
       - translations
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/pull/${{ needs.update-packages-readme.outputs.pr_number }}/head
+          fetch-depth: 2
       - name: Merge PR
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
