@@ -11,9 +11,8 @@ jobs:
   translations:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 1
       matrix:
-        language: ['es', 'de', 'zh', 'fr']
+        language: ['ru', 'ko', 'es', 'de', 'zh', 'fr']
     steps:
       - uses: actions/checkout@v4
         with:
