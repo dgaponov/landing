@@ -6,7 +6,7 @@
 npm install --save @gravity-ui/table
 ```
 
-## 使用方法
+## 使用
 
 ```tsx
 import React from 'react';
@@ -41,9 +41,9 @@ const BasicExample = () => {
 
 ## 组件
 
-有两个表格组件可供使用：
+有两种 Table 组件可供使用：
 
-- `BaseTable` - 仅具有基本样式的组件；
+- `BaseTable` - 仅包含基本样式的组件；
 - `Table` - 基于 Gravity UI 样式的组件。
 
 ### 行选择
@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...其他列
+  // ...other columns
 ];
 
 const data: Person[] = [
@@ -81,7 +81,7 @@ const RowSelectionExample = () => {
 
 ### 排序
 
-在 react-table 的[文档](https://tanstack.com/table/v8/docs/guide/sorting)中了解有关列属性的信息
+有关列属性的详细信息，请参阅 react-table 的[文档](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -96,6 +96,8 @@ const data: Person[] = [
 
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  // 您的列必须具有 accessorFn 才能启用排序
 
   const table = useTable({
     columns,
@@ -184,6 +186,30 @@ const GroupingExample = () => {
 };
 ```
 
+要启用嵌套样式，请在列配置中传递 `withNestingStyles = true`。
+
+可以通过传递 `showTreeDepthIndicators = false` 来禁用嵌套指示器。
+
+要添加展开/折叠行的控件，请使用 `TreeExpandableCell` 组件或类似自定义组件包装单元格内容：
+
+```tsx
+import {TreeExpandableCell} from '@gravity-ui/table';
+
+const columns: ColumnDef<Item>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    size: 200,
+    showTreeDepthIndicators: false,
+    withNestingStyles: true,
+    cell: ({row, info}) => (
+      <TreeExpandableCell row={row}>{info.getValue<string>()}</TreeExpandableCell>
+    ),
+  },
+  // ...other columns
+];
+```
+
 ### 重新排序
 
 ```tsx
@@ -192,7 +218,7 @@ import {dragHandleColumn, ReorderingProvider} from '@gravity-ui/table';
 
 const columns: ColumnDef<Person>[] = [
   dragHandleColumn,
-  // ...其他列
+  // ...other columns
 ];
 
 const data: Person[] = [
@@ -223,17 +249,11 @@ const ReorderingExample = () => {
     [],
   );
 
-  return (
-    <ReorderingProvider table={table} onReorder={handleReorder}>
-      <Table table={table} />
-    </ReorderingProvider>
-  );
-};
 ```
 
 ### 虚拟化
 
-如果您想使用网格容器作为滚动元素，请使用此选项（如果您想使用窗口，请参阅窗口虚拟化部分）。
+如果您希望使用网格容器作为滚动元素（如果要使用窗口，请参阅窗口虚拟化部分），则可以使用此功能。请确保在容器上设置固定高度；否则，虚拟化将无法正常工作。
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -270,7 +290,7 @@ const VirtualizationExample = () => {
 };
 ```
 
-如果您将虚拟化与重新排序功能一起使用，还需要传递 `rangeExtractor` 选项：
+如果您将虚拟化与重新排序功能结合使用，还需要传递 `rangeExtractor` 选项：
 
 ```tsx
 import {getVirtualRowRangeExtractor} from '@gravity-ui/table';
@@ -296,7 +316,7 @@ return (
 
 ### 窗口虚拟化
 
-如果您想使用窗口作为滚动元素，请使用此选项
+如果您希望使用窗口作为滚动元素，则可以使用此功能。
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -329,7 +349,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### 调整大小
+### 列调整大小
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -356,15 +376,15 @@ const ResizingDemo = () => {
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
-  // ...其他列
+  // ...other columns
   {
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // 可选。允许从设置弹出窗口中隐藏此列
-      titleInSettings: 'ReactNode', // 可选。覆盖设置弹出窗口的标题字段（如果您需要标题和设置弹出窗口的不同内容）
+      hideInSettings: false, // Optional. Allows to hide this column from settings popover
+      titleInSettings: 'ReactNode', // Optional. Overrides header field for settings popover (if you need different content for header and settings popover)
     },
-  }, // 或者您可以使用函数 getSettingsColumn
+  }, // or you can use function getSettingsColumn
 ];
 
 const data: Person[] = [
@@ -373,14 +393,14 @@ const data: Person[] = [
 
 const TableSettingsDemo = () => {
   const [columnVisibility, onColumnVisibilityChange] = React.useState<VisibilityState>({
-    // 用于外部控制和初始状态
-    column_id: false, // 用于默认隐藏
+    // for outside control and initial state
+    column_id: false, // for hidding by default
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* 叶列 ID */
-  ]); // 用于外部控制和初始状态
+    /* leaf columns ids */
+  ]); // for outside control and initial state
 
-  // 获取状态、回调和设置应用回调的替代方案 - 使用 useTableSettings 钩子：
+  // Alternative variant to get state, callbacks, and set on setting apply callbacks - using useTableSettings hook:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -398,4 +418,4 @@ const TableSettingsDemo = () => {
 };
 ```
 
-在 react-table 的[文档](https://tanstack.com/table/v8/docs/api/features/column-sizing)中了解有关表格和列调整大小属性的更多信息
+有关表格和列调整大小属性的更多信息，请参阅 react-table 的 [文档](https://tanstack.com/table/v8/docs/api/features/column-sizing)。
