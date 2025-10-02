@@ -1,15 +1,15 @@
 # @gravity-ui/babel-preset
 
-Preset de Babel para proyectos de Gravity UI
+Пресет Babel для проектов Gravity UI
 
-## Instalación
+## Установка
 ```
 npm install --save-dev @gravity-ui/babel-preset
 ```
 
-## Uso
+## Использование
 
-### Vía `.babelrc`
+### Через `.babelrc`
 
 ```json5
 {
