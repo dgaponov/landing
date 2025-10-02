@@ -1,22 +1,22 @@
 # @gravity-ui/illustrations &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/illustrations)](https://www.npmjs.com/package/@gravity-ui/illustrations) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/illustrations/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/illustrations/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/illustrations/)
 
-## Instalación
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/illustrations
 ```
 
-## Uso
+## Utilisation
 
 ### React
 
-#### Preparación
+#### Préparation
 
-Configura el tema de las ilustraciones. Ejecuta cualquiera de los siguientes pasos:
+Configurez le thème des illustrations. Exécutez l'une des étapes suivantes :
 
-##### Definir tokens CSS con una paleta de colores propia
+##### Définition des css-tokens avec une palette de couleurs personnalisée
 
-Define los siguientes tokens CSS en tu aplicación:
+Définissez les css-tokens suivants dans votre application :
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -29,9 +29,9 @@ Define los siguientes tokens CSS en tu aplicación:
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### Usar mixins con el tema gravity predeterminado en SCSS
+##### Utilisation de mixins avec le thème gravity par défaut en SCSS
 
-Utiliza los siguientes mixins para dar estilo a las ilustraciones en diferentes temas:
+Utilisez les mixins suivants pour styliser les illustrations dans différents thèmes
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -55,24 +55,24 @@ Utiliza los siguientes mixins para dar estilo a las ilustraciones en diferentes 
 }
 ```
 
-##### Alternativa para proyectos con el tema gravity ya instalado
+##### Alternative pour les projets avec le thème gravity préinstallé
 
-Alternativamente, si `@gravity-ui/uikit` ya está instalado en el proyecto y se usa el tema predeterminado, puedes importar simplemente `styles.scss` en el archivo raíz de estilos de tu proyecto:
+Alternativement, si `@gravity-ui/uikit` est déjà installé dans le projet et que le thème par défaut est utilisé, vous pouvez simplement importer `styles.scss` dans le fichier racine des styles de votre projet :
 
 ```scss
-// definición existente de estilos gravity
+// définition existante des styles gravity
 import '@gravity-ui/uikit/styles/styles.css';
-// solo agrega una importación más abajo
+// ajoutez simplement une importation supplémentaire ci-dessous
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
-#### Uso de componentes
+#### Utilisation des composants
 
 ```js
 import NotFound from '@gravity-ui/illustrations/NotFound';
 ```
 
-o
+ou
 
 ```js
 import {NotFound} from '@gravity-ui/illustrations';
@@ -80,15 +80,15 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> Es posible que necesites un cargador adecuado para esto
+> Vous pourriez avoir besoin d'un chargeur approprié pour cela
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 ```
 
-### Desarrollo
+### Développement
 
-Para actualizar las ilustraciones según un nuevo diseño, modifica el contenido de los archivos SVG en el tema claro (`<raíz-del-repositorio>/svgs/<nombre-de-ilustración>-light.svg`) y luego ejecuta el comando:
+Pour mettre à jour les illustrations en fonction d'un nouveau design, modifiez le contenu des fichiers SVG du thème clair (`<racine-du-dépôt>/svgs/<nom-de-l-illustration>-light.svg`) puis exécutez la commande suivante :
 
 ```shell
 npm run generate
