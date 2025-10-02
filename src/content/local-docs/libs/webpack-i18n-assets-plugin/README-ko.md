@@ -1,30 +1,30 @@
 # 🌍 webpack-i18n-assets-plugin
 
-一个用于 Webpack 的插件，用于将本地化函数（i18n）的调用替换为目标文本。
+Webpack 플러그인으로, 지역화 함수(i18n) 호출을 대상 텍스트로 대체합니다.
 
-### 功能
+### 기능
 
-- 将 i18n 文本内联到 bundle 中（同时将参数替换到最终字符串中）
-- 在一次构建中为所有语言环境生成资源
-- 该插件仅适用于生产构建！
-- 仅支持本地化函数参数中的字面量作为键（不允许使用模板字符串和变量）
+- 번들 내에 i18n 텍스트를 인라인으로 포함시킵니다 (매개변수를 최종 문자열에 대체하면서)
+- 한 번의 빌드에서 모든 로케일에 대한 에셋을 생성합니다
+- 이 플러그인은 프로덕션 빌드에서만 작동합니다!
+- 지역화 함수 인수의 키로 리터럴 값만 지원합니다 (템플릿 문자열과 변수는 허용되지 않습니다)
 
-## 📝 使用方法
+## 📝 사용 방법
 
-1. 安装包：
+1. 패키지 설치:
 
     ```sh
     npm i -D @gravity-ui/webpack-i18n-assets-plugin
     ```
 
-2. 将插件连接到 Webpack（使用 `@gravity-ui/app-builder` 的示例）：
+2. Webpack에 플러그인 연결 (`@gravity-ui/app-builder` 예시):
 
-    Webpack 配置示例（`webpack.config.js`）：
+    Webpack 설정 예시 (`webpack.config.js`):
 
     ```js
     const {I18nAssetsPlugin} = require('@gravity-ui/webpack-i18n-assets-plugin');
 
-    // 例如。读取所有包含本地化文本的文件，并存储到此映射中
+    // 예시. 지역화된 텍스트가 포함된 모든 파일을 읽어 이 매핑에 저장
     const locales = {
         en: {},
         ru: {},
@@ -33,7 +33,7 @@
 
     module.exports = {
         output: {
-            filename: '[name].[locale].js', // 文件名中必须包含 [locale]
+            filename: '[name].[locale].js', // 파일명에 [locale]가 필요합니다
         },
 
         plugins: [
@@ -44,7 +44,7 @@
     }
     ```
 
-    如果您想为每个语言环境创建资源清单的示例（`webpack.config.js`）：
+    각 로케일에 대한 에셋 매니페스트를 생성하려는 경우 예시 (`webpack.config.js`):
 
     ```js
     const {applyPluginToWebpackConfig} = require('@gravity-ui/webpack-i18n-assets-plugin');
@@ -55,18 +55,18 @@
         tr: {},
     };
 
-    // 现有的 Webpack 配置
+    // 기존 Webpack 설정
     const webpackConfig = {
         plugins: [ ... ],
         ...
     };
 
-    // 使用 applyPluginToWebpackConfig 时，还会连接 WebpackAssetsManifest 插件，
-    // 该插件将为每个语言环境生成资源清单。
+    // applyPluginToWebpackConfig를 사용할 때 WebpackAssetsManifest 플러그인도 함께 연결되어
+    // 각 로케일에 대한 에셋 매니페스트를 생성합니다.
     module.exports = applyPluginToWebpackConfig(webpackConfig, {locales});
     ```
 
-    如果您使用 `@gravity-ui/app-builder` 的示例：
+    `@gravity-ui/app-builder`를 사용하는 경우 예시:
 
     ```typescript
     import type {ServiceConfig} from '@gravity-ui/app-builder';
@@ -78,8 +78,8 @@
         tr: {},
     };
 
-    // 使用 applyPluginToWebpackConfig 时，还会连接 WebpackAssetsManifest 插件，
-    // 该插件将为每个语言环境生成资源清单。
+    // applyPluginToWebpackConfig를 사용할 때 WebpackAssetsManifest 플러그인도 함께 연결되어
+    // 각 로케일에 대한 에셋 매니페스트를 생성합니다.
     const config: ServiceConfig = {
         client: {
             webpack: (originalConfig) => applyPluginToWebpackConfig(originalConfig, {locales}),
@@ -87,7 +87,7 @@
     }
     ```
 
-3. 在服务器上配置来自资源清单的动态静态资源（使用 `@gravity-ui/app-layout` 的示例）：
+3. 서버에서 에셋 매니페스트를 사용한 동적 정적 파일 설정 (`@gravity-ui/app-layout` 예시):
 
     ```typescript
     import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -115,28 +115,28 @@
     });
     ```
 
-## 🔧 设置
+## 🔧 설정
 
-默认情况下，该插件配置为与 [`@gravity-ui/i18n`](./frameworks/gravity-i18n.ts) 库一起工作，但您可以为任何其他 i18n 库自定义处理。
+기본적으로 이 플러그인은 [`@gravity-ui/i18n`](./frameworks/gravity-i18n.ts) 라이브러리와 함께 작동하도록 설정되어 있지만, 다른 i18n 라이브러리에 대한 처리를 사용자 지정할 수 있습니다.
 
 ### importResolver
 
-类型：[`ImportResolver`](./src/types.ts#18)
+Type: [`ImportResolver`](./src/types.ts#18)
 
-处理导入并标记哪些导入应被视为本地化函数的函数（随后，对标记的标识符的调用由替换器处理）。
+임포트를 처리하고, 어떤 임포트가 지역화 함수로 간주되어야 하는지 표시하는 함수입니다 (이후에 표시된 식별자에 대한 호출은 replacer에 의해 처리됩니다).
 
-其签名类似于 webpack 中的原始 [importSpecifier](https://webpack.js.org/api/parser/#importspecifier)。
+시그니처는 webpack의 원본 [importSpecifier](https://webpack.js.org/api/parser/#importspecifier)와 유사합니다.
 
-示例：
+예시:
 
 ```typescript
 const importResolver = (source: string, exportName: string, _identifierName: string, module: string) => {
-    // 如果需要基于特定路径忽略处理模块，可以这样处理这种情况。
+    // 특정 경로에 기반한 모듈 처리를 무시해야 하는 경우, 이렇게 처리할 수 있습니다.
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
 
-    // 处理全局函数的默认导入
+    // 전역 함수의 기본 임포트 처리
     // import i18n from 'ui/utils/i18n'
     if (source === 'ui/utils/i18n' && exportName === 'default') {
         return {
@@ -145,7 +145,7 @@ const importResolver = (source: string, exportName: string, _identifierName: str
         };
     }
 
-    // 处理辅助函数的导入，并指定它属于公共 keyset（命名空间）。
+    // 헬퍼 함수의 임포트 처리 및 공통 keyset(네임스페이스)에 속한다고 지정
     // import {ci18n} from 'ui/utils/i18n'
     if (source === 'ui/utils/i18n' && exportName === 'ci18n') {
         return {
@@ -161,17 +161,17 @@ const importResolver = (source: string, exportName: string, _identifierName: str
 
 ### declarationResolver
 
-类型：[`DeclarationResolver`](./src/types.ts#30)
+Type: [`DeclarationResolver`](./src/types.ts#30)
 
-处理变量声明并标记哪些变量应被视为本地化函数的函数（随后，对标记的标识符的调用由替换器处理）。
+변수 선언을 처리하고, 어떤 변수가 지역화 함수로 간주되어야 하는지 표시하는 함수입니다 (이후에 표시된 식별자에 대한 호출은 replacer 함수에 의해 처리됩니다).
 
-示例：
+예시:
 
 ```typescript
 import type {VariableDeclarator} from 'estree';
 
 const declarationResolver = (declarator: VariableDeclarator, module: string) => {
-    // 如果需要基于特定路径忽略处理模块，可以这样处理这种情况。
+    // 특정 경로에 기반한 모듈 처리를 무시해야 하는 경우, 이렇게 처리할 수 있습니다.
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
@@ -198,11 +198,11 @@ return undefined;
 
 ### replacer
 
-类型：[`Replacer`](./src/types.ts#55)
+Type: [`Replacer`](./src/types.ts#55)
 
-一个处理本地化函数调用并返回字符串替换值的函数。
+로컬라이제이션 함수 호출을 처리하고 문자열 형태의 대체 값을 반환하는 함수입니다.
 
-示例：
+예시:
 
 ```typescript
 import type {VariableDeclarator} from 'estree';
@@ -224,24 +224,24 @@ function replacer(
         throw new Error('Incorrect argument type in localizer call');
     };
 
-    // 处理只有一个参数的调用 i18nK('key')
+    // Processing a call with one argument i18nK('key')
     if (callNode.arguments.length === 1) {
         key = getStringValue(callNode.arguments[0]);
     } else if (callNode.arguments.length === 2) {
-        // 处理 i18n('keyset', 'key') 或 i18nK('key', {params})
+        // Processing i18n('keyset', 'key') or i18nK('key', {params})
         const [firstArg, secondArg] = callNode.arguments;
 
-        // 调用 i18n('keyset', 'key')
+        // Call i18n('keyset', 'key')
         if (secondArg.type === 'Literal') {
             keyset = getStringValue(firstArg);
             key = getStringValue(secondArg);
         } else {
-            // 调用 i18nK('key', {params})
+            // Call i18nK('key', {params})
             key = getStringValue(firstArg);
             params = secondArg;
         }
     } else if (callNode.arguments.length === 3) {
-        // 调用 i18n(namespace, key, params)
+        // Call i18n(namespace, key, params)
         const [firstArg, secondArg, thirdArg] = callNode.arguments;
         keyset = getStringValue(firstArg);
         key = getStringValue(secondArg);
@@ -250,9 +250,9 @@ function replacer(
         throw new Error('Incorrect count of arguments in localizer call');
     }
 
-    // 确保处理从函数调用参数中获取的键。
-    // 如果函数与 keyset 相关，在修改代码后，可以将 keyset 插入到键中（这是插件的功能）。
-    // 如果使用 ReplacerArgs 中的键，它不包含 keyset，因此无需处理。
+    // Be sure to process the key obtained from the function call argument.
+    // If the function is related to a keyset, after modifying the code, the keyset can be inserted into the key (this is a plugin feature).
+    // If you use the key from ReplacerArgs, it comes without the keyset and does not need to be processed.
     const keyParts = key.split('::');
     if (keyParts.length === 2) {
         key = keyParts[1];
@@ -260,8 +260,8 @@ function replacer(
 
     const value = this.resolveKey(key, keyset);
 
-    // 根据需求在这里实现替换选项。
-    // 例如，如果键是复数形式，则返回函数调用等。
+    // Implement replacement options based on your needs here.
+    // For example, if the key is plural, return a function call, etc.
 
     return JSON.stringify(value);
 };
@@ -269,31 +269,31 @@ function replacer(
 
 ### collectUnusedKeys
 
-类型：[`Boolean`]（默认值 - false）
+Type: [`Boolean`] (기본값 - false)
 
-启用项目中收集未使用键的模式。构建后，会创建一个名为 `unused-keys.json` 的文件。
+프로젝트에서 사용되지 않는 키를 수집하는 모드를 활성화합니다. 빌드 후 `unused-keys.json`이라는 파일을 생성합니다.
 
-为了确保正常工作，在 `Replacer` 函数中始终需要返回详细格式。这很重要，因为在替换过程中，可能需要修改自动确定的键和 keyset。
+올바른 동작을 위해 `Replacer` 함수에서 항상 상세한 형식을 반환해야 합니다. 이는 대체 과정에서 자동으로 결정된 키와 키셋을 수정할 가능성이 있기 때문입니다.
 
-## 框架设置
+## 프레임워크 설정
 
 ### Gravity i18n
 
-用于处理来自库 [`@gravity-ui/i18n`](https://github.com/gravity-ui/i18n) 的本地化函数调用的函数。
+라이브러리 [`@gravity-ui/i18n`](https://github.com/gravity-ui/i18n)에서 제공하는 로컬라이제이션 함수 호출을 처리하는 함수들입니다.
 
-现成可用的函数位于 [`这里`](./src/frameworks/gravity-i18n.ts)。
+사용 준비가 된 함수들은 [`여기`](./src/frameworks/gravity-i18n.ts)에 있습니다.
 
-函数处理的代码示例：
+함수들이 작동할 코드 예시:
 
 ```typescript
-// importResolver 只考虑路径 ui/utils/i18n 的默认导入。
+// The importResolver only considers the default import at the path ui/utils/i18n.
 import i18n from 'ui/utils/i18n';
 
-// declarationResolver 处理值为 i18n.bind 调用变量。
+// The declarationResolver handles variables whose value is a call to i18n.bind.
 const i18nK = i18n.bind(null, 'component.navigation');
 
-// replacer 处理 importResolver 和 declarationResolver 找到的标识符调用
-// 这意味着以下调用将被处理：
+// The replacer handles calls to identifiers found by the importResolver and declarationResolver
+// This means the following calls will be processed:
 i18nK('some_key');
 i18nK('some_plural_key', { count: 123 });
 i18nK('some_key_with_param', { someParam: 'hello' });
@@ -302,9 +302,9 @@ i18n('component.navigation', 'some_plural_key', { count: 123 });
 i18n('component.navigation', 'some_key_with_param', { someParam: 'hello' });
 ```
 
-Replacer 还会额外执行以下操作：
+Replacer는 추가로 다음을 수행합니다:
 
-1. 将参数内联到字符串中。例如，如果键值如下：
+1. 매개변수를 문자열에 인라인으로 삽입합니다. 예를 들어, 키 값이 다음과 같을 때:
 
     ```typescript
     const keyset = {
@@ -312,11 +312,11 @@ Replacer 还会额外执行以下操作：
     };
 
     i18nK('some_key', {param: getSomeParam()})
-    // 替换后，我们将得到：
+    // 대체 후 결과:
     `string value with ${getSomeParam()}`
     ```
 
-2. 为复数键替换自调用函数：
+2. 복수 키에 대해 자체 호출 함수를 대체합니다:
 
     ```typescript
     const keyset = {
@@ -330,7 +330,7 @@ Replacer 还会额外执行以下操作：
 
     i18nK('pural_key', {count: getSomeCount()})
 
-    // 替换后，我们将得到：
+    // 대체 후 결과:
     (function(f,c){
         const v=f[!c ? "zero" : new Intl.PluralRules("${locale}").select(c)];
         return v && v.replaceAll("{{count}}",c);
@@ -342,14 +342,16 @@ Replacer 还会额外执行以下操作：
     }, getSomeCount())
     ```
 
-## ℹ️ 常见问题解答
+## ℹ️ FAQ
 
-### 这与 [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin) 相比如何？
+```
 
-在实现这个插件时，我们借鉴了 webpack-localize-assets-plugins 包中的一个想法（在此特别感谢该包的创建者！）。
+### [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)과 비교했을 때 어떻게 다른가요?
 
-差异如下：
+이 플러그인을 구현하기 위해 webpack-localize-assets-plugins 패키지의 아이디어를 사용했습니다 (패키지 제작자에게 큰 감사를 드립니다!).
 
-- 更便捷的 API，可以处理任何类型的国际化函数（包括像 i18next 中的 useTranslation 这样的命名空间助手、从其他模块导入的函数等）
-- 正确生成相对于源代码的源映射
-- 仅支持 webpack 5，已移除对 webpack 4 的支持
+차이점은 다음과 같습니다:
+
+- 모든 종류의 국제화 함수(예: i18next의 useTranslation 같은 네임스페이스 헬퍼, 다른 모듈에서 가져온 함수 등)와 작업할 수 있게 해주는 더 편리한 API
+- 소스 코드에 상대적인 올바른 소스 맵 생성
+- webpack 5만 지원합니다. webpack 4 지원은 제거되었습니다.

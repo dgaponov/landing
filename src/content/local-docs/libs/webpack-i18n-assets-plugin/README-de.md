@@ -1,30 +1,30 @@
 # 🌍 webpack-i18n-assets-plugin
 
-一个用于 Webpack 的插件，用于将本地化函数（i18n）的调用替换为目标文本。
+Ein Plugin für Webpack, das Aufrufe von Lokalisierungsfunktionen (i18n) durch Zieltexte ersetzt.
 
-### 功能
+### Funktionen
 
-- 将 i18n 文本内联到 bundle 中（同时将参数替换到最终字符串中）
-- 在一次构建中为所有语言环境生成资源
-- 该插件仅适用于生产构建！
-- 仅支持本地化函数参数中的字面量作为键（不允许使用模板字符串和变量）
+- Inline-i18n-Texte werden in das Bundle eingebettet (während Parameter in den endgültigen String eingefügt werden)
+- Generiert Assets für alle Sprachen in einem Build
+- Das Plugin funktioniert nur für Produktionsbuilds!
+- Unterstützt nur Literale als Schlüssel im Argument der Lokalisierungsfunktion (Template-Strings und Variablen sind nicht erlaubt)
 
-## 📝 使用方法
+## 📝 So verwenden
 
-1. 安装包：
+1. Installieren Sie das Paket:
 
     ```sh
     npm i -D @gravity-ui/webpack-i18n-assets-plugin
     ```
 
-2. 将插件连接到 Webpack（使用 `@gravity-ui/app-builder` 的示例）：
+2. Verbinden Sie das Plugin mit Webpack (Beispiel für `@gravity-ui/app-builder`):
 
-    Webpack 配置示例（`webpack.config.js`）：
+    Beispiel für die Webpack-Konfiguration (`webpack.config.js`):
 
     ```js
     const {I18nAssetsPlugin} = require('@gravity-ui/webpack-i18n-assets-plugin');
 
-    // 例如。读取所有包含本地化文本的文件，并存储到此映射中
+    // Zum Beispiel. Lesen Sie alle Dateien mit lokalen Texten und speichern Sie sie in dieser Zuordnung
     const locales = {
         en: {},
         ru: {},
@@ -33,7 +33,7 @@
 
     module.exports = {
         output: {
-            filename: '[name].[locale].js', // 文件名中必须包含 [locale]
+            filename: '[name].[locale].js', // [locale] ist im Dateinamen erforderlich
         },
 
         plugins: [
@@ -44,7 +44,7 @@
     }
     ```
 
-    如果您想为每个语言环境创建资源清单的示例（`webpack.config.js`）：
+    Beispiel, wenn Sie Assets-Manifeste für jede Sprache erstellen möchten (`webpack.config.js`):
 
     ```js
     const {applyPluginToWebpackConfig} = require('@gravity-ui/webpack-i18n-assets-plugin');
@@ -55,18 +55,18 @@
         tr: {},
     };
 
-    // 现有的 Webpack 配置
+    // Eine bestehende Webpack-Konfiguration
     const webpackConfig = {
         plugins: [ ... ],
         ...
     };
 
-    // 使用 applyPluginToWebpackConfig 时，还会连接 WebpackAssetsManifest 插件，
-    // 该插件将为每个语言环境生成资源清单。
+    // Beim Verwenden von applyPluginToWebpackConfig wird auch das WebpackAssetsManifest-Plugin verbunden,
+    // das Assets-Manifeste für jede Sprache generiert.
     module.exports = applyPluginToWebpackConfig(webpackConfig, {locales});
     ```
 
-    如果您使用 `@gravity-ui/app-builder` 的示例：
+    Beispiel, wenn Sie `@gravity-ui/app-builder` verwenden:
 
     ```typescript
     import type {ServiceConfig} from '@gravity-ui/app-builder';
@@ -78,8 +78,8 @@
         tr: {},
     };
 
-    // 使用 applyPluginToWebpackConfig 时，还会连接 WebpackAssetsManifest 插件，
-    // 该插件将为每个语言环境生成资源清单。
+    // Beim Verwenden von applyPluginToWebpackConfig wird auch das WebpackAssetsManifest-Plugin verbunden,
+    // das Assets-Manifeste für jede Sprache generiert.
     const config: ServiceConfig = {
         client: {
             webpack: (originalConfig) => applyPluginToWebpackConfig(originalConfig, {locales}),
@@ -87,7 +87,7 @@
     }
     ```
 
-3. 在服务器上配置来自资源清单的动态静态资源（使用 `@gravity-ui/app-layout` 的示例）：
+3. Konfigurieren Sie dynamische Statiken aus dem Asset-Manifest auf dem Server (Beispiel mit `@gravity-ui/app-layout`):
 
     ```typescript
     import {createRenderFunction, createLayoutPlugin} from '@gravity-ui/app-layout';
@@ -115,28 +115,28 @@
     });
     ```
 
-## 🔧 设置
+## 🔧 Einstellungen
 
-默认情况下，该插件配置为与 [`@gravity-ui/i18n`](./frameworks/gravity-i18n.ts) 库一起工作，但您可以为任何其他 i18n 库自定义处理。
+Standardmäßig ist das Plugin so konfiguriert, dass es mit der [`@gravity-ui/i18n`](./frameworks/gravity-i18n.ts)-Bibliothek funktioniert, aber Sie können die Verarbeitung für jede andere i18n-Bibliothek anpassen.
 
 ### importResolver
 
-类型：[`ImportResolver`](./src/types.ts#18)
+Typ: [`ImportResolver`](./src/types.ts#18)
 
-处理导入并标记哪些导入应被视为本地化函数的函数（随后，对标记的标识符的调用由替换器处理）。
+Die Funktion, die Imports verarbeitet und markiert, welche der Imports als Lokalisierungsfunktionen betrachtet werden sollen (anschließend werden Aufrufe der markierten Identifier vom Replacer verarbeitet).
 
-其签名类似于 webpack 中的原始 [importSpecifier](https://webpack.js.org/api/parser/#importspecifier)。
+Die Signatur ist ähnlich wie der originale [importSpecifier](https://webpack.js.org/api/parser/#importspecifier) aus Webpack.
 
-示例：
+Beispiel:
 
 ```typescript
 const importResolver = (source: string, exportName: string, _identifierName: string, module: string) => {
-    // 如果需要基于特定路径忽略处理模块，可以这样处理这种情况。
+    // Wenn Sie das Verarbeiten von Modulen basierend auf spezifischen Pfaden ignorieren müssen, können Sie das so handhaben.
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
 
-    // 处理全局函数的默认导入
+    // Verarbeitung des Default-Imports einer globalen Funktion
     // import i18n from 'ui/utils/i18n'
     if (source === 'ui/utils/i18n' && exportName === 'default') {
         return {
@@ -145,7 +145,7 @@ const importResolver = (source: string, exportName: string, _identifierName: str
         };
     }
 
-    // 处理辅助函数的导入，并指定它属于公共 keyset（命名空间）。
+    // Verarbeitung des Imports einer Hilfsfunktion und Angabe, dass sie zum gemeinsamen Keyset (Namespace) gehört.
     // import {ci18n} from 'ui/utils/i18n'
     if (source === 'ui/utils/i18n' && exportName === 'ci18n') {
         return {
@@ -161,17 +161,17 @@ const importResolver = (source: string, exportName: string, _identifierName: str
 
 ### declarationResolver
 
-类型：[`DeclarationResolver`](./src/types.ts#30)
+Typ: [`DeclarationResolver`](./src/types.ts#30)
 
-处理变量声明并标记哪些变量应被视为本地化函数的函数（随后，对标记的标识符的调用由替换器处理）。
+Die Funktion, die Variablendeklarationen verarbeitet und markiert, welche Variablen als Lokalisierungsfunktionen betrachtet werden sollen (anschließend werden Aufrufe der markierten Identifier von der Replacer-Funktion verarbeitet).
 
-示例：
+Beispiel:
 
 ```typescript
 import type {VariableDeclarator} from 'estree';
 
 const declarationResolver = (declarator: VariableDeclarator, module: string) => {
-    // 如果需要基于特定路径忽略处理模块，可以这样处理这种情况。
+    // Wenn Sie das Verarbeiten von Modulen basierend auf spezifischen Pfaden ignorieren müssen, können Sie das so handhaben.
     if (module.startsWith('src/units/compute')) {
         return undefined;
     }
@@ -198,11 +198,11 @@ return undefined;
 
 ### replacer
 
-类型：[`Replacer`](./src/types.ts#55)
+Typ: [`Replacer`](./src/types.ts#55)
 
-一个处理本地化函数调用并返回字符串替换值的函数。
+Eine Funktion, die Aufrufe von Lokalisierungsfunktionen verarbeitet und eine Ersetzung als String zurückgibt.
 
-示例：
+Beispiel:
 
 ```typescript
 import type {VariableDeclarator} from 'estree';
@@ -224,24 +224,24 @@ function replacer(
         throw new Error('Incorrect argument type in localizer call');
     };
 
-    // 处理只有一个参数的调用 i18nK('key')
+    // Processing a call with one argument i18nK('key')
     if (callNode.arguments.length === 1) {
         key = getStringValue(callNode.arguments[0]);
     } else if (callNode.arguments.length === 2) {
-        // 处理 i18n('keyset', 'key') 或 i18nK('key', {params})
+        // Processing i18n('keyset', 'key') or i18nK('key', {params})
         const [firstArg, secondArg] = callNode.arguments;
 
-        // 调用 i18n('keyset', 'key')
+        // Call i18n('keyset', 'key')
         if (secondArg.type === 'Literal') {
             keyset = getStringValue(firstArg);
             key = getStringValue(secondArg);
         } else {
-            // 调用 i18nK('key', {params})
+            // Call i18nK('key', {params})
             key = getStringValue(firstArg);
             params = secondArg;
         }
     } else if (callNode.arguments.length === 3) {
-        // 调用 i18n(namespace, key, params)
+        // Call i18n(namespace, key, params)
         const [firstArg, secondArg, thirdArg] = callNode.arguments;
         keyset = getStringValue(firstArg);
         key = getStringValue(secondArg);
@@ -250,9 +250,9 @@ function replacer(
         throw new Error('Incorrect count of arguments in localizer call');
     }
 
-    // 确保处理从函数调用参数中获取的键。
-    // 如果函数与 keyset 相关，在修改代码后，可以将 keyset 插入到键中（这是插件的功能）。
-    // 如果使用 ReplacerArgs 中的键，它不包含 keyset，因此无需处理。
+    // Be sure to process the key obtained from the function call argument.
+    // If the function is related to a keyset, after modifying the code, the keyset can be inserted into the key (this is a plugin feature).
+    // If you use the key from ReplacerArgs, it comes without the keyset and does not need to be processed.
     const keyParts = key.split('::');
     if (keyParts.length === 2) {
         key = keyParts[1];
@@ -260,8 +260,8 @@ function replacer(
 
     const value = this.resolveKey(key, keyset);
 
-    // 根据需求在这里实现替换选项。
-    // 例如，如果键是复数形式，则返回函数调用等。
+    // Implement replacement options based on your needs here.
+    // For example, if the key is plural, return a function call, etc.
 
     return JSON.stringify(value);
 };
@@ -269,31 +269,31 @@ function replacer(
 
 ### collectUnusedKeys
 
-类型：[`Boolean`]（默认值 - false）
+Typ: [`Boolean`] (Standard – false)
 
-启用项目中收集未使用键的模式。构建后，会创建一个名为 `unused-keys.json` 的文件。
+Aktiviert den Modus zur Sammlung ungenutzter Schlüssel im Projekt. Nach dem Build wird eine Datei namens `unused-keys.json` erstellt.
 
-为了确保正常工作，在 `Replacer` 函数中始终需要返回详细格式。这很重要，因为在替换过程中，可能需要修改自动确定的键和 keyset。
+Um eine ordnungsgemäße Funktionalität zu gewährleisten, muss immer ein detailliertes Format in der `Replacer`-Funktion zurückgegeben werden. Dies ist wichtig, da bei der Ersetzung die Möglichkeit besteht, automatisch bestimmte Schlüssel und Keysets zu modifizieren.
 
-## 框架设置
+## Framework-Einstellungen
 
 ### Gravity i18n
 
-用于处理来自库 [`@gravity-ui/i18n`](https://github.com/gravity-ui/i18n) 的本地化函数调用的函数。
+Funktionen zur Handhabung von Aufrufen von Lokalisierungsfunktionen aus der Bibliothek [`@gravity-ui/i18n`](https://github.com/gravity-ui/i18n).
 
-现成可用的函数位于 [`这里`](./src/frameworks/gravity-i18n.ts)。
+Die einsatzbereiten Funktionen befinden sich [`hier`](./src/frameworks/gravity-i18n.ts).
 
-函数处理的代码示例：
+Ein Beispiel für Code, mit dem die Funktionen arbeiten:
 
 ```typescript
-// importResolver 只考虑路径 ui/utils/i18n 的默认导入。
+// The importResolver only considers the default import at the path ui/utils/i18n.
 import i18n from 'ui/utils/i18n';
 
-// declarationResolver 处理值为 i18n.bind 调用变量。
+// The declarationResolver handles variables whose value is a call to i18n.bind.
 const i18nK = i18n.bind(null, 'component.navigation');
 
-// replacer 处理 importResolver 和 declarationResolver 找到的标识符调用
-// 这意味着以下调用将被处理：
+// The replacer handles calls to identifiers found by the importResolver and declarationResolver
+// This means the following calls will be processed:
 i18nK('some_key');
 i18nK('some_plural_key', { count: 123 });
 i18nK('some_key_with_param', { someParam: 'hello' });
@@ -302,9 +302,9 @@ i18n('component.navigation', 'some_plural_key', { count: 123 });
 i18n('component.navigation', 'some_key_with_param', { someParam: 'hello' });
 ```
 
-Replacer 还会额外执行以下操作：
+Der Replacer führt zusätzlich Folgendes aus:
 
-1. 将参数内联到字符串中。例如，如果键值如下：
+1. Inline-Parameter in einen String einbetten. Zum Beispiel, wenn der Schlüsselwert wie folgt ist:
 
     ```typescript
     const keyset = {
@@ -312,11 +312,11 @@ Replacer 还会额外执行以下操作：
     };
 
     i18nK('some_key', {param: getSomeParam()})
-    // 替换后，我们将得到：
+    // After the replacements, we will get:
     `string value with ${getSomeParam()}`
     ```
 
-2. 为复数键替换自调用函数：
+2. Eine selbstaufrufende Funktion für Plural-Schlüssel ersetzen:
 
     ```typescript
     const keyset = {
@@ -330,7 +330,7 @@ Replacer 还会额外执行以下操作：
 
     i18nK('pural_key', {count: getSomeCount()})
 
-    // 替换后，我们将得到：
+    // After the replacements, we will get:
     (function(f,c){
         const v=f[!c ? "zero" : new Intl.PluralRules("${locale}").select(c)];
         return v && v.replaceAll("{{count}}",c);
@@ -342,14 +342,14 @@ Replacer 还会额外执行以下操作：
     }, getSomeCount())
     ```
 
-## ℹ️ 常见问题解答
+## ℹ️ FAQ
 
-### 这与 [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin) 相比如何？
+### Wie vergleicht sich das mit [webpack-localize-assets-plugin](https://github.com/privatenumber/webpack-localize-assets-plugin)?
 
-在实现这个插件时，我们借鉴了 webpack-localize-assets-plugins 包中的一个想法（在此特别感谢该包的创建者！）。
+Zur Implementierung dieses Plugins wurde eine Idee aus dem Paket webpack-localize-assets-plugins übernommen (vielen Dank an den Paket-Ersteller dafür!).
 
-差异如下：
+Die Unterschiede sind wie folgt:
 
-- 更便捷的 API，可以处理任何类型的国际化函数（包括像 i18next 中的 useTranslation 这样的命名空间助手、从其他模块导入的函数等）
-- 正确生成相对于源代码的源映射
-- 仅支持 webpack 5，已移除对 webpack 4 的支持
+- Eine bequemere API, die es ermöglicht, mit allen Arten von Internationalisierungsfunktionen zu arbeiten (einschließlich Namespace-Helfern wie useTranslation aus i18next, importierten Funktionen aus anderen Modulen usw.)
+- Korrekte Generierung von Source Maps relativ zum Quellcode
+- Es gibt nur Unterstützung für webpack 5. Die Unterstützung für Webpack 4 wurde entfernt.
