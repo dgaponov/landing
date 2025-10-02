@@ -1,22 +1,22 @@
 # @gravity-ui/illustrations &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/illustrations)](https://www.npmjs.com/package/@gravity-ui/illustrations) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/illustrations/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/illustrations/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/illustrations/)
 
-## 安装
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/illustrations
 ```
 
-## 使用
+## Utilisation
 
 ### React
 
-#### 准备
+#### Préparation
 
-设置插图主题。请执行以下任一步骤：
+Configurez le thème des illustrations. Exécutez l'une des étapes suivantes :
 
-##### 使用自定义颜色调色板定义 CSS 变量
+##### Définition des css-tokens avec une palette de couleurs personnalisée
 
-在应用中定义以下 CSS 变量：
+Définissez les css-tokens suivants dans votre application :
 
 ```scss
 --gil-color-object-base: rgb(255, 190, 92);
@@ -29,9 +29,9 @@ npm install --save-dev @gravity-ui/illustrations
 --gil-color-object-danger: rgb(255, 0, 61);
 ```
 
-##### 在 SCSS 中使用 mixin 和默认 Gravity 主题
+##### Utilisation de mixins avec le thème gravity par défaut en scss
 
-使用以下 mixin 来为不同主题的插图进行样式设置
+Utilisez les mixins suivants pour styliser les illustrations dans différents thèmes
 
 ```scss
 @import '@gravity-ui/illustrations/styles/theme.scss';
@@ -55,24 +55,24 @@ npm install --save-dev @gravity-ui/illustrations
 }
 ```
 
-##### 对于已安装 Gravity 主题的项目的替代方案
+##### Alternative pour les projets avec thème gravity préinstallé
 
-或者，如果项目中已安装 `@gravity-ui/uikit` 并使用默认主题，您只需在项目根样式文件中导入 `styles.scss`：
+Alternativement, si `@gravity-ui/uikit` est déjà installé dans le projet et que le thème par défaut est utilisé, vous pouvez simplement importer `styles.scss` dans le fichier racine des styles de votre projet :
 
 ```scss
-// 现有的 Gravity 样式定义
+// définition existante des styles gravity
 import '@gravity-ui/uikit/styles/styles.css';
-// 在下方添加一个导入
+// ajoutez simplement une importation supplémentaire ci-dessous
 import '@gravity-ui/illustrations/styles/styles.scss';
 ```
 
-#### 组件使用
+#### Utilisation des composants
 
 ```js
 import NotFound from '@gravity-ui/illustrations/NotFound';
 ```
 
-或
+ou
 
 ```js
 import {NotFound} from '@gravity-ui/illustrations';
@@ -80,15 +80,15 @@ import {NotFound} from '@gravity-ui/illustrations';
 
 ### SVG
 
-> 您可能需要合适的加载器来处理此操作
+> Vous pourriez avoir besoin d'un chargeur approprié pour cela
 
 ```js
 import notFound from '@gravity-ui/illustrations/svgs/not-found-light.svg';
 ```
 
-### 开发
+### Développement
 
-要根据新设计更新插图，请修改浅色主题的 SVG 文件内容（位于 `<此仓库根目录>/svgs/<插图名称>-light.svg` 文件），然后运行命令：
+Pour mettre à jour les illustrations en fonction d'un nouveau design, modifiez le contenu des fichiers SVG dans le thème clair (`<racine-du-dépôt>/svgs/<nom-de-l-illustration>-light.svg`) puis exécutez la commande suivante :
 
 ```shell
 npm run generate
