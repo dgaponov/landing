@@ -7,12 +7,14 @@ on:
 
 permissions: write-all
 
+env:
+  LANGUAGES: 'ru,ko,es,de,zh,fr'
+
 jobs:
-  translations:
+  prepare-inputs:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        language: ['ru', 'ko', 'es', 'de', 'zh', 'fr']
+    outputs:
+      modified_library_readmes: ${{ steps.get-modified-files.outputs.modified_library_readmes }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,24 +25,46 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           MODIFIED_FILES=$(git diff --name-only HEAD^ HEAD | grep -E 'src/content/local-docs/libs/.*/README\.md$' || echo "")
-          echo "modified_files=$(echo "$MODIFIED_FILES" | tr '\n' ' ' | sed 's/ $//')" >> $GITHUB_OUTPUT
-      - name: Prepare inputs for ${{ matrix.language }}
+
+          # Prepare output with library names for matrix strategy
+          JSON_OUTPUT=$(echo "$MODIFIED_FILES" | awk 'NF' | jq -R -s '
+            split("\n") |
+            map(select(length > 0)) |
+            map(capture("src/content/local-docs/libs/(?<lib>[^/]+)/README\\.md").lib)
+          ')
+
+          echo "modified_library_readmes=$JSON_OUTPUT" >> $GITHUB_OUTPUT
+
+  translations:
+    needs: prepare-inputs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        library: ${{ fromJson(needs.prepare-inputs.outputs.modified_library_readmes) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Prepare inputs for ${{ matrix.library }}
         id: prepare-inputs
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODIFIED_FILES: ${{ steps.get-modified-files.outputs.modified_files }}
-          LANGUAGE: ${{ matrix.language }}
+          LIBRARY: ${{ matrix.library }}
         run: |
-          OUTPUT_FILES=$(echo "$MODIFIED_FILES" | sed "s/README\.md/README-$LANGUAGE.md/g")
+          LIBRARY_README="src/content/local-docs/libs/${LIBRARY}/README.md"
 
-          echo "Files to translate to $LANGUAGE:"
-          echo "$MODIFIED_FILES" | tr ' ' '\n'
+          echo "Processing library: $LIBRARY"
+          echo "README file: $LIBRARY_README"
 
-          echo "Resulting files after translation to $LANGUAGE:"
-          echo "$OUTPUT_FILES" | tr ' ' '\n'
+          OUTPUT_FILES=""
+          for LANGUAGE in $(echo "${{ env.LANGUAGES }}" | tr ',' ' '); do
+            OUTPUT_FILES="$OUTPUT_FILES src/content/local-docs/libs/${LIBRARY}/README-${LANGUAGE}.md"
+          done
 
-          echo "input_files=$(echo "$MODIFIED_FILES")" >> $GITHUB_OUTPUT
-          echo "output_files=$(echo "$OUTPUT_FILES")" >> $GITHUB_OUTPUT
+          echo "Output files: $OUTPUT_FILES"
+
+          echo "input_files=$LIBRARY_README" >> $GITHUB_OUTPUT
+          echo "output_files=$OUTPUT_FILES" >> $GITHUB_OUTPUT
       - name: Run translations
         uses: dgaponov/gpt-translate@master
         with:
@@ -49,7 +73,7 @@ jobs:
           model: 'x-ai/grok-4-fast:free'
           inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
           outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
-          languages: ${{ matrix.language }}
+          languages: ${{ env.LANGUAGES }}
           prompt: |
             Please translate the README source file to {targetLanguage}. \
               Make the translation sound as natural as possible. \
