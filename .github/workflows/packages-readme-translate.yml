@@ -1,4 +1,4 @@
-name: GPT Translate
+name: Packages readme translate
 
 on:
   pull_request:
@@ -8,10 +8,12 @@ on:
 permissions: write-all
 
 env:
-  LANGUAGES: 'ru ko es de zh fr'
+  LANGUAGES: 'ru ko es de zh fr' # Supported languages separated by space (spaces are important)
 
 jobs:
   prepare-inputs:
+    # Run only if PR created by bot with update-packages-readme workflow
+    if: github.actor == 'github-actions'
     runs-on: ubuntu-latest
     outputs:
       modified_library_readmes: ${{ steps.get-modified-files.outputs.modified_library_readmes }}
