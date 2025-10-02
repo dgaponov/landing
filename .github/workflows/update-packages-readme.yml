@@ -81,6 +81,7 @@ jobs:
       - prepare-inputs
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix:
         library: ${{ fromJson(needs.prepare-inputs.outputs.modified_library_readmes) }}
     steps:
@@ -118,9 +119,22 @@ jobs:
           outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
           pullRequestNumber: ${{ needs.update-packages-readme.outputs.pr_number }}
           languages: ${{ env.LANGUAGES }}
+          commitMessage: 'translations: for package ${{ matrix.library }}'
           prompt: |
             Please translate the README source file to {targetLanguage}. \
               Make the translation sound as natural as possible. \
               Keep the HTML snippet with the language options in the same place as in the source file. \
               Do not translate the first line in the source file if it looks like the name of the library. \
               For example, don't translate @gravity/uikit or Axios Wrapper - they need to be left in place.
+
+  merge-pr:
+    needs:
+      - update-packages-readme
+      - translations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge ${{ needs.update-packages-readme.outputs.pr_number }} --auto --squash
