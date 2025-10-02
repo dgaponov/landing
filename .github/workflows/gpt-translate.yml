@@ -2,8 +2,8 @@ name: GPT Translate
 
 on:
   pull_request:
-#    paths:
-#      - 'src/content/local-docs/libs/**'
+    paths:
+      - 'src/content/local-docs/libs'
 
 permissions: write-all
 
