@@ -33,4 +33,4 @@ Puedes especificar navegadores adicionales según tu audiencia, por ejemplo:
 
 ## Uso
 
-Este paquete proporciona la versión de producción de browserslist.
+El paquete proporciona la versión de producción de browserslist.

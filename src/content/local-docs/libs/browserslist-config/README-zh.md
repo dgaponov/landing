@@ -10,7 +10,7 @@
 npm i --save-dev @gravity-ui/browserslist-config
 ```
 
-在 `package.json` 的 `browserslist` 部分添加配置：
+将配置添加到 `package.json` 中的 `browserslist` 部分：
 
 ```json
 {
@@ -20,7 +20,8 @@ npm i --save-dev @gravity-ui/browserslist-config
 }
 ```
 
-您可以根据目标受众指定额外的浏览器，例如：
+您可以根据目标用户群体指定额外的浏览器，例如：
+
 ```json
 {
   "browserslist": [
@@ -33,4 +34,4 @@ npm i --save-dev @gravity-ui/browserslist-config
 
 ## 使用
 
-该包提供 Browserslist 的生产版本。
+该包提供了 Browserslist 的生产版本。

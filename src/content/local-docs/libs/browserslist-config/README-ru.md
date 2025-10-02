@@ -10,7 +10,7 @@
 npm i --save-dev @gravity-ui/browserslist-config
 ```
 
-Добавьте конфигурацию в `package.json` в раздел `browserslist`:
+Добавьте конфигурацию в раздел `browserslist` файла `package.json`:
 
 ```json
 {
@@ -33,4 +33,4 @@ npm i --save-dev @gravity-ui/browserslist-config
 
 ## Использование
 
-Пакет предоставляет версию browserslist для production.
+Пакет предоставляет производственную версию browserslist.
