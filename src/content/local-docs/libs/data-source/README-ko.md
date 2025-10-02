@@ -1,20 +1,20 @@
 # Data Source · [![npm version](https://img.shields.io/npm/v/@gravity-ui/data-source?logo=npm&label=version)](https://www.npmjs.com/package/@gravity-ui/data-source) [![ci](https://img.shields.io/github/actions/workflow/status/gravity-ui/data-source/ci.yml?branch=main&label=ci&logo=github)](https://github.com/gravity-ui/data-source/actions/workflows/ci.yml?query=branch:main)
 
-**Data Source** es un envoltorio simple alrededor de la obtención de datos. Es una especie de "puerto" en la [arquitectura limpia](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html). Te permite crear envoltorios para la obtención de datos según tus casos de uso. **Data Source** utiliza [react-query](https://tanstack.com/query/latest) internamente.
+**Data Source**는 데이터 가져오기를 위한 간단한 래퍼입니다. 이는 [clean architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)의 일종의 "포트" 역할을 합니다. 사용 사례에 따라 데이터 가져오기 주변의 래퍼를 만들 수 있도록 해줍니다. **Data Source**는 내부적으로 [react-query](https://tanstack.com/query/latest)를 사용합니다.
 
-## Instalación
+## 설치
 
 ```bash
 npm install @gravity-ui/data-source @tanstack/react-query
 ```
 
-`@tanstack/react-query` es una dependencia peer.
+`@tanstack/react-query`는 피어 의존성입니다.
 
-## Inicio rápido
+## 빠른 시작
 
-### 1. Configura DataManager
+### 1. DataManager 설정
 
-Primero, crea y proporciona un `DataManager` en tu aplicación:
+먼저 애플리케이션에서 `DataManager`를 생성하고 제공하세요:
 
 ```tsx
 import React from 'react';
@@ -23,10 +23,10 @@ import {ClientDataManager, DataManagerContext} from '@gravity-ui/data-source';
 const dataManager = new ClientDataManager({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutos
+      staleTime: 5 * 60 * 1000, // 5분
       retry: 3,
     },
-    // ... otras opciones de react-query
+    // ... 다른 react-query 옵션
   },
 });
 
@@ -39,9 +39,9 @@ function App() {
 }
 ```
 
-### 2. Define tipos de error y envoltorios
+### 2. 오류 유형 및 래퍼 정의
 
-Define un tipo de error y crea tus constructores para fuentes de datos basados en los constructores predeterminados:
+오류 유형을 정의하고 기본 생성자를 기반으로 데이터 소스 생성자를 만드세요:
 
 ```ts
 import {makePlainQueryDataSource as makePlainQueryDataSourceBase} from '@gravity-ui/data-source';
@@ -59,9 +59,9 @@ export const makePlainQueryDataSource = <TParams, TRequest, TResponse, TData, TE
 };
 ```
 
-### 3. Crea un componente DataLoader personalizado
+### 3. 사용자 정의 DataLoader 컴포넌트 생성
 
-Escribe un componente `DataLoader` basado en el predeterminado para definir cómo mostrar el estado de carga y los errores:
+기본 DataLoader를 기반으로 로딩 상태와 오류 표시를 정의하는 `DataLoader` 컴포넌트를 작성하세요:
 
 ```tsx
 import {
@@ -77,33 +77,33 @@ export interface DataLoaderProps
 }
 
 export const DataLoader: React.FC<DataLoaderProps> = ({
-  LoadingView = YourLoader, // Puedes usar tu propio componente de carga
-  ErrorView = YourError, // Puedes usar tu propio componente de error
+  LoadingView = YourLoader, // 자체 로더 컴포넌트를 사용할 수 있습니다
+  ErrorView = YourError, // 자체 오류 컴포넌트를 사용할 수 있습니다
   ...restProps
 }) => {
   return <DataLoaderBase LoadingView={LoadingView} ErrorView={ErrorView} {...restProps} />;
 };
 ```
 
-### 4. Define tu primera fuente de datos
+### 4. 첫 번째 데이터 소스 정의
 
 ```ts
 import {skipContext} from '@gravity-ui/data-source';
 
-// Tu función de API
+// API 함수
 import {fetchUser} from './api';
 
 export const userDataSource = makePlainQueryDataSource({
-  // Las claves deben ser únicas. Tal vez debas crear un ayudante para generar nombres de fuentes de datos
+  // 키는 고유해야 합니다. 데이터 소스 이름을 만드는 도우미를 생성하는 것이 좋을 수 있습니다
   name: 'user',
-  // skipContext es un ayudante para omitir los dos primeros parámetros en la función (context y fetchContext)
+  // skipContext는 함수의 처음 두 매개변수(컨텍스트와 fetchContext)를 건너뛰는 도우미입니다
   fetch: skipContext(fetchUser),
-  // Opcional: genera etiquetas para invalidación avanzada de caché
+  // 선택 사항: 고급 캐시 무효화를 위한 태그 생성
   tags: (params) => [`user:${params.userId}`, 'users'],
 });
 ```
 
-### 5. Úsalo en componentes
+### 5. 컴포넌트에서 사용
 
 ```tsx
 import {useQueryData} from '@gravity-ui/data-source';
@@ -119,15 +119,15 @@ export const UserProfile: React.FC<{userId: number}> = ({userId}) => {
 };
 ```
 
-## Conceptos principales
+## 핵심 개념
 
-### Tipos de fuentes de datos
+### 데이터 소스 유형
 
-La biblioteca proporciona dos tipos principales de fuentes de datos:
+이 라이브러리는 두 가지 주요 데이터 소스 유형을 제공합니다:
 
-#### Fuente de datos de consulta simple
+#### Plain Query Data Source
 
-Para patrones simples de solicitud/respuesta:
+간단한 요청/응답 패턴에 사용:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -139,9 +139,9 @@ const userDataSource = makePlainQueryDataSource({
 });
 ```
 
-#### Fuente de datos de consulta infinita
+#### Infinite Query Data Source
 
-Para paginación y desplazamiento infinito:
+페이지네이션 및 무한 스크롤에 사용:
 
 ```ts
 const postsDataSource = makeInfiniteQueryDataSource({
@@ -159,23 +159,23 @@ const postsDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Gestión de estados
+### 상태 관리
 
-La biblioteca normaliza los estados de las consultas en tres estados simples:
+라이브러리는 쿼리 상태를 세 가지 간단한 상태로 정규화합니다:
 
-- `loading` - Carga real de datos. Lo mismo que `isLoading` en React Query
-- `success` - Datos disponibles (puede omitirse usando idle)
-- `error` - Fallo al obtener los datos
+- `loading` - 실제 데이터 로딩. React Query의 `isLoading`과 동일
+- `success` - 데이터 사용 가능 (idle을 사용해 건너뛸 수 있음)
+- `error` - 데이터 가져오기 실패
 
-### Concepto de idle
+### Idle 개념
 
-La biblioteca proporciona un símbolo especial `idle` para omitir la ejecución de consultas:
+라이브러리는 쿼리 실행을 건너뛰기 위한 특수 `idle` 심볼을 제공합니다:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
 const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
-  // La consulta no se ejecutará si userId no está definido
+  // userId가 정의되지 않으면 쿼리가 실행되지 않습니다
   const {data, status} = useQueryData(userDataSource, userId ? {userId} : idle);
 
   return (
@@ -186,29 +186,29 @@ const UserProfile: React.FC<{userId?: number}> = ({userId}) => {
 };
 ```
 
-Cuando los parámetros son iguales a `idle`:
+매개변수가 `idle`과 같을 때:
 
-- La consulta no se ejecuta
-- El estado permanece en `success`
-- Los datos permanecen como `undefined`
-- El componente puede renderizarse de forma segura sin carga
+- 쿼리가 실행되지 않음
+- 상태가 `success`로 유지됨
+- 데이터가 `undefined`로 유지됨
+- 컴포넌트가 로딩 없이 안전하게 렌더링될 수 있음
 
-**Beneficios de `idle`:**
+**`idle`의 이점:**
 
-1. **Seguridad de tipos** - TypeScript infiere correctamente los tipos para parámetros condicionales
-2. **Rendimiento** - Evita solicitudes innecesarias al servidor
-3. **Simplicidad lógica** - No es necesario gestionar un estado adicional `enabled`
-4. **Consistencia** - Enfoque unificado para todas las consultas condicionales
+1. **타입 안전성** - TypeScript가 조건부 매개변수에 대한 타입을 올바르게 추론함
+2. **성능** - 불필요한 서버 요청 방지
+3. **로직 단순화** - 추가 `enabled` 상태 관리 불필요
+4. **일관성** - 모든 조건부 쿼리에 대한 통합 접근 방식
 
-Esto es especialmente útil para consultas condicionales cuando quieres cargar datos solo bajo ciertas condiciones, manteniendo la seguridad de tipos.
+이것은 특정 조건에서만 데이터를 로드하고 싶으면서도 타입 안전성을 유지해야 하는 조건부 쿼리에 특히 유용합니다.
 
-## Referencia de API
+## API 참조
 
-### Creación de fuentes de datos
+### 데이터 소스 생성
 
 #### `makePlainQueryDataSource(config)`
 
-Crea una fuente de datos de consulta simple para patrones de solicitud/respuesta simples.
+간단한 요청/응답 패턴을 위한 일반 쿼리 데이터 소스를 생성합니다.
 
 ```ts
 const dataSource = makePlainQueryDataSource({
@@ -225,18 +225,18 @@ const dataSource = makePlainQueryDataSource({
 });
 ```
 
-**Parámetros:**
+**매개변수:**
 
-- `name` - Identificador único para la fuente de datos
-- `fetch` - Función que realiza la obtención real de datos
-- `transformParams` (opcional) - Transforma los parámetros de entrada antes de la solicitud
-- `transformResponse` (opcional) - Transforma los datos de respuesta
-- `tags` (opcional) - Genera etiquetas de caché para invalidación
-- `options` (opcional) - Opciones de React Query
+- `name` - 데이터 소스의 고유 식별자
+- `fetch` - 실제 데이터 가져오기를 수행하는 함수
+- `transformParams` (선택) - 요청 전에 입력 매개변수를 변환
+- `transformResponse` (선택) - 응답 데이터를 변환
+- `tags` (선택) - 무효화のための 캐시 태그 생성
+- `options` (선택) - React Query 옵션
 
 #### `makeInfiniteQueryDataSource(config)`
 
-Crea una fuente de datos de consulta infinita para patrones de paginación y desplazamiento infinito.
+페이징 및 무한 스크롤 패턴을 위한 무한 쿼리 데이터 소스를 생성합니다.
 
 ```ts
 const infiniteDataSource = makeInfiniteQueryDataSource({
@@ -248,16 +248,16 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-**Parámetros adicionales:**
+**추가 매개변수:**
 
-- `next` - Función para determinar los parámetros de la siguiente página
-- `prev` (opcional) - Función para determinar los parámetros de la página anterior
+- `next` - 다음 페이지 매개변수를 결정하는 함수
+- `prev` (선택) - 이전 페이지 매개변수를 결정하는 함수
 
 ### React Hooks
 
 #### `useQueryData(dataSource, params, options?)`
 
-Hook principal para obtener datos con una fuente de datos.
+데이터 소스를 사용한 데이터 가져오기를 위한 주요 훅입니다.
 
 ```ts
 const {data, status, error, refetch, ...rest} = useQueryData(
@@ -270,17 +270,17 @@ const {data, status, error, refetch, ...rest} = useQueryData(
 );
 ```
 
-**Devuelve:**
+**반환값:**
 
-- `data` - Los datos obtenidos
-- `status` - Estado actual ('loading' | 'success' | 'error')
-- `error` - Objeto de error si la solicitud falló
-- `refetch` - Función para recargar manualmente los datos
-- Otras propiedades de React Query
+- `data` - 가져온 데이터
+- `status` - 현재 상태 ('loading' | 'success' | 'error')
+- `error` - 요청이 실패한 경우 오류 객체
+- `refetch` - 데이터를 수동으로 다시 가져오는 함수
+- 기타 React Query 속성
 
 #### `useQueryResponses(responses)`
 
-Combina múltiples respuestas de consultas en un solo estado.
+여러 쿼리 응답을 하나의 상태로 결합합니다.
 
 ```ts
 const user = useQueryData(userDataSource, {userId});
@@ -289,34 +289,34 @@ const posts = useQueryData(postsDataSource, {userId});
 const {status, error, refetch, refetchErrored} = useQueryResponses([user, posts]);
 ```
 
-**Devuelve:**
+**반환값:**
 
-- `status` - Estado combinado de todas las consultas
-- `error` - Primer error encontrado
-- `refetch` - Función para recargar todas las consultas
-- `refetchErrored` - Función para recargar solo las consultas fallidas
+- `status` - 모든 쿼리의 결합된 상태
+- `error` - 발생한 첫 번째 오류
+- `refetch` - 모든 쿼리를 다시 가져오는 함수
+- `refetchErrored` - 실패한 쿼리만 다시 가져오는 함수
 
 #### `useRefetchAll(states)`
 
-Crea un callback para recargar múltiples consultas.
+여러 쿼리를 다시 가져오는 콜백을 생성합니다.
 
 ```ts
 const refetchAll = useRefetchAll([user, posts, comments]);
-// refetchAll() activará la recarga para todas las consultas
+// refetchAll() will trigger refetch for all queries
 ```
 
 #### `useRefetchErrored(states)`
 
-Crea un callback para recargar solo las consultas fallidas.
+실패한 쿼리만 다시 가져오는 콜백을 생성합니다.
 
 ```ts
 const refetchErrored = useRefetchErrored([user, posts, comments]);
-// refetchErrored() solo recargará las consultas con errores
+// refetchErrored() will only refetch queries with errors
 ```
 
 #### `useDataManager()`
 
-Devuelve el DataManager desde el contexto.
+컨텍스트에서 DataManager를 반환합니다.
 
 ```ts
 const dataManager = useDataManager();
@@ -325,13 +325,13 @@ await dataManager.invalidateTag('users');
 
 #### `useQueryContext()`
 
-Devuelve el contexto de consulta (para construir hooks de datos personalizados basados en react-query).
+쿼리 컨텍스트를 반환합니다 (react-query를 기반으로 한 커스텀 데이터 훅을 빌드하기 위해).
 
 ### React Components
 
 #### `<DataLoader />`
 
-Componente para manejar estados de carga y errores.
+로딩 상태와 오류를 처리하는 컴포넌트입니다.
 
 ```tsx
 <DataLoader
@@ -349,17 +349,17 @@ Componente para manejar estados de carga y errores.
 
 **Props:**
 
-- `status` - Estado actual de carga
-- `error` - Objeto de error
-- `errorAction` - Función o configuración de acción para reintentar en caso de error
-- `LoadingView` - Componente para mostrar durante la carga
-- `ErrorView` - Componente para mostrar en caso de error
-- `loadingViewProps` - Props pasados a LoadingView
-- `errorViewProps` - Props pasados a ErrorView
+- `status` - 현재 로딩 상태
+- `error` - 오류 객체
+- `errorAction` - 오류 재시도のための 함수 또는 액션 설정
+- `LoadingView` - 로딩 중에 표시할 컴포넌트
+- `ErrorView` - 오류 발생 시 표시할 컴포넌트
+- `loadingViewProps` - LoadingView에 전달할 속성
+- `errorViewProps` - ErrorView에 전달할 속성
 
 #### `<DataInfiniteLoader />`
 
-Componente especializado para consultas infinitas.
+무한 쿼리를 위한 특화된 컴포넌트입니다.
 
 ```tsx
 <DataInfiniteLoader
@@ -378,20 +378,20 @@ Componente especializado para consultas infinitas.
 </DataInfiniteLoader>
 ```
 
-**Props adicionales:**
+**추가 Props:**
 
-- `hasNextPage` - Si hay más páginas disponibles
-- `fetchNextPage` - Función para obtener la siguiente página
-- `isFetchingNextPage` - Si se está obteniendo la siguiente página
-- `MoreView` - Componente para el botón de "cargar más"
+- `hasNextPage` - 추가 페이지가 사용 가능한지 여부
+- `fetchNextPage` - 다음 페이지를 가져오는 함수
+- `isFetchingNextPage` - 다음 페이지가 가져오는 중인지 여부
+- `MoreView` - "더 가져오기" 버튼のための 컴포넌트
 
 #### `withDataManager(Component)`
 
-HOC que inyecta DataManager como prop.
+DataManager를 prop으로 주입하는 HOC입니다.
 
 ```tsx
 const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
-  // El componente tiene acceso a dataManager
+  // Component has access to dataManager
   return <div>...</div>;
 });
 ```
@@ -400,7 +400,7 @@ const MyComponent = withDataManager<Props>(({dataManager, ...props}) => {
 
 #### `ClientDataManager`
 
-Clase principal para la gestión de datos.
+데이터 관리를 위한 주요 클래스입니다.
 
 ```ts
 const dataManager = new ClientDataManager({
@@ -414,22 +414,22 @@ const dataManager = new ClientDataManager({
 });
 ```
 
-**Métodos:**
+**메서드:**
 
 ##### `invalidateTag(tag, options?)`
 
-Invalida todas las consultas con una etiqueta específica.
+특정 태그가 있는 모든 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateTag('users');
 await dataManager.invalidateTag('posts', {
-  repeat: {count: 3, interval: 1000}, // Reintenta la invalidación
+  repeat: {count: 3, interval: 1000}, // Retry invalidation
 });
 ```
 
 ##### `invalidateTags(tags, options?)`
 
-Invalida consultas que tengan todas las etiquetas especificadas.
+지정된 모든 태그가 있는 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateTags(['user', 'profile']);
@@ -437,7 +437,7 @@ await dataManager.invalidateTags(['user', 'profile']);
 
 ##### `invalidateSource(dataSource, options?)`
 
-Invalida todas las consultas para una fuente de datos.
+데이터 소스의 모든 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateSource(userDataSource);
@@ -445,7 +445,7 @@ await dataManager.invalidateSource(userDataSource);
 
 ##### `invalidateParams(dataSource, params, options?)`
 
-Invalida una consulta específica con parámetros exactos.
+정확한 매개변수로 특정 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateParams(userDataSource, {userId: 123});
@@ -453,7 +453,7 @@ await dataManager.invalidateParams(userDataSource, {userId: 123});
 
 ##### `resetSource(dataSource)`
 
-Reinicia (limpia) todos los datos en caché para una fuente de datos.
+데이터 소스의 모든 캐시된 데이터를 재설정 (지우기)합니다.
 
 ```ts
 await dataManager.resetSource(userDataSource);
@@ -461,7 +461,7 @@ await dataManager.resetSource(userDataSource);
 
 ##### `resetParams(dataSource, params)`
 
-Reinicia los datos en caché para parámetros específicos.
+특정 매개변수에 대한 캐시된 데이터를 재설정합니다.
 
 ```ts
 await dataManager.resetParams(userDataSource, {userId: 123});
@@ -469,7 +469,7 @@ await dataManager.resetParams(userDataSource, {userId: 123});
 
 ##### `invalidateSourceTags(dataSource, params, options?)`
 
-Invalida consultas basadas en etiquetas generadas por una fuente de datos.
+데이터 소스가 생성한 태그를 기반으로 쿼리를 무효화합니다.
 
 ```ts
 await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
@@ -479,24 +479,24 @@ await dataManager.invalidateSourceTags(userDataSource, {userId: 123});
 
 #### `skipContext(fetchFunction)`
 
-Utilidad para adaptar funciones de obtención existentes a la interfaz de fuente de datos.
+기존 가져오기 함수를 데이터 소스 인터페이스에 맞게 적응시키는 유틸리티입니다.
 
 ```ts
-// Función existente
+// Existing function
 async function fetchUser(params: {userId: number}) {
   // ...
 }
 
-// Adaptada para fuente de datos
+// Adapted for data source
 const dataSource = makePlainQueryDataSource({
   name: 'user',
-  fetch: skipContext(fetchUser), // Omite el contexto y los parámetros fetchContext
+  fetch: skipContext(fetchUser), // Skips context and fetchContext params
 });
 ```
 
 #### `withCatch(fetchFunction, errorHandler)`
 
-Añade un manejo de errores estandarizado a las funciones de fetch.
+fetch 함수에 표준화된 오류 처리를 추가합니다.
 
 ```ts
 const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.message}));
@@ -504,22 +504,22 @@ const safeFetch = withCatch(fetchUser, (error) => ({error: true, message: error.
 
 #### `withCancellation(fetchFunction)`
 
-Añade soporte para cancelación a las funciones de fetch.
+fetch 함수에 취소 지원을 추가합니다.
 
 ```ts
 const cancellableFetch = withCancellation(fetchFunction);
-// Maneja automáticamente AbortSignal de React Query
+// React Query의 AbortSignal을 자동으로 처리합니다
 ```
 
 #### `getProgressiveRefetch(options)`
 
-Crea una función de intervalo de reintento progresivo.
+점진적인 재요청 간격 함수를 생성합니다.
 
 ```ts
 const progressiveRefetch = getProgressiveRefetch({
-  minInterval: 1000, // Comienza con 1 segundo
-  maxInterval: 30000, // Máximo 30 segundos
-  multiplier: 2, // Duplica cada vez
+  minInterval: 1000, // 1초부터 시작
+  maxInterval: 30000, // 최대 30초
+  multiplier: 2, // 매번 2배 증가
 });
 
 const dataSource = makePlainQueryDataSource({
@@ -533,72 +533,72 @@ const dataSource = makePlainQueryDataSource({
 
 #### `normalizeStatus(status, fetchStatus)`
 
-Convierte los estados de React Query en estados de DataLoader.
+React Query 상태를 DataLoader 상태로 변환합니다.
 
 ```ts
 const status = normalizeStatus('pending', 'fetching'); // 'loading'
 ```
 
-#### Utilidades para Estados y Errores
+#### 상태 및 오류 유틸리티
 
 ```ts
-// Obtiene el estado combinado de múltiples estados
+// 여러 상태에서 결합된 상태 가져오기
 const status = getStatus([user, posts, comments]);
 
-// Obtiene el primer error de múltiples estados
+// 여러 상태에서 첫 번째 오류 가져오기
 const error = getError([user, posts, comments]);
 
-// Fusiona múltiples estados
+// 여러 상태 병합
 const combinedStatus = mergeStatuses(['loading', 'success', 'error']); // 'error'
 
-// Verifica si la clave de consulta tiene una etiqueta
+// 쿼리 키에 태그가 있는지 확인
 const hasUserTag = hasTag(queryKey, 'users');
 ```
 
-#### Utilidades para Composición de Claves
+#### 키 구성 유틸리티
 
 ```ts
-// Compone la clave de caché para una fuente de datos
+// 데이터 소스에 대한 캐시 키 구성
 const key = composeKey(userDataSource, {userId: 123});
 
-// Compone la clave completa incluyendo etiquetas
+// 태그를 포함한 전체 키 구성
 const fullKey = composeFullKey(userDataSource, {userId: 123});
 ```
 
-#### Constantes
+#### 상수
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
 
-// Símbolo especial para omitir la ejecución de la consulta
+// 쿼리 실행을 건너뛰기 위한 특수 심볼
 const params = shouldFetch ? {userId: 123} : idle;
 
-// Alternativa con tipos seguros a enabled: false
-// En lugar de:
+// enabled: false의 타입 안전한 대안
+// 기존 방식 대신:
 const {data} = useQueryData(userDataSource, {userId: userId || ''}, {enabled: Boolean(userId)});
 
-// Usa:
+// 이렇게 사용:
 const {data} = useQueryData(userDataSource, userId ? {userId} : idle);
-// TypeScript infiere correctamente los tipos en ambas ramas
+// TypeScript가 두 분기 모두에 대해 타입을 올바르게 추론합니다
 ```
 
-#### Composición de Opciones de Consulta
+#### 쿼리 옵션 구성
 
 ```ts
-// Compone opciones de React Query para consultas simples
+// 일반 쿼리에 대한 React Query 옵션 구성
 const plainOptions = composePlainQueryOptions(context, dataSource, params, options);
 
-// Compone opciones de React Query para consultas infinitas
+// 무한 쿼리에 대한 React Query 옵션 구성
 const infiniteOptions = composeInfiniteQueryOptions(context, dataSource, params, options);
 ```
 
-**Nota:** Estas funciones están destinadas principalmente para uso interno al crear implementaciones personalizadas de fuentes de datos.
+**참고:** 이러한 함수는 주로 커스텀 데이터 소스 구현 시 내부적으로 사용됩니다.
 
-## Patrones Avanzados
+## 고급 패턴
 
-### Consultas Condicionales con Idle
+### Idle을 사용한 조건부 쿼리
 
-Usa `idle` para crear consultas condicionales:
+`idle`을 사용하여 조건부 쿼리를 생성합니다:
 
 ```ts
 import {idle} from '@gravity-ui/data-source';
@@ -607,13 +607,13 @@ const ConditionalDataComponent: React.FC<{
   userId?: number;
   shouldLoadPosts: boolean;
 }> = ({userId, shouldLoadPosts}) => {
-  // Carga el usuario solo si userId está definido
+  // userId가 정의된 경우에만 사용자 로드
   const user = useQueryData(
     userDataSource,
     userId ? {userId} : idle
   );
 
-  // Carga las publicaciones solo si el usuario está cargado y la bandera está habilitada
+  // 사용자가 로드되었고 플래그가 활성화된 경우에만 게시물 로드
   const posts = useQueryData(
     userPostsDataSource,
     user.data && shouldLoadPosts ? {userId: user.data.id} : idle
@@ -632,9 +632,9 @@ const ConditionalDataComponent: React.FC<{
 };
 ```
 
-### Transformación de Datos
+### 데이터 변환
 
-Transforma parámetros de solicitud y datos de respuesta:
+요청 매개변수와 응답 데이터를 변환합니다:
 
 ```ts
 const apiDataSource = makePlainQueryDataSource({
@@ -652,9 +652,9 @@ const apiDataSource = makePlainQueryDataSource({
 });
 ```
 
-### Invalidación de Caché Basada en Etiquetas
+### 태그 기반 캐시 무효화
 
-Usa etiquetas para un manejo sofisticado del caché:
+태그를 사용하여 정교한 캐시 관리를 수행합니다:
 
 ```ts
 const userDataSource = makePlainQueryDataSource({
@@ -669,16 +669,16 @@ const userPostsDataSource = makePlainQueryDataSource({
   fetch: skipContext(fetchUserPosts),
 });
 
-// Invalida todos los datos para un usuario específico
+// 특정 사용자에 대한 모든 데이터 무효화
 await dataManager.invalidateTag('user:123');
 
-// Invalida todos los datos relacionados con usuarios
+// 모든 사용자 관련 데이터 무효화
 await dataManager.invalidateTag('users');
 ```
 
-### Manejo de Errores con Tipos
+### 타입을 사용한 오류 처리
 
-Crea un manejo de errores con tipos seguros:
+타입 안전한 오류 처리를 생성합니다:
 
 ```ts
 interface ApiError {
@@ -693,16 +693,16 @@ const ErrorView: React.FC<ErrorViewProps<ApiError>> = ({error, action}) => (
     <p>{error?.message}</p>
     {action && (
       <button onClick={action.handler}>
-        {action.children || 'Reintentar'}
+        {action.children || 'Retry'}
       </button>
     )}
   </div>
 );
 ```
 
-### Consultas Infinitas con Paginación Compleja
+### 복잡한 페이지네이션을 사용한 무한 쿼리
 
-Maneja escenarios de paginación complejos:
+복잡한 페이지네이션 시나리오를 처리합니다:
 
 ```ts
 interface PaginationParams {
@@ -732,9 +732,9 @@ const infiniteDataSource = makeInfiniteQueryDataSource({
 });
 ```
 
-### Combinación de Múltiples Fuentes de Datos
+### 여러 데이터 소스 결합
 
-Combina datos de múltiples fuentes:
+여러 소스의 데이터를 결합합니다:
 
 ```ts
 const UserProfile: React.FC<{userId: number}> = ({userId}) => {
@@ -766,27 +766,27 @@ return (
 );
 ```
 
-## Soporte para TypeScript
+## TypeScript 지원
 
-La biblioteca se ha construido con un enfoque prioritario en TypeScript y proporciona inferencia completa de tipos:
+이 라이브러리는 TypeScript 우선 접근 방식을 기반으로 구축되었으며, 완전한 타입 추론을 제공합니다:
 
 ```ts
-// Los tipos se infieren automáticamente
+// 타입이 자동으로 추론됩니다
 const userDataSource = makePlainQueryDataSource({
   name: 'user',
   fetch: skipContext(async (params: {userId: number}): Promise<User> => {
-    // El tipo de retorno se infiere como User
+    // 반환 타입이 User로 추론됩니다
   }),
 });
 
-// El tipo de retorno del hook se tipa automáticamente
+// 훅 반환 타입이 자동으로 타입화됩니다
 const {data} = useQueryData(userDataSource, {userId: 123});
-// data está tipado como User | undefined
+// data는 User | undefined로 타입화됩니다
 ```
 
-### Tipos de Error Personalizados
+### 사용자 정의 오류 타입
 
-Define y usa tipos de error personalizados:
+사용자 정의 오류 타입을 정의하고 사용하세요:
 
 ```ts
 interface ValidationError {
@@ -801,21 +801,21 @@ interface ApiError {
 }
 
 const typedDataSource = makePlainQueryDataSource<
-  {id: number}, // Tipo de parámetros
-  {id: number}, // Tipo de solicitud
-  ApiResponse, // Tipo de respuesta
-  User, // Tipo de datos
-  ApiError // Tipo de error
+  {id: number}, // Params type
+  {id: number}, // Request type
+  ApiResponse, // Response type
+  User, // Data type
+  ApiError // Error type
 >({
   name: 'typed-user',
   fetch: skipContext(fetchUser),
 });
 ```
 
-## Contribuyendo
+## 기여하기
 
-Por favor, lee [CONTRIBUTING.md](CONTRIBUTING.md) para obtener detalles sobre nuestro código de conducta y el proceso para enviar solicitudes de pull.
+코드 오브 컨덕트와 풀 리퀘스트 제출 과정에 대한 자세한 내용은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참조하세요.
 
-## Licencia
+## 라이선스
 
-Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
+MIT 라이선스입니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
