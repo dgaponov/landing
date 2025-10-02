@@ -1,14 +1,14 @@
 # @gravity-ui/icons &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/icons)](https://www.npmjs.com/package/@gravity-ui/icons) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/icons/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/icons/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/icons/)
 
-Un paquete de iconos de Gravity UI. Los iconos están disponibles en dos formatos: SVG y React. Echa un vistazo a la página de [demostración](https://preview.gravity-ui.com/icons/).
+Un ensemble d'icônes pour Gravity UI. Les icônes sont disponibles en deux formats : SVG et React. Consultez la [page de démonstration](https://preview.gravity-ui.com/icons/) pour en voir plus.
 
-## Instalación
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/icons
 ```
 
-## Uso
+## Utilisation
 
 ### React
 
@@ -16,7 +16,7 @@ npm install --save-dev @gravity-ui/icons
 import Cloud from '@gravity-ui/icons/Cloud';
 ```
 
-o
+ou
 
 ```js
 import {Cloud} from '@gravity-ui/icons';
@@ -24,7 +24,7 @@ import {Cloud} from '@gravity-ui/icons';
 
 ### SVG
 
-> Podrías necesitar un cargador (loader) adecuado para esto
+> Vous pourriez avoir besoin d'un chargeur approprié pour cela.
 
 ```js
 import cloudIcon from '@gravity-ui/icons/svgs/cloud.svg';
