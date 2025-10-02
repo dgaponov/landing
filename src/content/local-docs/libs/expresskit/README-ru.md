@@ -1,14 +1,14 @@
 # ExpressKit
 
-ExpressKit es un envoltorio ligero de [express.js](https://expressjs.com/) que se integra con [NodeKit](https://github.com/gravity-ui/nodekit) y proporciona algunas funciones útiles, como el registro de solicitudes, soporte para rastreo, controladores y middleware asíncronos, y descripciones detalladas de rutas.
+ExpressKit — это лёгкий обёртка для [express.js](https://expressjs.com/), которая интегрируется с [NodeKit](https://github.com/gravity-ui/nodekit) и предоставляет полезные функции, такие как логирование запросов, поддержка трассировки, асинхронные контроллеры и middleware, а также подробное описание маршрутов.
 
-Instalación:
+Установка:
 
 ```bash
 npm install --save @gravity-ui/nodekit @gravity-ui/expresskit
 ```
 
-Uso básico:
+Основное использование:
 
 ```typescript
 import {ExpressKit} from '@gravity-ui/expresskit';
