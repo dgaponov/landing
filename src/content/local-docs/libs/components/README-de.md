@@ -1,8 +1,8 @@
 # @gravity-ui/components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/components)](https://www.npmjs.com/package/@gravity-ui/components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/components/)
 
-一套复杂的 React 组件集合
+Eine Sammlung komplexer React-Komponenten
 
-## 安装
+## Installation
 
 ```shell
 npm install --save-dev @gravity-ui/components
