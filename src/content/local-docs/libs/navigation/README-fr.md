@@ -1,37 +1,37 @@
 # @gravity-ui/navigation &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/navigation)](https://www.npmjs.com/package/@gravity-ui/navigation) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/navigation/.github/workflows/ci.yml?branch=main&label=CI&logo=github)](https://github.com/gravity-ui/navigation/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/navigation/)
 
-### 侧边栏头部导航 &middot; [预览 →](https://preview.yandexcloud.dev/navigation/)
+### Navigation en en-tête latéral &middot; [Aperçu →](https://preview.yandexcloud.dev/navigation/)
 
 ![](docs/images/showcase.png)
 
-## 安装
+## Installation
 
 ```bash
 npm install @gravity-ui/navigation
 ```
 
-确保在您的项目中安装了所需的 peer dependencies
+Assurez-vous que les dépendances peer sont installées dans votre projet
 
 ```bash
 npm install --dev @gravity-ui/uikit@^6.15.0 @gravity-ui/icons@2.2.0 @gravity-ui/components@3.0.0 @bem-react/classname@1.6.0 react@^18.0.0 react-dom@18.0.0
 ```
 
-## 示例沙箱
+## Exemples en ligne
 
-基础版
+Basique  
 https://codesandbox.io/p/devbox/navigation-demo-simple-x9k5sd
 
-高级版
+Avancé  
 https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 
-## 2025 年路线图
+## Roadmap 2025
 
-1. 支持 SSR
-2. 在 [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header) 中添加更多文档和示例
-3. 支持在 UIKit 主题工具中使用 Navigation
-4. 统一 subheaderItem、menuItem 和 footerItem 的 API
+1. Prise en charge SSR
+2. Ajouter plus de documentation et d'exemples à [Gravity UI](https://gravity-ui.com/ru/components/navigation/aside-header)
+3. Prise en charge de Navigation dans le thématiseur UIKit
+4. Unifier l'API de subheaderItem, menuItem, footerItem
 
-## 组件
+## Composants
 
 - [AsideHeader](https://github.com/gravity-ui/navigation/tree/main/src/components/AsideHeader/README.md)
   - [AllPagesPanel](https://github.com/gravity-ui/navigation/tree/main/src/components/AllPagesPanel/README.md)
@@ -51,6 +51,6 @@ https://codesandbox.io/p/devbox/recursing-dawn-6kc9vh
 - [ActionBar](https://github.com/gravity-ui/navigation/tree/main/src/components/ActionBar/README.md)
 - [Settings](https://github.com/gravity-ui/navigation/tree/main/src/components/Settings/README.md)
 
-## CSS API
+## API CSS
 
-用于主题化 Navigation 的组件
+Utilisée pour la thématisation des composants de Navigation
