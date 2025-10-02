@@ -1,16 +1,16 @@
-# Creador de constructores de páginas
+# Constructor de Páginas
 
-Una potente utilidad de línea de comandos para crear páginas estáticas a partir de configuraciones de YAML mediante el paquete [@gravity](https://github.com/gravity-ui/page-constructor) -ui/page-constructor. Consulte el [libro de cuentos del constructor de páginas para obtener detalles](https://preview.gravity-ui.com/page-constructor/) de configuración.
+Una potente utilidad de línea de comandos para construir páginas estáticas a partir de configuraciones YAML utilizando el paquete [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Consulta el [storybook de page-constructor](https://preview.gravity-ui.com/page-constructor/) para detalles de configuración.
 
-## Inicio rápido
+## Inicio Rápido
 
-1. **Paquete de instalación:**
+1. **Instalar el paquete:**
 
 ```bash
 npm install @gravity-ui/page-constructor-builder
 ```
 
-2. **Agregue el comando de compilación a package.json:**
+2. **Agregar el comando de build a package.json:**
 
 ```json
 {
@@ -20,7 +20,7 @@ npm install @gravity-ui/page-constructor-builder
 }
 ```
 
-3. **Añadir archivos fuente:**
+3. **Agregar archivos fuente:**
 
 `page-builder.config.yml`:
 
@@ -28,6 +28,7 @@ npm install @gravity-ui/page-constructor-builder
 input: ./pages
 output: ./dist
 assets: ./assets
+favicon: logo.svg
 theme: light
 minify: true
 ```
@@ -49,13 +50,13 @@ blocks:
       color: '#f8f9fa'
 ```
 
-4. **Crea tus páginas:**
+4. **Construir tus páginas:**
 
 ```bash
 npm run build
 ```
 
-5. **Abra los archivos HTML generados en su navegador:**
+5. **Abrir los archivos HTML generados en tu navegador:**
 
 ```bash
 open dist/index.html
@@ -67,7 +68,7 @@ open dist/index.html
 
 #### `page-builder build`
 
-Crea páginas a partir de configuraciones de YAML.
+Construye páginas a partir de configuraciones YAML.
 
 ```bash
 page-builder build [options]
@@ -75,41 +76,42 @@ page-builder build [options]
 
 **Opciones:**
 
-- `-i, --entrada: <path>` Directorio de entrada que contiene archivos YAML (predeterminado:». /páginas «)
-- `-o, --salida: <path>` Directorio de salida para los archivos creados (predeterminado:». /dist «)
-- `-c, --configuración: <path>` Ruta del archivo de configuración (predeterminado:»). /page-builder.config.yml «)
-- `--css: <files...>` Archivos CSS personalizados para incluir
-- `--componentes: <path>` Directorio de componentes personalizados
-- `--navegación: <path>` Archivo de datos de navegación
-- `--activos: <path>` Directorio de activos estáticos para copiar
-- `--tema: <theme>` Tema (luz)|oscuro) (predeterminado: «claro»)
-- `--URL base: <url>` URL base del sitio
-- `--minify`: Habilitar la minificación
+- `-i, --input <path>`: Directorio de entrada que contiene archivos YAML (predeterminado: "./pages")
+- `-o, --output <path>`: Directorio de salida para los archivos construidos (predeterminado: "./dist")
+- `-c, --config <path>`: Ruta del archivo de configuración (predeterminado: "./page-builder.config.yml")
+- `--css <files...>`: Archivos CSS personalizados para incluir
+- `--components <path>`: Directorio de componentes personalizados
+- `--navigation <path>`: Archivo de datos de navegación
+- `--assets <path>`: Directorio de activos estáticos para copiar
+- `--theme <theme>`: Tema (light|dark) (predeterminado: "light")
+- `--base-url <url>`: URL base para el sitio
+- `--minify`: Habilitar minificación
 - `--source-maps`: Generar mapas de origen
-- `--watch`: Activar el modo reloj
+- `--watch`: Habilitar modo de vigilancia
 
 ### Configuración
 
-Crea un `page-builder.config.yml` archivo en la raíz de tu proyecto:
+Crea un archivo `page-builder.config.yml` en la raíz de tu proyecto:
 
 ```yaml
 input: ./pages
 output: ./dist
 assets: ./assets
+favicon: logo.svg # Archivo de favicon desde assets o URL externa
 theme: light
 baseUrl: https://mysite.com
 minify: true
-sourceMaps: false # Generate source maps for debugging (increases bundle size)
+sourceMaps: false # Generar mapas de origen para depuración (aumenta el tamaño del bundle)
 css:
   - ./styles/main.css
   - ./styles/components.scss
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # Custom webpack configuration
+  # Configuración personalizada de webpack
 ```
 
-### Configuración de página
+### Configuración de Página
 
 Crea archivos YAML en tu directorio de páginas:
 
@@ -133,14 +135,14 @@ blocks:
 
       You can use **markdown** formatting here.
 
-  - type: CustomBlock # Your custom component
+  - type: CustomBlock # Tu componente personalizado
     title: Custom Component
     content: This uses a custom component
 ```
 
-### Componentes personalizados
+### Componentes Personalizados
 
-Crea componentes de React en tu directorio de componentes:
+Crea componentes React en tu directorio de componentes:
 
 ```typescript
 // components/CustomBlock.tsx
@@ -152,7 +154,11 @@ interface CustomBlockProps {
   className?: string;
 }
 
-export const CustomBlock: React.FC<CustomBlockProps> = ({title, content, className = ''}) => {
+export const CustomBlock: React.FC<CustomBlockProps> = ({
+  title,
+  content,
+  className = ''
+}) => {
   return (
     <div className={`custom-block ${className}`}>
       <h2>{title}</h2>
@@ -164,9 +170,9 @@ export const CustomBlock: React.FC<CustomBlockProps> = ({title, content, classNa
 export default CustomBlock;
 ```
 
-### Estilos personalizados
+### Estilos Personalizados
 
-Agregue sus archivos CSS/SCSS personalizados:
+Agrega tus archivos CSS/SCSS personalizados:
 
 ```css
 /* styles/main.css */
@@ -184,18 +190,18 @@ Agregue sus archivos CSS/SCSS personalizados:
 }
 ```
 
-### Activos estáticos
+### Activos Estáticos
 
-El constructor de páginas gestiona automáticamente los activos estáticos, como imágenes, iconos y otros archivos. Configure el directorio de activos en su archivo de configuración:
+El constructor de páginas maneja automáticamente los activos estáticos como imágenes, iconos y otros archivos. Configura el directorio de activos en tu archivo de configuración:
 
 ```yaml
 # page-builder.config.yml
 input: ./pages
 output: ./dist
-assets: ./assets # Assets directory to copy
+assets: ./assets # Directorio de activos para copiar
 ```
 
-**Estructura del directorio de activos:**
+**Estructura del Directorio de Activos:**
 
 ```
 assets/
@@ -209,7 +215,7 @@ assets/
     └── brochure.pdf
 ```
 
-**Uso de activos en tus páginas:**
+**Usando Activos en Tus Páginas:**
 
 ```yaml
 # pages/index.yml
@@ -228,13 +234,80 @@ blocks:
         alt: Our team photo
 ```
 
+### Favicon
+
+El constructor de páginas soporta agregar favicons a tus páginas estáticas. Puedes especificar un archivo local desde tu directorio de activos o una URL externa.
+
+#### Configuración
+
+Agrega la opción `favicon` a tu archivo de configuración:
+
+```yaml
+# page-builder.config.yml
+favicon: logo.svg # Archivo local desde el directorio de activos
+# o
+favicon: https://cdn.example.com/favicon.ico # URL externa
+```
+
+#### Archivos de Favicon Locales
+
+Para archivos de favicon locales, el constructor:
+
+- Detectará automáticamente el archivo en tu directorio de activos
+- Lo copiará al directorio de salida
+- Generará etiquetas HTML `<link>` adecuadas con tipos MIME correctos
+
+**Formatos de archivo compatibles:**
+
+- **SVG** (recomendado) - `image/svg+xml`
+- **ICO** (clásico) - `image/x-icon`
+- **PNG** (moderno) - `image/png`
+- **JPG/JPEG** (aceptable) - `image/jpeg`
+- **GIF** (animado) - `image/gif`
+
+**Ejemplos:**
+
+```yaml
+# page-builder.config.yml
+favicon: logo.svg                    # Archivo en el directorio assets/
+favicon: icons/favicon.ico           # Archivo en el subdirectorio assets/icons/
+favicon: ./custom/path/favicon.png   # Ruta personalizada relativa al proyecto
+favicon: /absolute/path/favicon.ico  # Ruta absoluta
+```
+
+#### URLs Externas para Favicon
+
+También puedes usar URLs externas para favicon de CDNs u otros dominios:
+
+```yaml
+# page-builder.config.yml
+favicon: https://cdn.example.com/favicon.ico
+favicon: https://mysite.com/assets/logo.svg
+```
+
+#### HTML Generado
+
+El constructor genera automáticamente las etiquetas HTML apropiadas según el tipo de favicon:
+
+```html
+<!-- Para favicon en SVG -->
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+
+<!-- Para favicon en ICO (incluye soporte para navegadores legacy) -->
+<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link rel="shortcut icon" href="assets/favicon.ico" />
+
+<!-- Para URLs externas -->
+<link rel="icon" href="https://example.com/favicon.ico" />
+```
+
 ### Navegación
 
-El constructor de páginas admite la configuración de navegación global que aparece en todas las páginas. La navegación se configura mediante un archivo YAML independiente.
+El constructor de páginas soporta una configuración global de navegación que aparece en todas las páginas. La navegación se configura a través de un archivo YAML separado.
 
-#### Configuración de navegación
+#### Configuración de Navegación
 
-Crea un `navigation.yml` archivo en la raíz de tu proyecto (o especifica una ruta personalizada en tu configuración):
+Crea un archivo `navigation.yml` en la raíz de tu proyecto (o especifica una ruta personalizada en tu configuración):
 
 ```yaml
 # navigation.yml
@@ -272,9 +345,9 @@ footer:
       type: 'text'
 ```
 
-#### Anulación de navegación por página
+#### Anulación de Navegación por Página
 
-Puedes anular la navegación de páginas específicas añadiendo una `navigation` sección directamente en el YAML de tu página:
+Puedes anular la navegación para páginas específicas agregando una sección `navigation` directamente en el YAML de tu página:
 
 ```yaml
 # pages/special-page.yml

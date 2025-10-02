@@ -1,16 +1,16 @@
 # Page Constructor Builder
 
-一个强大的命令行工具，用于从 YAML 配置构建静态页面，基于 [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor) 包。有关配置详情，请参阅 [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/)。
+Un utilitaire en ligne de commande puissant pour construire des pages statiques à partir de configurations YAML en utilisant le package [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor). Consultez le [storybook de page-constructor](https://preview.gravity-ui.com/page-constructor/) pour plus de détails sur la configuration.
 
-## 快速开始
+## Démarrage rapide
 
-1. **安装包：**
+1. **Installer le package :**
 
 ```bash
 npm install @gravity-ui/page-constructor-builder
 ```
 
-2. **在 package.json 中添加构建命令：**
+2. **Ajouter la commande de build à package.json :**
 
 ```json
 {
@@ -20,9 +20,9 @@ npm install @gravity-ui/page-constructor-builder
 }
 ```
 
-3. **添加源文件：**
+3. **Ajouter les fichiers sources :**
 
-`page-builder.config.yml`：
+`page-builder.config.yml` :
 
 ```yaml
 input: ./pages
@@ -33,7 +33,7 @@ theme: light
 minify: true
 ```
 
-`pages/index.yml`：
+`pages/index.yml` :
 
 ```yaml
 meta:
@@ -50,70 +50,70 @@ blocks:
       color: '#f8f9fa'
 ```
 
-4. **构建您的页面：**
+4. **Construire vos pages :**
 
 ```bash
 npm run build
 ```
 
-5. **在浏览器中打开生成的 HTML 文件：**
+5. **Ouvrir les fichiers HTML générés dans votre navigateur :**
 
 ```bash
 open dist/index.html
 ```
 
-## 使用方法
+## Utilisation
 
-### 命令
+### Commandes
 
 #### `page-builder build`
 
-从 YAML 配置构建页面。
+Construit des pages à partir de configurations YAML.
 
 ```bash
 page-builder build [options]
 ```
 
-**选项：**
+**Options :**
 
-- `-i, --input <path>`: 包含 YAML 文件的输入目录（默认："./pages"）
-- `-o, --output <path>`: 构建文件的输出目录（默认："./dist"）
-- `-c, --config <path>`: 配置文件路径（默认："./page-builder.config.yml"）
-- `--css <files...>`: 要包含的自定义 CSS 文件
-- `--components <path>`: 自定义组件目录
-- `--navigation <path>`: 导航数据文件
-- `--assets <path>`: 要复制的静态资源目录
-- `--theme <theme>`: 主题（light|dark）（默认："light"）
-- `--base-url <url>`: 网站的基 URL
-- `--minify`: 启用压缩
-- `--source-maps`: 生成源映射
-- `--watch`: 启用监听模式
+- `-i, --input <path>` : Répertoire d'entrée contenant les fichiers YAML (par défaut : "./pages")
+- `-o, --output <path>` : Répertoire de sortie pour les fichiers construits (par défaut : "./dist")
+- `-c, --config <path>` : Chemin vers le fichier de configuration (par défaut : "./page-builder.config.yml")
+- `--css <files...>` : Fichiers CSS personnalisés à inclure
+- `--components <path>` : Répertoire des composants personnalisés
+- `--navigation <path>` : Fichier de données de navigation
+- `--assets <path>` : Répertoire des ressources statiques à copier
+- `--theme <theme>` : Thème (light|dark) (par défaut : "light")
+- `--base-url <url>` : URL de base pour le site
+- `--minify` : Activer la minification
+- `--source-maps` : Générer des source maps
+- `--watch` : Activer le mode surveillance
 
-### 配置
+### Configuration
 
-在项目根目录创建一个 `page-builder.config.yml` 文件：
+Créez un fichier `page-builder.config.yml` à la racine de votre projet :
 
 ```yaml
 input: ./pages
 output: ./dist
 assets: ./assets
-favicon: logo.svg # 来自 assets 的图标文件或外部 URL
+favicon: logo.svg # Fichier favicon depuis les assets ou URL externe
 theme: light
 baseUrl: https://mysite.com
 minify: true
-sourceMaps: false # 生成源映射以便调试（会增加捆绑包大小）
+sourceMaps: false # Générer des source maps pour le débogage (augmente la taille du bundle)
 css:
   - ./styles/main.css
   - ./styles/components.scss
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # 自定义 webpack 配置
+  # Configuration webpack personnalisée
 ```
 
-### 页面配置
+### Configuration des pages
 
-在页面目录中创建 YAML 文件：
+Créez des fichiers YAML dans votre répertoire de pages :
 
 ```yaml
 # pages/index.yml
@@ -135,14 +135,14 @@ blocks:
 
       You can use **markdown** formatting here.
 
-  - type: CustomBlock # 您的自定义组件
+  - type: CustomBlock # Votre composant personnalisé
     title: Custom Component
     content: This uses a custom component
 ```
 
-### 自定义组件
+### Composants personnalisés
 
-在组件目录中创建 React 组件：
+Créez des composants React dans votre répertoire components :
 
 ```typescript
 // components/CustomBlock.tsx
@@ -170,9 +170,9 @@ export const CustomBlock: React.FC<CustomBlockProps> = ({
 export default CustomBlock;
 ```
 
-### 自定义样式
+### Styles personnalisés
 
-添加您的自定义 CSS/SCSS 文件：
+Ajoutez vos fichiers CSS/SCSS personnalisés :
 
 ```css
 /* styles/main.css */
@@ -190,18 +190,18 @@ export default CustomBlock;
 }
 ```
 
-### 静态资源
+### Ressources statiques
 
-页面构建器会自动处理静态资源，如图像、图标和其他文件。您可以在配置文件中配置资源目录：
+Le builder de page constructor gère automatiquement les ressources statiques comme les images, les icônes et les autres fichiers. Configurez le répertoire des assets dans votre fichier de configuration :
 
 ```yaml
 # page-builder.config.yml
 input: ./pages
 output: ./dist
-assets: ./assets # 要复制的资源目录
+assets: ./assets # Répertoire des assets à copier
 ```
 
-**资源目录结构：**
+**Structure du répertoire Assets :**
 
 ```
 assets/
@@ -215,7 +215,7 @@ assets/
     └── brochure.pdf
 ```
 
-**在页面中使用资源：**
+**Utilisation des assets dans vos pages :**
 
 ```yaml
 # pages/index.yml
@@ -234,38 +234,38 @@ blocks:
         alt: Our team photo
 ```
 
-### 网站图标
+### Favicon
 
-页面构建器支持为静态页面添加网站图标。您可以指定来自资源目录的本地文件或外部 URL。
+Le builder de page constructor prend en charge l'ajout de favicons à vos pages statiques. Vous pouvez spécifier soit un fichier local depuis votre répertoire assets, soit une URL externe.
 
-#### 配置
+#### Configuration
 
-在配置文件中添加 `favicon` 选项：
+Ajoutez l'option `favicon` à votre fichier de configuration :
 
 ```yaml
 # page-builder.config.yml
-favicon: logo.svg # 来自资源目录的本地文件
-# 或
-favicon: https://cdn.example.com/favicon.ico # 外部 URL
+favicon: logo.svg # Fichier local depuis le répertoire assets
+# ou
+favicon: https://cdn.example.com/favicon.ico # URL externe
 ```
 
-#### 本地图标文件
+#### Fichiers Favicon locaux
 
-对于本地图标文件，构建器将：
+Pour les fichiers favicon locaux, le builder va :
 
-- 自动检测资源目录中的文件
-- 将其复制到输出目录
-- 生成正确的 HTML `<link>` 标签，并包含适当的 MIME 类型
+- Détecter automatiquement le fichier dans votre répertoire assets
+- Le copier vers le répertoire de sortie
+- Générer les balises HTML `<link>` appropriées avec les types MIME corrects
 
-**支持的文件格式：**
+**Formats de fichiers pris en charge :**
 
-- **SVG**（推荐） - `image/svg+xml`
-- **ICO**（经典） - `image/x-icon`
-- **PNG**（现代） - `image/png`
-- **JPG/JPEG**（可接受） - `image/jpeg`
-- **GIF**（动画） - `image/gif`
+- **SVG** (recommandé) - `image/svg+xml`
+- **ICO** (classique) - `image/x-icon`
+- **PNG** (moderne) - `image/png`
+- **JPG/JPEG** (acceptable) - `image/jpeg`
+- **GIF** (animé) - `image/gif`
 
-**示例：**
+**Exemples :**
 
 ```yaml
 # page-builder.config.yml
@@ -275,9 +275,9 @@ favicon: ./custom/path/favicon.png   # Custom path relative to project
 favicon: /absolute/path/favicon.ico  # Absolute path
 ```
 
-#### 外部 Favicon URL
+#### URLs Externes pour Favicon
 
-您也可以使用来自 CDN 或其他域名的外部 favicon URL：
+Vous pouvez également utiliser des URLs externes pour favicon provenant de CDNs ou d'autres domaines :
 
 ```yaml
 # page-builder.config.yml
@@ -285,9 +285,9 @@ favicon: https://cdn.example.com/favicon.ico
 favicon: https://mysite.com/assets/logo.svg
 ```
 
-#### 生成的 HTML
+#### HTML Généré
 
-构建器会根据 favicon 类型自动生成合适的 HTML 标签：
+Le constructeur génère automatiquement les balises HTML appropriées en fonction du type de favicon :
 
 ```html
 <!-- For SVG favicons -->
@@ -301,13 +301,13 @@ favicon: https://mysite.com/assets/logo.svg
 <link rel="icon" href="https://example.com/favicon.ico" />
 ```
 
-### 导航
+### Navigation
 
-页面构建器支持全局导航配置，该配置会在所有页面上显示。导航通过单独的 YAML 文件进行配置。
+Le constructeur de pages prend en charge la configuration globale de la navigation, qui apparaît sur toutes les pages. La navigation est configurée via un fichier YAML séparé.
 
-#### 导航配置
+#### Configuration de la Navigation
 
-在项目根目录下创建一个 `navigation.yml` 文件（或在配置中指定自定义路径）：
+Créez un fichier `navigation.yml` à la racine de votre projet (ou spécifiez un chemin personnalisé dans votre configuration) :
 
 ```yaml
 # navigation.yml
@@ -345,9 +345,9 @@ footer:
       type: 'text'
 ```
 
-#### 特定页面的导航覆盖
+#### Remplacement de la Navigation par Page
 
-您可以通过在页面 YAML 中直接添加 `navigation` 部分来覆盖特定页面的导航：
+Vous pouvez remplacer la navigation pour des pages spécifiques en ajoutant une section `navigation` directement dans votre fichier YAML de page :
 
 ```yaml
 # pages/special-page.yml
