@@ -20,7 +20,7 @@ npm i --save-dev @gravity-ui/browserslist-config
 }
 ```
 
-대상 사용자에 따라 추가 브라우저를 지정할 수도 있습니다. 예:
+청중을 기반으로 추가 브라우저를 지정할 수도 있습니다. 예를 들어:
 
 ```json
 {

@@ -20,7 +20,8 @@ Agrega la configuración a `package.json` en la sección `browserslist`:
 }
 ```
 
-Puedes especificar navegadores adicionales según tu audiencia, por ejemplo:
+Puedes especificar navegadores adicionales según tu audiencia, como:
+
 ```json
 {
   "browserslist": [

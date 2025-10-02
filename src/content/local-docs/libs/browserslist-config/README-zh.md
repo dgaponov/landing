@@ -33,4 +33,4 @@ npm i --save-dev @gravity-ui/browserslist-config
 
 ## 使用
 
-该包提供 Browserslist 的生产版本。
+此包提供了 Browserslist 的生产版本。
