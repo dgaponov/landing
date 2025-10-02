@@ -11,6 +11,7 @@ jobs:
   translations:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 2
       matrix:
         language: ['es', 'de', 'zh', 'fr']
     steps:
