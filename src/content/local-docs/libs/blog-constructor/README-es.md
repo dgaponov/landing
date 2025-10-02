@@ -1,20 +1,20 @@
 # @gravity-ui/blog-constructor &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/blog-constructor)](https://www.npmjs.com/package/@gravity-ui/blog-constructor) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/blog-constructor/ci.yml?branch=main&label=CI)](https://github.com/gravity-ui/blog-constructor/actions/workflows/ci.yml?query=branch:main) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/blog-constructor/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/blog-constructor/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/blog-constructor/)
 
-## Instalar
+## Instalación
 
 ```shell
 npm install @gravity-ui/blog-constructor
 ```
 
-## Constructor de blogs
+## Blog-constructor
 
-`Blog-constructor` es una biblioteca basada en la biblioteca [Page-Constructor](https://github.com/gravity-ui/page-constructor) para crear páginas web en formato blog. Blog-constructor usa el [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) accesorio de page-constructor para agregar los componentes necesarios para el blog.
+`Blog-constructor` es una biblioteca basada en la biblioteca [Page-constructor](https://github.com/gravity-ui/page-constructor) para crear páginas web en formato de blog. Blog-constructor utiliza la prop [`custom`](https://github.com/gravity-ui/page-constructor#custom-blocks) de page-constructor para agregar los componentes necesarios para el blog.
 
-### Documentación: libro de [cuentos](https://preview.gravity-ui.com/blog-constructor/)
+### Documentación - [storybook](https://preview.gravity-ui.com/blog-constructor/)
 
-### Cómo empezar
+### Primeros pasos
 
-El constructor de blogs tiene componentes de cliente y componentes de servidor para importar. Las páginas del blog se importan como un componente de React. Para asegurarte de que funciona correctamente, envuélvelo en `BlogConstructorProvider`:
+Blog-constructor incluye tanto componentes de cliente como de servidor para importar. La página de blog se importa como un componente de React. Para asegurarte de que funcione correctamente, envuélvela en `BlogConstructorProvider`:
 
 ```jsx
 import {BlogPage, BlogConstructorProvider} from '@gravity-ui/blog-constructor';
@@ -47,9 +47,9 @@ import {BlogPostPage, BlogConstructorProvider} from '@gravity-ui/blog-constructo
 
 ```
 
-Documentación sobre [ProviderProps](./src/constructor/README.md).
+Documentación sobre [providerProps](./src/constructor/README.md).
 
-Además, los constructores de blogs tienen componentes de servidor para ayudarlo a transformar sus datos si lo necesita
+Además, blog-constructor incluye componentes de servidor para ayudarte a transformar tus datos si lo necesitas:
 
 ```jsx
 import {
@@ -60,7 +60,7 @@ import {
 } from '@gravity-ui/blog-constructor/server';
 ```
 
-`blog-constructor` Es una `uikit-based` biblioteca y utilizamos una instancia de `i18n` from uikit. Para configurar la internacionalización, solo necesitas usar el comando `configure` from uikit:
+`Blog-constructor` es una biblioteca basada en `uikit`, y utilizamos una instancia de `i18n` de uikit. Para configurar la internacionalización, solo necesitas usar `configure` de uikit:
 
 ```typescript
 import {configure} from '@gravity-ui/uikit';
