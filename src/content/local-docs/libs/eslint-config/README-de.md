@@ -1,14 +1,14 @@
 # @gravity-ui/eslint-config
 
-## Instalación
+## Installation
 
 ```
 npm install --save-dev eslint @gravity-ui/eslint-config
 ```
 
-## Uso
+## Verwendung
 
-Agrega un archivo `eslint.config.js` en tu proyecto con el siguiente contenido:
+Fügen Sie eine `eslint.config.js`-Datei in Ihrem Projekt mit folgendem Inhalt hinzu:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -16,16 +16,16 @@ import baseConfig from '@gravity-ui/eslint-config';
 export default [
   ...baseConfig,
   {
-    // ...otra configuración
+    // ...weitere Konfiguration
   },
 ];
 ```
 
-La configuración base también incluye reglas de TypeScript.
+Die Basis-Konfiguration enthält auch TypeScript-Regeln.
 
 ### Prettier
 
-Si estás usando Prettier, agrega la configuración correspondiente:
+Wenn Sie Prettier verwenden, fügen Sie die entsprechende Konfiguration hinzu:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -35,14 +35,14 @@ export default [
   ...baseConfig,
   ...prettierConfig,
   {
-    // ...otra configuración
+    // ...weitere Konfiguration
   },
 ];
 ```
 
 ### a11y
 
-Si quieres detectar problemas de accesibilidad, agrega la configuración correspondiente:
+Wenn Sie Barrierefreiheitsprobleme erkennen möchten, fügen Sie die entsprechende Konfiguration hinzu:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -52,14 +52,14 @@ export default [
   ...baseConfig,
   ...a11yConfig,
   {
-    // ...otra configuración
+    // ...weitere Konfiguration
   },
 ];
 ```
 
 ### Order
 
-Si quieres imponer una convención en el orden de las importaciones de módulos, agrega la configuración correspondiente:
+Wenn Sie eine Konvention für die Reihenfolge von Modul-Imports durchsetzen möchten, fügen Sie die entsprechende Konfiguration hinzu:
 
 ```js
 import baseConfig from '@gravity-ui/eslint-config';
@@ -69,7 +69,7 @@ export default [
   ...baseConfig,
   ...importOrderConfig,
   {
-    // ...otra configuración
+    // ...weitere Konfiguration
   },
 ];
 ```
