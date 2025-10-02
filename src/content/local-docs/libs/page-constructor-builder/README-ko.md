@@ -1,16 +1,16 @@
-# Page Constructor Builder
+# 페이지 생성기 빌더
 
-一个强大的命令行工具，用于从 YAML 配置构建静态页面，使用 [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor) 包。有关配置详情，请参阅 [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/)。
+YAML 구성으로부터 정적 페이지를 빌드하기 위한 강력한 명령줄 유틸리티로, [@gravity-ui/page-constructor](https://github.com/gravity-ui/page-constructor) 패키지를 사용합니다. 구성 세부 사항은 [page-constructor storybook](https://preview.gravity-ui.com/page-constructor/)을 참조하세요.
 
-## 快速开始
+## 빠른 시작
 
-1. **安装包：**
+1. **패키지 설치:**
 
 ```bash
 npm install @gravity-ui/page-constructor-builder
 ```
 
-2. **在 package.json 中添加构建命令：**
+2. **package.json에 빌드 명령 추가:**
 
 ```json
 {
@@ -20,9 +20,9 @@ npm install @gravity-ui/page-constructor-builder
 }
 ```
 
-3. **添加源文件：**
+3. **소스 파일 추가:**
 
-`page-builder.config.yml`：
+`page-builder.config.yml`:
 
 ```yaml
 input: ./pages
@@ -33,7 +33,7 @@ theme: light
 minify: true
 ```
 
-`pages/index.yml`：
+`pages/index.yml`:
 
 ```yaml
 meta:
@@ -50,70 +50,70 @@ blocks:
       color: '#f8f9fa'
 ```
 
-4. **构建您的页面：**
+4. **페이지 빌드:**
 
 ```bash
 npm run build
 ```
 
-5. **在浏览器中打开生成的 HTML 文件：**
+5. **생성된 HTML 파일을 브라우저에서 열기:**
 
 ```bash
 open dist/index.html
 ```
 
-## 使用方法
+## 사용법
 
-### 命令
+### 명령어
 
 #### `page-builder build`
 
-从 YAML 配置构建页面。
+YAML 구성으로부터 페이지를 빌드합니다.
 
 ```bash
 page-builder build [options]
 ```
 
-**选项：**
+**옵션:**
 
-- `-i, --input <path>`: 包含 YAML 文件的输入目录（默认: "./pages"）
-- `-o, --output <path>`: 构建文件的输出目录（默认: "./dist"）
-- `-c, --config <path>`: 配置文件路径（默认: "./page-builder.config.yml"）
-- `--css <files...>`: 要包含的自定义 CSS 文件
-- `--components <path>`: 自定义组件目录
-- `--navigation <path>`: 导航数据文件
-- `--assets <path>`: 要复制的静态资源目录
-- `--theme <theme>`: 主题（light|dark）（默认: "light"）
-- `--base-url <url>`: 网站的基 URL
-- `--minify`: 启用压缩
-- `--source-maps`: 生成源映射
-- `--watch`: 启用监视模式
+- `-i, --input <path>`: YAML 파일이 포함된 입력 디렉터리 (기본값: "./pages")
+- `-o, --output <path>`: 빌드된 파일의 출력 디렉터리 (기본값: "./dist")
+- `-c, --config <path>`: 구성 파일 경로 (기본값: "./page-builder.config.yml")
+- `--css <files...>`: 포함할 사용자 정의 CSS 파일
+- `--components <path>`: 사용자 정의 컴포넌트 디렉터리
+- `--navigation <path>`: 네비게이션 데이터 파일
+- `--assets <path>`: 복사할 정적 에셋 디렉터리
+- `--theme <theme>`: 테마 (light|dark) (기본값: "light")
+- `--base-url <url>`: 사이트의 기본 URL
+- `--minify`: 압축 활성화
+- `--source-maps`: 소스 맵 생성
+- `--watch`: 감시 모드 활성화
 
-### 配置
+### 구성
 
-在项目根目录创建一个 `page-builder.config.yml` 文件：
+프로젝트 루트에 `page-builder.config.yml` 파일을 생성하세요:
 
 ```yaml
 input: ./pages
 output: ./dist
 assets: ./assets
-favicon: logo.svg # 来自 assets 的图标文件或外部 URL
+favicon: logo.svg # assets에서 가져오거나 외부 URL의 파비콘 파일
 theme: light
 baseUrl: https://mysite.com
 minify: true
-sourceMaps: false # 生成源映射以用于调试（会增加捆绑包大小）
+sourceMaps: false # 디버깅을 위한 소스 맵 생성 (번들 크기 증가)
 css:
   - ./styles/main.css
   - ./styles/components.scss
 components: ./components
 navigation: ./navigation.yml
 webpack:
-  # 自定义 webpack 配置
+  # 사용자 정의 webpack 구성
 ```
 
-### 页面配置
+### 페이지 구성
 
-在页面目录中创建 YAML 文件：
+페이지 디렉터리에 YAML 파일을 생성하세요:
 
 ```yaml
 # pages/index.yml
@@ -135,14 +135,14 @@ blocks:
 
       You can use **markdown** formatting here.
 
-  - type: CustomBlock # 您的自定义组件
+  - type: CustomBlock # Your custom component
     title: Custom Component
     content: This uses a custom component
 ```
 
-### 自定义组件
+### 사용자 정의 컴포넌트
 
-在组件目录中创建 React 组件：
+컴포넌트 디렉터리에 React 컴포넌트를 생성하세요:
 
 ```typescript
 // components/CustomBlock.tsx
@@ -170,9 +170,9 @@ export const CustomBlock: React.FC<CustomBlockProps> = ({
 export default CustomBlock;
 ```
 
-### 自定义样式
+### 사용자 정의 스타일
 
-添加您的自定义 CSS/SCSS 文件：
+사용자 정의 CSS/SCSS 파일을 추가하세요:
 
 ```css
 /* styles/main.css */
@@ -190,18 +190,18 @@ export default CustomBlock;
 }
 ```
 
-### 静态资源
+### 정적 에셋
 
-页面构建器会自动处理静态资源，如图像、图标和其他文件。您可以在配置文件中配置资源目录：
+페이지 생성기 빌더는 이미지, 아이콘 및 기타 파일과 같은 정적 에셋을 자동으로 처리합니다. 구성 파일에서 에셋 디렉터리를 설정하세요:
 
 ```yaml
 # page-builder.config.yml
 input: ./pages
 output: ./dist
-assets: ./assets # 要复制的资源目录
+assets: ./assets # 복사할 에셋 디렉터리
 ```
 
-**资源目录结构：**
+**에셋 디렉터리 구조:**
 
 ```
 assets/
@@ -215,7 +215,7 @@ assets/
     └── brochure.pdf
 ```
 
-**在页面中使用资源：**
+**페이지에서 에셋 사용:**
 
 ```yaml
 # pages/index.yml
@@ -234,38 +234,38 @@ blocks:
         alt: Our team photo
 ```
 
-### 图标
+### 파비콘
 
-页面构建器支持为静态页面添加图标。您可以指定来自资源目录的本地文件或外部 URL。
+페이지 생성기 빌더는 정적 페이지에 파비콘을 추가하는 것을 지원합니다. 에셋 디렉터리의 로컬 파일이나 외부 URL을 지정할 수 있습니다.
 
-#### 配置
+#### 구성
 
-在配置文件中添加 `favicon` 选项：
+구성 파일에 `favicon` 옵션을 추가하세요:
 
 ```yaml
 # page-builder.config.yml
-favicon: logo.svg # 来自资源目录的本地文件
-# 或
-favicon: https://cdn.example.com/favicon.ico # 外部 URL
+favicon: logo.svg # 에셋 디렉터리의 로컬 파일
+# 또는
+favicon: https://cdn.example.com/favicon.ico # 외부 URL
 ```
 
-#### 本地图标文件
+#### 로컬 파비콘 파일
 
-对于本地图标文件，构建器将：
+로컬 파비콘 파일의 경우, 빌더는 다음을 수행합니다:
 
-- 自动检测资源目录中的文件
-- 将其复制到输出目录
-- 生成正确的 HTML `<link>` 标签，并包含适当的 MIME 类型
+- 에셋 디렉터리에서 파일을 자동으로 감지
+- 출력 디렉터리로 복사
+- 올바른 MIME 유형으로 적절한 HTML `<link>` 태그 생성
 
-**支持的文件格式：**
+**지원 파일 형식:**
 
-- **SVG**（推荐） - `image/svg+xml`
-- **ICO**（经典） - `image/x-icon`
-- **PNG**（现代） - `image/png`
-- **JPG/JPEG**（可接受） - `image/jpeg`
-- **GIF**（动画） - `image/gif`
+- **SVG** (권장) - `image/svg+xml`
+- **ICO** (클래식) - `image/x-icon`
+- **PNG** (현대적) - `image/png`
+- **JPG/JPEG** (허용) - `image/jpeg`
+- **GIF** (애니메이션) - `image/gif`
 
-**示例：**
+**예시:**
 
 ```yaml
 # page-builder.config.yml
@@ -275,9 +275,9 @@ favicon: ./custom/path/favicon.png   # Custom path relative to project
 favicon: /absolute/path/favicon.ico  # Absolute path
 ```
 
-#### 外部 Favicon URL
+#### 외부 Favicon URL
 
-您也可以使用来自 CDN 或其他域的外部 favicon URL：
+CDN이나 다른 도메인에서 제공하는 외부 favicon URL도 사용할 수 있습니다:
 
 ```yaml
 # page-builder.config.yml
@@ -285,9 +285,9 @@ favicon: https://cdn.example.com/favicon.ico
 favicon: https://mysite.com/assets/logo.svg
 ```
 
-#### 生成的 HTML
+#### 생성된 HTML
 
-构建器会根据 favicon 类型自动生成合适的 HTML 标签：
+빌더는 favicon 유형에 따라 적절한 HTML 태그를 자동으로 생성합니다:
 
 ```html
 <!-- For SVG favicons -->
@@ -301,13 +301,13 @@ favicon: https://mysite.com/assets/logo.svg
 <link rel="icon" href="https://example.com/favicon.ico" />
 ```
 
-### 导航
+### 네비게이션
 
-页面构建器支持全局导航配置，该配置会在所有页面上显示。导航通过单独的 YAML 文件进行配置。
+페이지 빌더는 모든 페이지에 나타나는 전역 네비게이션 구성을 지원합니다. 네비게이션은 별도의 YAML 파일을 통해 구성됩니다.
 
-#### 导航配置
+#### 네비게이션 구성
 
-在项目根目录中创建一个 `navigation.yml` 文件（或在配置中指定自定义路径）：
+프로젝트 루트에 `navigation.yml` 파일을 생성하거나(또는 구성에서 사용자 지정 경로를 지정) 다음과 같이 구성하세요:
 
 ```yaml
 # navigation.yml
@@ -345,9 +345,9 @@ footer:
       type: 'text'
 ```
 
-#### 特定页面的导航覆盖
+#### 페이지별 네비게이션 재정의
 
-您可以通过在页面 YAML 中直接添加 `navigation` 部分来覆盖特定页面的导航：
+특정 페이지에 대해 네비게이션을 재정의하려면 페이지 YAML에 직접 `navigation` 섹션을 추가하세요:
 
 ```yaml
 # pages/special-page.yml
