@@ -1,39 +1,39 @@
 # @gravity-ui/graph &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/graph)](https://www.npmjs.com/package/@gravity-ui/graph) [![Release](https://img.shields.io/github/actions/workflow/status/gravity-ui/graph/release.yml?branch=main&label=Release)](https://github.com/gravity-ui/graph/actions/workflows/release.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/graph/)
 
-> [Guía de migración de 0.x a 1.x →](docs/migration-guides/v0-to-v1.md)
+> [Migrationshandbuch von 0.x zu 1.x →](docs/migration-guides/v0-to-v1.md)
 
-Una biblioteca de visualización de gráficos que combina lo mejor de ambos mundos:
-- Canvas para un alto rendimiento al ver el gráfico completo
-- HTML/React para interacciones ricas cuando se hace zoom
+Eine Bibliothek zur Visualisierung von Graphen, die das Beste aus zwei Welten vereint:
+- Canvas für hohe Leistung beim Anzeigen des gesamten Graphen
+- HTML/React für reiche Interaktionen bei Zoom hinein
 
-Ya no más elegir entre rendimiento e interactividad. Perfecta para diagramas grandes, diagramas de flujo y editores basados en nodos.
+Kein Kompromiss mehr zwischen Leistung und Interaktivität. Ideal für große Diagramme, Flussdiagramme und nodebasierte Editoren.
 
-## Motivación
+## Motivation
 
-Las aplicaciones web modernas a menudo requieren visualización e interactividad complejas, pero las soluciones existentes suelen centrarse en una sola tecnología de renderizado:
+Moderne Web-Anwendungen erfordern oft komplexe Visualisierungen und Interaktionen, aber bestehende Lösungen konzentrieren sich in der Regel auf eine einzige Rendering-Technologie:
 
-- **Canvas** ofrece un alto rendimiento para gráficos complejos, pero está limitado en el manejo de texto e interactividad.
-- **HTML DOM** es conveniente para interfaces, pero menos eficiente para gráficos complejos o grandes cantidades de elementos.
+- **Canvas** bietet hohe Leistung für komplexe Grafiken, ist aber bei der Textverarbeitung und Interaktivität eingeschränkt.
+- **HTML DOM** ist praktisch für Benutzeroberflächen, aber weniger effizient für komplexe Grafiken oder große Elementmengen.
 
-@gravity-ui/graph resuelve esto cambiando automáticamente entre Canvas y HTML según el nivel de zoom:
-- **Zoom alejado**: Usa Canvas para un renderizado eficiente del gráfico completo
-- **Zoom medio**: Muestra una vista esquemática con interactividad básica
-- **Zoom acercado**: Cambia a componentes HTML/React para interacciones ricas
+@gravity-ui/graph löst dies, indem es automatisch zwischen Canvas und HTML wechselt, basierend auf dem Zoom-Level:
+- **Herausgezoomt**: Verwendet Canvas für eine effiziente Darstellung des gesamten Graphen
+- **Mittlerer Zoom**: Zeigt eine schematische Ansicht mit grundlegender Interaktivität
+- **Hineingezoomt**: Wechselt zu HTML/React-Komponenten für reiche Interaktionen
 
-## Cómo funciona
+## Funktionsweise
 
-La biblioteca utiliza un sistema de renderizado inteligente que administra automáticamente la transición entre Canvas y componentes React:
+Die Bibliothek nutzt ein intelligentes Rendering-System, das den Übergang zwischen Canvas und React-Komponenten automatisch verwaltet:
 
-1. En niveles de zoom bajos, todo se renderiza en Canvas por motivos de rendimiento
-2. Al hacer zoom hacia una vista detallada, el componente `GraphCanvas`:
-   - Rastrea los cambios en el viewport y la escala de la cámara
-   - Calcula qué bloques son visibles en el viewport actual (con padding para un desplazamiento suave)
-   - Renderiza componentes React solo para los bloques visibles
-   - Actualiza automáticamente la lista al desplazarse o hacer zoom
-   - Elimina los componentes React al alejar el zoom
+1. Bei niedrigen Zoom-Leveln wird alles auf Canvas gerendert, um Leistung zu gewährleisten
+2. Beim Hineinzoomen in die Detailansicht übernimmt die `GraphCanvas`-Komponente:
+   - Die Verfolgung von Kamera-Viewport- und Skalenänderungen
+   - Die Berechnung, welche Blöcke im aktuellen Viewport sichtbar sind (mit Polsterung für flüssiges Scrollen)
+   - Das Rendern von React-Komponenten nur für sichtbare Blöcke
+   - Automatische Aktualisierungen der Liste beim Scrollen oder Zoomen
+   - Das Entfernen von React-Komponenten beim Herauszoomen
 
 ```typescript
-// Example of React components rendering
+// Beispiel für das Rendern von React-Komponenten
 const MyGraph = () => {
   return (
     <GraphCanvas
@@ -51,17 +51,17 @@ const MyGraph = () => {
 
 [Storybook](https://preview.gravity-ui.com/graph/)
 
-## Instalación
+## Installation
 
 ```bash
 npm install @gravity-ui/graph
 ```
 
-## Ejemplos
+## Beispiele
 
-### Ejemplo con React
+### React-Beispiel
 
-[Documentación detallada de componentes React](docs/react/usage.md)
+[Detaillierte Dokumentation zu React-Komponenten](docs/react/usage.md)
 
 ```typescript
 import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
@@ -143,19 +143,19 @@ export function GraphEditor() {
 }
 ```
 
-### Ejemplo con JavaScript vanilla
+### Vanilla-JavaScript-Beispiel
 
 ```javascript
 import { Graph } from "@gravity-ui/graph";
 
-// Create container element
+// Container-Element erstellen
 const container = document.createElement('div');
 container.style.width = '100vw';
 container.style.height = '100vh';
 container.style.overflow = 'hidden';
 document.body.appendChild(container);
 
-// Initialize graph with configuration
+// Graph mit Konfiguration initialisieren
 const graph = new Graph({
     configurationName: "example",
     blocks: [],
@@ -171,7 +171,7 @@ const graph = new Graph({
 ```
 
 ```javascript
-// Agregar bloques y conexiones
+// Blöcke und Verbindungen hinzufügen
 graph.setEntities({
     blocks: [
         {
@@ -219,42 +219,42 @@ graph.setEntities({
     ]
 });
 
-// Iniciar el renderizado
+// Rendering starten
 graph.start();
 
-// Centrar la vista
+// Ansicht zentrieren
 graph.zoomTo("center", { padding: 100 });
 ```
 
-## Ejemplos Interactivos
+## Live-Beispiele
 
-- [Ejemplo básico](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
-- [Ejemplo a gran escala](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
-- [Vista de bloques personalizados](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
-- [Conexión de Bezier](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
-- [Personalización de conexiones](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
+- [Einfaches Beispiel](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--hundred-blocks)
+- [Beispiel mit großem Umfang](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--five-thousands-blocks)
+- [Ansicht mit benutzerdefinierten Blöcken](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--custom-schematic-block)
+- [Bezier-Verbindung](https://preview.gravity-ui.com/graph/?path=/story/stories-main-grapheditor--one-bezier-connection)
+- [Anpassung von Verbindungen](https://preview.gravity-ui.com/graph/?path=/story/api-updateconnection--default)
 
-## Documentación
+## Dokumentation
 
-### Tabla de Contenidos
+### Inhaltsverzeichnis
 
-1. Sistema
-   - [Ciclo de Vida del Componente](docs/system/component-lifecycle.md)
-   - [Eventos](docs/system/events.md)
-   - [Configuración del Gráfico](docs/system/graph-settings.md)
-   - [API Pública](docs/system/public_api.md)
-   - [Sistema de Programador](docs/system/scheduler-system.md)
+1. System
+   - [Komponenten-Lebenszyklus](docs/system/component-lifecycle.md)
+   - [Ereignisse](docs/system/events.md)
+   - [Graph-Einstellungen](docs/system/graph-settings.md)
+   - [Öffentliche API](docs/system/public_api.md)
+   - [Planer-System](docs/system/scheduler-system.md)
 
-2. Componentes
-   - [Componente de Gráfico de Lienzo](docs/components/canvas-graph-component.md)
-   - [Componente de Bloque](docs/components/block-component.md)
-   - [Anclas](docs/components/anchors.md)
+2. Komponenten
+   - [Canvas-Graph-Komponente](docs/components/canvas-graph-component.md)
+   - [Block-Komponente](docs/components/block-component.md)
+   - [Anker](docs/components/anchors.md)
 
-3. Renderizado
-   - [Mecanismo de Renderizado](docs/rendering/rendering-mechanism.md)
-   - [Capas](docs/rendering/layers.md)
+3. Rendering
+   - [Rendering-Mechanismus](docs/rendering/rendering-mechanism.md)
+   - [Ebenen](docs/rendering/layers.md)
 
-4. Bloques y Conexiones
-   - [Grupos de Bloques](docs/blocks/groups.md)
-   - [Sistema de Conexiones del Lienzo](docs/connections/canvas-connection-system.md)
+4. Blöcke und Verbindungen
+   - [Block-Gruppen](docs/blocks/groups.md)
+   - [Canvas-Verbindungs-System](docs/connections/canvas-connection-system.md)
 ```
