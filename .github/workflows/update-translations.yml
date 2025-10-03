@@ -22,7 +22,7 @@ jobs:
         run: |
           FILES=$(ls public/locales/en/ | sed 's/\.json$//')
           NAMESPACES_ARRAY=$(echo "$FILES" | jq -R -s -c 'split("\n") | map(select(length > 0))')
-          echo "namespaces=$NAMESPACES_ARRAY" >> $GIGITHUB_OUTPUT
+          echo "namespaces=$NAMESPACES_ARRAY" >> $GITHUB_OUTPUT
 
   translations:
     needs: prepare-inputs
