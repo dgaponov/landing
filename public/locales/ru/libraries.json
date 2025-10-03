@@ -1,7 +1,7 @@
 {
     "title": "Библиотеки",
     "header": "Наши библиотеки",
-    "searchPlaceholder": "Поиск по имени и описанию",
+    "searchPlaceholder": "Поиск по названию или описанию",
     "empty": "Ничего не найдено",
     "tags_all": "Все",
     "tags_ui": "UI",
