@@ -1,16 +1,16 @@
-﻿{
-    "actions_copyIconName": "Copiar nombre de icono",
+{
+    "actions_copyIconName": "Copiar nombre del ícono",
     "actions_copyLink": "Copiar enlace",
     "actions_copied": "Copiado",
-    "actions_copyReactComponent": "Copiar el componente React",
+    "actions_copyReactComponent": "Copiar componente React",
     "actions_copySvgImport": "Copiar importación de SVG",
     "actions_downloadSvg": "Descargar SVG",
-    "title": "Iconos",
+    "title": "Íconos",
     "goToLibrary": "Ir a la biblioteca",
-    "filterPlaceholder": "Filtrar por nombre de icono",
+    "filterPlaceholder": "Filtrar por nombre de ícono",
     "keywords": "Palabras clave",
-    "empty_title": "No se han encontrado resultados para su solicitud",
-    "empty_subTitle": "Compruebe la ortografía o pruebe con otras palabras clave.",
+    "empty_title": "No se encontraron resultados para su búsqueda",
+    "empty_subTitle": "Por favor, revise la ortografía o pruebe con otras palabras clave.",
     "usage_reactComponent": "Componente React",
     "usage_svg": "SVG"
 }
