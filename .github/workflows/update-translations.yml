@@ -6,7 +6,7 @@ on:
 permissions: write-all
 
 env:
-  LANGUAGES: 'ru ko es de zh fr' # Supported languages separated by space (spaces are important)
+  LANGUAGES: 'ko es de zh fr' # Supported languages separated by space (spaces are important)
 
 jobs:
   prepare-inputs:
@@ -63,7 +63,8 @@ jobs:
           inputFiles: ${{ steps.prepare-inputs.outputs.input_files }}
           outputFiles: ${{ steps.prepare-inputs.outputs.output_files }}
           languages: ${{ env.LANGUAGES }}
-          commitMessage: 'i18n: LLM translations for namespace ${{ matrix.namespace }}'
+          commitMessage: 'i18n: translations for namespace ${{ matrix.namespace }}'
+          pullRequestTitle: 'i18n: translations for namespace ${{ matrix.namespace }}'
           prompt: |
             Please translate the json source file to {targetLanguage}. \
             Make the translation sound as natural as possible. \
