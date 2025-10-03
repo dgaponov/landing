@@ -9,7 +9,7 @@
     "lastUpdate": "Последнее обновление",
     "repository": "Репозиторий",
     "license": "Лицензия",
-    "issues": "Задачи",
-    "maintainers": "Maintainers",
-    "contributors": "Участники"
+    "issues": "Проблемы",
+    "maintainers": "Сопровождающие",
+    "contributors": "Соавторы"
 }
