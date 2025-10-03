@@ -1,0 +1,13 @@
+{
+    "actions_openInFigma": "Ouvrir dans Figma",
+    "title": "Composants",
+    "searchPlaceholder": "Rechercher par nom de composant",
+    "color-input_validation-format-error": "Format incorrect",
+    "maintainers_one": "Maintenancier :",
+    "maintainers_other": "Maintenanciers :",
+    "maintainers": "Maintenanciers :",
+    "theme": "Changer de thème",
+    "rtlOn": "Activer RTL",
+    "rtlOff": "Désactiver RTL",
+    "rtlNotSupported": "RTL non pris en charge"
+}
