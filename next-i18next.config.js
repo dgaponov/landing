@@ -1,6 +1,6 @@
 module.exports = {
     i18n: {
-        locales: ['en', 'ru', 'es', 'zh', 'fr', 'de', 'ko'],
+        locales: ['en', 'ru', 'es', 'zh', 'fr', 'de', 'ko', 'pt', 'ja'],
         defaultLocale: 'en',
         defaultNS: 'common',
         ignoreJSONStructure: false,
@@ -13,5 +13,6 @@ module.exports = {
         '/sitemap.xml',
         '/robots.txt',
         '/analytics.txt',
+        '/index-social.png',
     ],
 };

@@ -1,6 +1,6 @@
 # ExpressKit
 
-ExpressKit est un wrapper léger pour [express.js](https://expressjs.com/) qui s'intègre à [NodeKit](https://github.com/gravity-ui/nodekit) et offre des fonctionnalités utiles telles que la journalisation des requêtes, la prise en charge du traçage, les contrôleurs et middlewares asynchrones, ainsi qu'une description détaillée des routes.
+ExpressKit est un wrapper léger pour [express.js](https://expressjs.com/) qui s'intègre à [NodeKit](https://github.com/gravity-ui/nodekit) et offre des fonctionnalités utiles telles que la journalisation des requêtes, le support du traçage, les contrôleurs et middlewares asynchrones, ainsi qu'une description détaillée des routes.
 
 Installation :
 
@@ -78,7 +78,7 @@ export default config;
 | Option              | Type                 | Défaut                              | Description                                                                                     |
 | ------------------- | -------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------- |
 | `appCsrfSecret`     | `string \| string[]` | -                                    | **Requis.** Clé(s) secrète(s) pour la génération de jetons HMAC. Plusieurs secrets permettent la rotation des clés. |
-| `appCsrfLifetime`   | `number`             | `2592000` (30 jours)                  | Durée de vie du jeton en secondes. Définir à `0` pour aucune expiration.                                        |
+| `appCsrfLifetime`   | `number`             | `2592000` (30 jours)                  | Durée de vie du jeton en secondes. Définissez à `0` pour aucune expiration.                                        |
 | `appCsrfHeaderName` | `string`             | `'x-csrf-token'`                     | Nom de l'en-tête HTTP pour la validation du jeton.                                                          |
 | `appCsrfMethods`    | `string[]`           | `['POST', 'PUT', 'DELETE', 'PATCH']` | Méthodes HTTP nécessitant une validation CSRF.                                                      |
 
@@ -128,3 +128,36 @@ const app = new ExpressKit(nodekit, {
   },
 });
 ```
+
+## Contrôle de la mise en cache
+
+Par défaut, ExpressKit définit des en-têtes `no-cache` sur toutes les réponses. Vous pouvez contrôler ce comportement globalement ou par route.
+
+### Configuration globale
+
+```typescript
+const config: Partial<AppConfig> = {
+  expressEnableCaching: true, // Autorise la mise en cache par défaut
+};
+```
+
+### Configuration par route
+
+```typescript
+const app = new ExpressKit(nodekit, {
+  'GET /api/cached': {
+    enableCaching: true, // Autorise la mise en cache pour cette route
+    handler: (req, res) => res.json({data: 'cacheable'}),
+  },
+  'GET /api/fresh': {
+    enableCaching: false, // Force le no-cache
+    handler: (req, res) => res.json({data: 'toujours frais'}),
+  },
+});
+```
+
+Le paramètre `enableCaching` au niveau de la route remplace le réglage global. L'état de la mise en cache est disponible dans `req.routeInfo.enableCaching`.
+
+## Validation et Sérialisation des réponses
+
+- [Validation des requêtes et sérialisation des réponses](https://github.com/gravity-ui/expresskit/blob/main/docs/VALIDATOR.md) - utilisez les schémas Zod pour la validation automatique des requêtes et la sérialisation des réponses.

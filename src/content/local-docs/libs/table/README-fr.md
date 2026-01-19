@@ -79,9 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
+Pour utiliser le regroupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans lui, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
+
 ### Colonne de sélection personnalisée par plage
 
-Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue une sélection de lignes par plage. Il nécessite une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
+Le hook `useToggleRangeSelectionHandler` renvoie un gestionnaire de changement qui écoute les événements Shift+clic et effectue une sélection de lignes par plage. Il doit recevoir une instance de `CellContext` pour avoir accès aux états internes de la table et de la ligne.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -208,11 +210,42 @@ const columns: ColumnDef<Person>[] = [
 ];
 ```
 
-**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. À l'heure actuelle, cela est considéré comme un comportement indéfini.
+**Remarque** : Si la table contient des lignes imbriquées, la sélection par plage ne fonctionnera pas. Pour le moment, cela est considéré comme un comportement indéfini.
 
 ### Tri
 
-Découvrez les propriétés des colonnes dans la [documentation](https://tanstack.com/table/v8/docs/guide/sorting) de react-table.
+Apprenez-en davantage sur les propriétés des colonnes dans la documentation de react-table [ici](https://tanstack.com/table/v8/docs/guide/sorting).
+
+```tsx
+import type {SortingState} from '@gravity-ui/table/tanstack';
+
+const columns: ColumnDef<Person>[] = [
+  /* ... */
+];
+
+const data: Person[] = [
+  /* ... */
+];
+
+const SortingExample = () => {
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+
+  // Votre colonne DOIT avoir accessorFn pour que le tri soit activé
+
+  const table = useTable({
+    columns,
+    data,
+    enableSorting: true,
+    getRowId: (item) => item.id,
+    onSortingChange: setSorting,
+    state: {
+      sorting,
+    },
+  });
+
+  return <Table table={table} />;
+};
+```
 
 Si vous souhaitez trier les éléments manuellement, passez la propriété `manualSorting` :
 
@@ -286,11 +319,13 @@ const GroupingExample = () => {
 };
 ```
 
+Pour utiliser le groupement avec la sélection, utilisez le hook `useRowSelectionFixedHandler`. Sans lui, l'état de la case à cocher de la ligne parente sera incorrect. https://github.com/TanStack/table/issues/4878
+
 Pour activer les styles d'imbrication, passez `withNestingStyles = true` dans la configuration de la colonne.
 
 Les indicateurs d'imbrication peuvent être désactivés en passant `showTreeDepthIndicators = false`.
 
-Pour ajouter un contrôle pour développer/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
+Pour ajouter un contrôle permettant d'étendre/réduire les lignes, enveloppez le contenu de la cellule avec le composant `TreeExpandableCell` ou votre composant personnalisé similaire :
 
 ```tsx
 import {TreeExpandableCell} from '@gravity-ui/table';
@@ -359,7 +394,7 @@ const ReorderingExample = () => {
 
 ### Virtualisation
 
-Utilisez si vous souhaitez utiliser le conteneur de grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur ; sinon, la virtualisation ne fonctionnera pas.
+Utilisez-la si vous souhaitez utiliser le conteneur de la grille comme élément de défilement (si vous souhaitez utiliser la fenêtre, consultez la section de virtualisation de fenêtre). Assurez-vous de définir une hauteur fixe sur le conteneur, sinon la virtualisation ne fonctionnera pas.
 
 ```tsx
 import {useRowVirtualizer} from '@gravity-ui/table';
@@ -422,7 +457,7 @@ return (
 
 ### Virtualisation de fenêtre
 
-Utilisez si vous souhaitez utiliser la fenêtre comme élément de défilement
+Utilisez-la si vous souhaitez utiliser la fenêtre comme élément de défilement.
 
 ```tsx
 import {useWindowRowVirtualizer} from '@gravity-ui/table';
@@ -443,7 +478,9 @@ const WindowVirtualizationExample = () => {
   });
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
+```
 
+```tsx
   const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
@@ -487,8 +524,8 @@ const columns: ColumnDef<Person>[] = [
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Optionnel. Permet de masquer cette colonne dans le popover des paramètres
-      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ header pour le popover des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et le popover des paramètres)
+      hideInSettings: false, // Optionnel. Permet de masquer cette colonne dans la fenêtre contextuelle des paramètres
+      titleInSettings: 'ReactNode', // Optionnel. Remplace le champ d'en-tête pour la fenêtre contextuelle des paramètres (si vous avez besoin d'un contenu différent pour l'en-tête et la fenêtre contextuelle des paramètres)
     },
   }, // ou vous pouvez utiliser la fonction getSettingsColumn
 ];
@@ -506,7 +543,7 @@ const TableSettingsDemo = () => {
     /* ids des colonnes feuilles */
   ]); // pour le contrôle externe et l'état initial
 
-  // Variante alternative pour obtenir l'état, les callbacks et définir les callbacks d'application des paramètres - en utilisant le hook useTableSettings :
+  // Variante alternative pour obtenir l'état, les rappels et définir les rappels d'application des paramètres - en utilisant le hook useTableSettings :
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -524,4 +561,59 @@ const TableSettingsDemo = () => {
 };
 ```
 
-Apprenez-en davantage sur la table et les propriétés de redimensionnement des colonnes dans la [documentation](https://tanstack.com/table/v8/docs/api/features/column-sizing) de react-table.
+Apprenez-en davantage sur la table et les propriétés de redimensionnement des colonnes dans la documentation de react-table [docs](https://tanstack.com/table/v8/docs/api/features/column-sizing)
+
+## Problèmes connus et compatibilité
+
+### Compatibilité React 19 + React Compiler
+
+**⚠️ Problème connu :** Il existe un problème de compatibilité connu avec React 19 et React Compiler lors de l'utilisation de `@gravity-ui/table` (qui est basé sur TanStack Table). La table peut ne pas se réafficher lorsque les données changent. Voir le [problème TanStack Table #5567](https://github.com/TanStack/table/issues/5567) pour plus de détails.
+
+**Solution de contournement :**
+
+Si vous utilisez React 19 avec React Compiler et rencontrez des problèmes de réaffichage de la table, vous pouvez utiliser la directive `'use no memo'` dans le code de votre composant :
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  'use no memo'; // Désactive la mémoïsation de React Compiler pour ce composant
+
+  const [data, setData] = React.useState<Person[]>([]);
+
+  const table = useTable({
+    data,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**Solution alternative :**
+
+Vous pouvez également mémoïser explicitement l'instance de la table ou les données pour garantir des réaffichages corrects :
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // Mémoïse explicitement les données pour garantir les réaffichages
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**Remarque :** Ce problème concerne la bibliothèque sous-jacente TanStack Table et devra y être corrigé. Les solutions de contournement ci-dessus devraient aider en attendant qu'une correction soit disponible.

@@ -1,4 +1,4 @@
-# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
+# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/) [![coverage](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fstorage.yandexcloud.net%2Fplaywright-reports%2Fdate-components%2Fpulls%2Fmain%2Fcoverage%2Fcoverage-summary.json&query=%24.total.lines.pct&suffix=%25&label=Coverage)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/coverage/lcov-report/index.html) [![tests-report](https://img.shields.io/badge/Tests-report-ff4685)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/html/index.html)
 
 ## Installation
 
@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date :</label>
+        <label htmlFor="date-picker">Date : </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -37,7 +37,7 @@ root.render(<App />);
 import {settings} from '@gravity-ui/date-utils';
 
 // Chargez les locales de date qui seront utilisées dans l'application.
-settings.loadLocale('ru');
+await settings.loadLocale('ru');
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Date :</label>
+        <label htmlFor="date-picker">Date : </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -56,14 +56,13 @@ function App() {
 Si l'application prend en charge le changement de langue, préchargez toutes les locales prises en charge au premier chargement de l'application, ou chargez les locales avant de changer de langue :
 
 ```jsx
-// Préchargez les locales
-settings.loadLocale('ru');
-settings.loadLocale('nl');
+// Précharger les locales
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// ou chargez les locales à la demande.
+// ou charger les locales à la demande.
 
 function App() {
   const [lang, setLang] = React.useState('en');
@@ -78,7 +77,7 @@ function App() {
 }
 ```
 
-Les composants ont des traductions en anglais et en russe. Pour ajouter des traductions dans d'autres langues, utilisez `addLanguageKeysets` de `@gravity-ui/uikit` :
+Les composants disposent de traductions en anglais et en russe. Pour ajouter des traductions dans d'autres langues, utilisez `addLanguageKeysets` de `@gravity-ui/uikit` :
 
 ```ts
 import {addLanguageKeysets} from '@gravity-ui/uikit/i18n';

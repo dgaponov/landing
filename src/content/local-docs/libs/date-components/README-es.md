@@ -1,4 +1,4 @@
-# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/)
+# @gravity-ui/date-components &middot; [![npm package](https://img.shields.io/npm/v/@gravity-ui/date-components)](https://www.npmjs.com/package/@gravity-ui/date-components) [![CI](https://img.shields.io/github/actions/workflow/status/gravity-ui/date-components/.github/workflows/ci.yml?label=CI&logo=github)](https://github.com/gravity-ui/date-components/actions/workflows/ci.yml?query=branch:main) [![storybook](https://img.shields.io/badge/Storybook-deployed-ff4685)](https://preview.gravity-ui.com/date-components/) [![coverage](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fstorage.yandexcloud.net%2Fplaywright-reports%2Fdate-components%2Fpulls%2Fmain%2Fcoverage%2Fcoverage-summary.json&query=%24.total.lines.pct&suffix=%25&label=Coverage)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/coverage/lcov-report/index.html) [![tests-report](https://img.shields.io/badge/Tests-report-ff4685)](https://storage.yandexcloud.net/playwright-reports/date-components/pulls/main/html/index.html)
 
 ## Instalación
 
@@ -20,7 +20,7 @@ function App() {
     <ThemeProvider>
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Fecha:</label>
+        <label htmlFor="date-picker">Fecha: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -36,8 +36,8 @@ root.render(<App />);
 ```jsx
 import {settings} from '@gravity-ui/date-utils';
 
-// Carga los locales de fecha que se usarán en la aplicación.
-settings.loadLocale('ru');
+// Carga las localizaciones de fecha que se usarán en la aplicación.
+await settings.loadLocale('ru');
 
 function App() {
   return (
@@ -45,7 +45,7 @@ function App() {
     <ThemeProvider lang="ru">
       <h1>DatePicker</h1>
       <form>
-        <label forHtml="date-picker">Fecha:</label>
+        <label htmlFor="date-picker">Fecha: </label>
         <DatePicker id="date-picker" name="date" />
       </form>
     </ThemeProvider>
@@ -53,17 +53,16 @@ function App() {
 }
 ```
 
-Si la aplicación admite el cambio de idioma, precarga todos los locales compatibles al cargar la aplicación por primera vez, o carga los locales antes de cambiar el idioma:
+Si la aplicación admite el cambio de idioma, precarga todas las localizaciones admitidas cuando la aplicación se carga por primera vez, o carga las localizaciones antes de cambiar el idioma:
 
 ```jsx
-// Precarga de locales
-settings.loadLocale('ru');
-settings.loadLocale('nl');
+// Precarga de localizaciones
+await Promise.all([settings.loadLocale('ru'), settings.loadLocale('nl')]);
 
 const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 
-// o carga de locales bajo demanda.
+// o carga las localizaciones bajo demanda.
 
 function App() {
   const [lang, setLang] = React.useState('en');

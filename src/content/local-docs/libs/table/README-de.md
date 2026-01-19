@@ -54,7 +54,7 @@ import type {RowSelectionState} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
 const data: Person[] = [
@@ -79,9 +79,11 @@ const RowSelectionExample = () => {
 };
 ```
 
-### Benutzerdefinierte Bereichsauswahlspalte
+Um Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen Hook ist der Status der übergeordneten Zeilen-Checkboxes falsch. https://github.com/TanStack/table/issues/4878
 
-Der Hook `useToggleRangeSelectionHandler` gibt einen Änderungs-Handler zurück, der auf Shift+Klick-Ereignisse hört und eine Bereichsauswahl von Zeilen durchführt. Er benötigt eine `CellContext`-Instanz, um Zugriff auf die internen Zustände der Tabelle und der Zeile zu haben.
+### Benutzerdefinierte Bereichsauswahl-Spalte
+
+Der Hook `useToggleRangeSelectionHandler` gibt einen Änderungs-Handler zurück, der auf Shift+Klick-Ereignisse reagiert und eine Bereichsauswahl von Zeilen durchführt. Er benötigt eine `CellContext`-Instanz, um Zugriff auf die internen Zustände der Tabelle und der Zeile zu haben.
 
 ```tsx
 import React, {type ChangeEvent, useCallback, useState} from 'react';
@@ -139,7 +141,7 @@ const customSelectionColumn: ColumnDef<unknown> = {
 
 const columns: ColumnDef<Person>[] = [
   customSelectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 
 const data: Person[] = [
@@ -196,7 +198,7 @@ export const selectionColumn: ColumnDef<unknown> = {
 };
 ```
 
-Standardmäßig enthält die mit `selectionColumn` generierte Auswahlspalte die Funktionalität für die Bereichsauswahl.
+Standardmäßig enthält die mit `selectionColumn` generierte Auswahlspalte die Funktionalität der Bereichsauswahl.
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -204,7 +206,7 @@ import type {ColumnDef} from '@gravity-ui/table/tanstack';
 
 const columns: ColumnDef<Person>[] = [
   selectionColumn as ColumnDef<Person>,
-  // ...weitere Spalten
+  // ...andere Spalten
 ];
 ```
 
@@ -212,7 +214,7 @@ const columns: ColumnDef<Person>[] = [
 
 ### Sortierung
 
-Erfahren Sie mehr über die Spalteneigenschaften in der [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting) von react-table.
+Erfahren Sie mehr über die Spalteneigenschaften in der react-table [Dokumentation](https://tanstack.com/table/v8/docs/guide/sorting)
 
 ```tsx
 import type {SortingState} from '@gravity-ui/table/tanstack';
@@ -228,7 +230,7 @@ const data: Person[] = [
 const SortingExample = () => {
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  // Ihre Spalten MÜSSEN accessorFn für aktivierte Sortierung haben
+  // Ihre Spalte MUSS accessorFn für aktivierte Sortierung haben
 
   const table = useTable({
     columns,
@@ -317,9 +319,11 @@ const GroupingExample = () => {
 };
 ```
 
+Um die Gruppierung mit Auswahl zu verwenden, nutzen Sie den Hook `useRowSelectionFixedHandler`. Ohne diesen ist der Status der Kontrollkästchen der übergeordneten Zeilen falsch. https://github.com/TanStack/table/issues/4878
+
 Um Verschachtelungsstile zu aktivieren, übergeben Sie `withNestingStyles = true` in der Spaltenkonfiguration.
 
-Verschachtelungsindikatoren können durch Übergabe von `showTreeDepthIndicators = false` deaktiviert werden.
+Verschachtelungsindikatoren können deaktiviert werden, indem `showTreeDepthIndicators = false` übergeben wird.
 
 Um eine Steuerung zum Erweitern/Zusammenklappen von Zeilen hinzuzufügen, umschließen Sie den Zellinhalt mit der Komponente `TreeExpandableCell` oder einer ähnlichen benutzerdefinierten Komponente:
 
@@ -475,6 +479,7 @@ const WindowVirtualizationExample = () => {
 
   const bodyRef = React.useRef<HTMLTableSectionElement>(null);
 
+```tsx
   const rowVirtualizer = useWindowRowVirtualizer({
     count: table.getRowModel().rows.length,
     estimateSize: () => 20,
@@ -486,7 +491,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Größenänderung
+### Größenänderung von Spalten
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -518,7 +523,7 @@ const columns: ColumnDef<Person>[] = [
     id: 'settings_column_id',
     header: ({table}) => <TableSettings table={table} />,
     meta: {
-      hideInSettings: false, // Optional. Ermöglicht das Ausblenden dieser Spalte aus dem Einstellungs-Popover
+      hideInSettings: false, // Optional. Ermöglicht das Ausblenden dieser Spalte im Einstellungs-Popover
       titleInSettings: 'ReactNode', // Optional. Überschreibt das Header-Feld für das Einstellungs-Popover (falls Sie unterschiedliche Inhalte für Header und Einstellungs-Popover benötigen)
     },
   }, // oder Sie können die Funktion getSettingsColumn verwenden
@@ -534,10 +539,10 @@ const TableSettingsDemo = () => {
     column_id: false, // zum standardmäßigen Ausblenden
   });
   const [columnOrder, onColumnOrderChange] = React.useState<string[]>([
-    /* leaf columns ids */
+    /* Blattspalten-IDs */
   ]); // für externe Steuerung und Anfangszustand
 
-  // Alternative Variante, um Zustand, Rückrufe und das Festlegen von Rückrufen bei der Anwendungsänderung von Einstellungen zu erhalten - Verwendung des Hooks useTableSettings:
+  // Alternative Variante, um Zustand, Rückruffunktionen und das Setzen von Rückruffunktionen bei der Anwendungsbestätigung zu erhalten - Verwendung des Hooks useTableSettings:
   // const {state, callbacks} = useTableSettings({initialVisibility: {}, initialOrder: []})
 
   const table = useTable({
@@ -556,3 +561,58 @@ const TableSettingsDemo = () => {
 ```
 
 Erfahren Sie mehr über die Tabellen- und Spaltengrößenänderungseigenschaften in der [Dokumentation](https://tanstack.com/table/v8/docs/api/features/column-sizing) von react-table.
+
+## Bekannte Probleme und Kompatibilität
+
+### Kompatibilität mit React 19 + React Compiler
+
+**⚠️ Bekanntes Problem:** Es gibt ein bekanntes Kompatibilitätsproblem mit React 19 und React Compiler bei der Verwendung von `@gravity-ui/table` (das auf TanStack Table aufbaut). Die Tabelle wird möglicherweise nicht neu gerendert, wenn sich Daten ändern. Weitere Details finden Sie in [TanStack Table Issue #5567](https://github.com/TanStack/table/issues/5567).
+
+**Workaround:**
+
+Wenn Sie React 19 mit React Compiler verwenden und Probleme mit dem Neuzeichnen der Tabelle haben, können Sie die Direktive `'use no memo'` in Ihrem Komponentencode verwenden:
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  'use no memo'; // Deaktiviert die Memoization des React Compilers für diese Komponente
+
+  const [data, setData] = React.useState<Person[]>([]);
+
+  const table = useTable({
+    data,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**Alternative Lösung:**
+
+Sie können die Tabelleninstanz oder die Daten auch explizit memoizen, um ordnungsgemäße Neuzeichnungen sicherzustellen:
+
+```tsx
+import React from 'react';
+import {Table, useTable} from '@gravity-ui/table';
+import type {ColumnDef} from '@gravity-ui/table/tanstack';
+
+function MyTable() {
+  const [data, setData] = React.useState<Person[]>([]);
+
+  // Memoisiert die Daten explizit, um Neuzeichnungen sicherzustellen
+  const memoizedData = React.useMemo(() => data, [data]);
+
+  const table = useTable({
+    data: memoizedData,
+    columns,
+  });
+
+  return <Table table={table} />;
+}
+```
+
+**Hinweis:** Dieses Problem liegt in der zugrunde liegenden TanStack Table-Bibliothek und muss dort behoben werden. Die oben genannten Workarounds sollten helfen, bis eine Korrektur verfügbar ist.
