@@ -8,6 +8,8 @@ A graph visualization library that combines the best of both worlds:
 
 No more choosing between performance and interactivity. Perfect for large diagrams, flowcharts, and node-based editors.
 
+![preview graph.](docs/_static/graph_preview.png)
+
 ## Motivation
 
 Modern web applications often require complex visualization and interactivity, but existing solutions typically focus on a single rendering technology:
@@ -39,8 +41,8 @@ const MyGraph = () => {
     <GraphCanvas
       graph={graph}
       renderBlock={(graph, block) => (
-        <MyCustomBlockComponent 
-          graph={graph} 
+        <MyCustomBlockComponent
+          graph={graph}
           block={block}
         />
       )}
@@ -64,9 +66,10 @@ npm install @gravity-ui/graph
 [Detailed React Components Documentation](docs/react/usage.md)
 
 ```typescript
-import { EAnchorType, Graph, GraphState } from "@gravity-ui/graph";
+import React, { useEffect } from "react";
+import type { Graph, TBlock } from "@gravity-ui/graph";
+import { EAnchorType, GraphState } from "@gravity-ui/graph";
 import { GraphCanvas, GraphBlock, useGraph } from "@gravity-ui/graph/react";
-import React from "react";
 
 const config = {};
 
@@ -90,8 +93,8 @@ export function GraphEditor() {
               id: "out1",
               blockId: "action_1",
               type: EAnchorType.OUT,
-              index: 0
-            }
+              index: 0,
+            },
           ],
         },
         {
@@ -108,10 +111,10 @@ export function GraphEditor() {
               id: "in1",
               blockId: "action_2",
               type: EAnchorType.IN,
-              index: 0
-            }
+              index: 0,
+            },
           ],
-        }
+        },
       ],
       connections: [
         {
@@ -119,13 +122,17 @@ export function GraphEditor() {
           sourceAnchorId: "out1",
           targetBlockId: "action_2",
           targetAnchorId: "in1",
-        }
-      ]
+        },
+      ],
     });
   }, [setEntities]);
 
-  const renderBlockFn = (graph, block) => {
-    return <GraphBlock graph={graph} block={block}>{block.id}</GraphBlock>;
+  const renderBlockFn = (graph: Graph, block: TBlock) => {
+    return (
+      <GraphBlock graph={graph} block={block}>
+        {block.id}
+      </GraphBlock>
+    );
   };
 
   return (
@@ -141,6 +148,7 @@ export function GraphEditor() {
     />
   );
 }
+
 ```
 
 ### Vanilla JavaScript Example

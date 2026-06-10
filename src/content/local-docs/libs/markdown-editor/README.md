@@ -61,11 +61,11 @@ Read more:
 - [How to add text binding extension in markdown](https://preview.gravity-ui.com/md-editor/?path=/docs/docs-develop-extension-with-popup--docs)
 
 ### Development
-To start the dev storybook
 
-```shell
-npm start
-```
+1. Install Nodejs environment, version is specified in `.nvmrc` file. We recommend using [NVM](https://github.com/nvm-sh/nvm) or a similar tool.
+2. Install [pnpm](https://pnpm.io/installation), version is specified in `package.json` in "packageManager" property.
+3. Install dependencies: `pnpm i`
+4. Run storybook dev-server: `pnpm start`
 
 
 ### i18n
