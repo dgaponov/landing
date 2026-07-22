@@ -39,14 +39,14 @@ const BasicExample = () => {
 };
 ```
 
-## Components
+### Components
 
 There are two Table components that you can use:
 
 - `BaseTable` - a component with basic styles only;
 - `Table` - a component with Gravity UI based styles.
 
-### Row selection
+#### Row selection
 
 ```tsx
 import {selectionColumn} from '@gravity-ui/table';
@@ -81,7 +81,7 @@ const RowSelectionExample = () => {
 
 To use grouping with selection, use `useRowSelectionFixedHandler` hook. Without it parent row checkbox state will be wrong. https://github.com/TanStack/table/issues/4878
 
-### Custom Ranged Selection Column
+#### Custom Ranged Selection Column
 
 The `useToggleRangeSelectionHandler` hook returns a change handler that listens for Shift+click events and performs ranged row selection. It needs to be passed a `CellContext` instance in order to have access to the table's and row's internal states.
 
@@ -212,7 +212,7 @@ const columns: ColumnDef<Person>[] = [
 
 **Note**: If the table contains nested rows, range selection will not work. At the moment, this is considered undefined behavior.
 
-### Sorting
+#### Sorting
 
 Learn about the column properties in the react-table [docs](https://tanstack.com/table/v8/docs/guide/sorting)
 
@@ -256,7 +256,7 @@ const table = useTable({
 });
 ```
 
-### Grouping
+#### Grouping
 
 ```tsx
 import type {ExpandedState, Row} from '@gravity-ui/table/tanstack';
@@ -345,7 +345,7 @@ const columns: ColumnDef<Item>[] = [
 ];
 ```
 
-### Reordering
+#### Reordering
 
 ```tsx
 import type {ReorderingProviderProps} from '@gravity-ui/table';
@@ -392,7 +392,7 @@ const ReorderingExample = () => {
 };
 ```
 
-### Column reordering
+#### Column reordering
 
 Wrap the table with `ColumnReorderingProvider` to enable drag-and-drop reordering of columns by their headers.
 
@@ -414,6 +414,54 @@ const ColumnReorderingExample = () => {
   return (
     <ColumnReorderingProvider table={table}>
       <Table table={table} />
+    </ColumnReorderingProvider>
+  );
+};
+```
+
+### Row and column reordering together
+
+Nest `ColumnReorderingProvider` and `ReorderingProvider` to enable both drag axes at once. The order of providers does not matter — they share a single dnd-kit context internally.
+
+```tsx
+import type {ColumnReorderingProviderProps, ReorderingProviderProps} from '@gravity-ui/table';
+import {ColumnReorderingProvider, ReorderingProvider, dragHandleColumn} from '@gravity-ui/table';
+
+const columns: ColumnDef<Person>[] = [
+  dragHandleColumn,
+  {accessorKey: 'name', header: 'Name'},
+  {accessorKey: 'age', header: 'Age'},
+];
+
+const CombinedReorderingExample = () => {
+  const [data, setData] = React.useState(initialData);
+  const [columnOrder, setColumnOrder] = React.useState<string[]>([]);
+
+  const table = useTable({
+    columns,
+    data,
+    getRowId: (item) => item.id,
+    state: {columnOrder},
+    onColumnOrderChange: setColumnOrder,
+  });
+
+  const handleRowReorder = React.useCallback<
+    NonNullable<ReorderingProviderProps<Person>['onReorder']>
+  >(({draggedItemKey, baseItemKey}) => {
+    // update data array
+  }, []);
+
+  const handleColumnReorder = React.useCallback<
+    NonNullable<ColumnReorderingProviderProps<Person>['onReorder']>
+  >(({columnOrder}) => {
+    setColumnOrder(columnOrder);
+  }, []);
+
+  return (
+    <ColumnReorderingProvider table={table} onReorder={handleColumnReorder}>
+      <ReorderingProvider table={table} onReorder={handleRowReorder}>
+        <Table table={table} />
+      </ReorderingProvider>
     </ColumnReorderingProvider>
   );
 };
@@ -488,7 +536,7 @@ While dragging:
 </ColumnReorderingProvider>
 ```
 
-### Virtualization
+#### Virtualization
 
 Use if you want to use grid container as the scroll element (if you want to use window see window virtualization section). Be sure to set a fixed height on the container; otherwise, virtualization will not work.
 
@@ -551,7 +599,7 @@ return (
 );
 ```
 
-### Window virtualization
+#### Window virtualization
 
 Use if you want to use window as the scroll element
 
@@ -586,7 +634,7 @@ const WindowVirtualizationExample = () => {
 };
 ```
 
-### Resizing
+#### Resizing
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -609,7 +657,7 @@ const ResizingDemo = () => {
 };
 ```
 
-### Column settings
+#### Column settings
 
 ```tsx
 const columns: ColumnDef<Person>[] = [
@@ -739,3 +787,7 @@ A headless, TanStack-Table-powered data grid for Gravity UI apps — reach for i
 - **Sorting needs an accessor.** A column must have `accessorKey`/`accessorFn` for sorting to work; set `enableSorting` and provide `getRowId`.
 - **React 19 + React Compiler can skip re-renders.** This is an upstream TanStack Table issue — add the `'use no memo'` directive to the component or memoize `data`.
 - **Range selection breaks with nested rows.** Ranged selection is undefined behavior when the table has grouped/nested rows; use `useRowSelectionFixedHandler` for correct parent-checkbox state with grouping.
+
+## Documentation for AI agents
+
+Agent-readable documentation for the installed version is located in `node_modules/@gravity-ui/table/build/docs/INDEX.md`.
